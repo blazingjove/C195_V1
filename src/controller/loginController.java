@@ -1,9 +1,11 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import main.JDBC;
 
 import java.time.ZoneId;
 import java.net.URL;
@@ -26,21 +28,48 @@ public class loginController implements Initializable{
 
     private String exitMessage; //class level variable
     private String closeMessage; //class level variable
+    private String errorMessage; //class level variable
+    private String incorrectMessage; //class level variable
+    /**
+     * validates user inputs then logs-in
+     * <p>
+     *     <b>Runtime Error</b></n>
+     *     as usual it's always a difficult time validating multiple use cases as errors can be anything and catching them can be difficult for me,
+     * </p>
+     * */
+    //TODO set password and login information
+    public void loginButtonAction() {
+        System.out.println("Login button pressed");
+        try{
+            if(usernameField != null || passwordField != null){
+                System.out.println("Username: " + usernameField.getText());
+                System.out.println("Password: " + passwordField.getText());
 
-
-
-
-
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
+            alert.setTitle(errorMessage);
+            alert.showAndWait();
+        }
+    }
 
     /**
-     * Prompts user to close the application.
+     *Prompts user to close the application.
      *changes language inline with detected system language.
+     * <p>
+     *     <b>Runtime Errors</b></n>
+     *     I was having trouble when closing longin page and the database connection still open. figured out that the close command was in the main view, and that
+     *     close connection command would execute if the use close the window using the corner x buttong so i added the command here as well to solve that problem.
+     * </p>
      */
     public void exitButtonAction() {
+        System.out.println("Exit button pressed");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, closeMessage, ButtonType.YES, ButtonType.NO);
         alert.setTitle(exitMessage);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES){
+            JDBC.closeConnection();
             System.exit(0);
         }
     }
@@ -48,6 +77,11 @@ public class loginController implements Initializable{
     /**
      *Initialize executes upon longin view being opened.
      * sets the language of the view in line with system language setting
+     * <p>
+     *     <b>Future Improvements</b></n>
+     *     adding a dropdown menu to manually select language would be nice
+     *     and adding more languages.
+     * </p>
      * @param url
      * @param resourceBundle
      * used to reassign FXML parameters to different languages
@@ -70,10 +104,10 @@ public class loginController implements Initializable{
             loginButton.setText(resourceBundle.getString("login"));
             zoneIdLabel.setText(resourceBundle.getString("Location"));
             exitButton.setText(resourceBundle.getString("exit"));
-
             exitMessage = resourceBundle.getString("exit");
             closeMessage = resourceBundle.getString("close");
-            System.out.println(exitMessage);
+            errorMessage = resourceBundle.getString("Error");
+            incorrectMessage = resourceBundle.getString("Incorrect");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
