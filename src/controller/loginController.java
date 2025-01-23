@@ -39,20 +39,14 @@ public class loginController implements Initializable{
     public void loginButtonAction() {
         System.out.println("Login button pressed");
         try{
-
             int userId = userValidation.validateUser(usernameField.getText(), passwordField.getText());
-
             if (userId > 0) {
-
                 System.out.println("User logged in");
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
                 alert.setTitle(errorMessage);
                 alert.showAndWait();
             }
-
-            System.out.println("Username: " + usernameField.getText());
-            System.out.println("Password: " + passwordField.getText());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

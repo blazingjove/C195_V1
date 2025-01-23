@@ -10,9 +10,9 @@ public class userValidation extends users {
 
     /**
      * method used to validate username and password
-     * @param username
-     * @param password
-     * @return not used
+     * @param username username entered in field
+     * @param password password entered in field
+     * @return used to define if valid username and password are used by checking for user id greater or lower than 0.
      */
     public static int validateUser(String username, String password) {
         try {

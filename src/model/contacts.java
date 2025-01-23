@@ -1,5 +1,5 @@
 package model;
-
+/**contacts class used to define and retrieve information specific to contacts class*/
 public class contacts {
     public int contactID;
     public String contactName;

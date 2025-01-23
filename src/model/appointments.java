@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
+/**Appointments class used to define components and return specific components through methods below*/
 public class appointments {
     private int appointmentID;
     private String appointmentTitle;
@@ -34,59 +35,46 @@ public class appointments {
      * @return appointmentID
      */
     public int getAppointmentID() {
-
         return appointmentID;
     }
 
-    /**
-     * @return appointmentTitle
+    /**@return appointmentTitle
      */
     public String getAppointmentTitle() {
-
         return appointmentTitle;
     }
 
-    /**
-     * @return appointmentDescription
+    /**@return appointmentDescription
      */
     public String getAppointmentDescription() {
-
         return appointmentDescription;
     }
 
-    /**
-     * @return appointmentLocation
+    /**@return appointmentLocation
      */
     public String getAppointmentLocation() {
-
         return appointmentLocation;
     }
 
-    /**
-     * @return appointmentType
+    /**@return appointmentType
      */
     public String getAppointmentType() {
-
         return appointmentType;
     }
 
 
-    /**
-     * @return start
+    /**@return start
      */
     public LocalDateTime getStart() {
         System.out.println("start " + start);
-
         return start;
     }
 
 
 
-    /**
-     * @return end
+    /**@return end
      */
     public LocalDateTime getEnd() {
-
         return end;
     }
 
@@ -97,8 +85,7 @@ public class appointments {
         return customerID;
     }
 
-    /**
-     * @return userID
+    /**@return userID
      */
     public int getUserID() {
         return userID;

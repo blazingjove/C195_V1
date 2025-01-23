@@ -1,5 +1,5 @@
 package model;
-
+/**User class used to define and retrieve information specific to user*/
 public class users {
 
     public int userID;
