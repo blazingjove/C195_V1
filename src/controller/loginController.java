@@ -1,12 +1,10 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import main.JDBC;
-
+import DAO.userValidation;
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;
@@ -34,23 +32,29 @@ public class loginController implements Initializable{
      * validates user inputs then logs-in
      * <p>
      *     <b>Runtime Error</b></n>
-     *     as usual it's always a difficult time validating multiple use cases as errors can be anything and catching them can be difficult for me,
+     *     Trouble catching errors on this page due to the many ways you can miss input the fields.
+     *     created user validate method do bump user inputs to existing users, much easier than other methods.
      * </p>
      * */
-    //TODO set password and login information
     public void loginButtonAction() {
         System.out.println("Login button pressed");
         try{
-            if(usernameField != null || passwordField != null){
-                System.out.println("Username: " + usernameField.getText());
-                System.out.println("Password: " + passwordField.getText());
 
+            int userId = userValidation.validateUser(usernameField.getText(), passwordField.getText());
+
+            if (userId > 0) {
+
+                System.out.println("User logged in");
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
+                alert.setTitle(errorMessage);
+                alert.showAndWait();
             }
+
+            System.out.println("Username: " + usernameField.getText());
+            System.out.println("Password: " + passwordField.getText());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
-            alert.setTitle(errorMessage);
-            alert.showAndWait();
         }
     }
 
@@ -60,7 +64,7 @@ public class loginController implements Initializable{
      * <p>
      *     <b>Runtime Errors</b></n>
      *     I was having trouble when closing longin page and the database connection still open. figured out that the close command was in the main view, and that
-     *     close connection command would execute if the use close the window using the corner x buttong so i added the command here as well to solve that problem.
+     *     close connection command would execute if the use close the window using the corner x button, so I added the command here as well to solve that problem.
      * </p>
      */
     public void exitButtonAction() {
@@ -83,6 +87,7 @@ public class loginController implements Initializable{
      *     and adding more languages.
      * </p>
      * @param url
+     * file paths
      * @param resourceBundle
      * used to reassign FXML parameters to different languages
      */

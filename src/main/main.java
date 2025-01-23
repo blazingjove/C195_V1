@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -32,8 +30,8 @@ public class main extends Application {
      * commented out code is to change locale for troubleshooting.
      * @param args*/
     public static void main(String[] args) {
-        //Locale.setDefault(new Locale("fr"));
-        //System.out.println("Locale set to: " + Locale.getDefault());
+        //Locale.setDefault(new Locale("fr")); //sets system language to French
+        System.out.println("Locale set to: " + Locale.getDefault());
 
         JDBC.openConnection();
         launch(args);
