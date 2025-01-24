@@ -2,10 +2,15 @@ package controller;
 
 import DAO.customerQuery;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import DAO.*;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import javafx.stage.Stage;
 import model.appointments;
@@ -39,6 +44,8 @@ public class mainViewController {
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
     @FXML private Button deleteAppointment;
+    @FXML private Button addAppointment;
+    @FXML private Button modifyAppointment;
 
 
     /**Prompts user to select if they want to close the program.*/
@@ -53,6 +60,39 @@ public class mainViewController {
         }
     }
 
+    public void addAppointmentAction() throws IOException {
+        System.out.println("Add Appointment button pressed");
+
+        //FXML code to open the main view after login successful
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/appointmentView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Add Appointment");
+        stage.setScene(scene);
+        stage.show();
+
+        // Hide the mainView
+        Stage thisStage = (Stage) addAppointment.getScene().getWindow();
+        thisStage.hide();
+    }
+
+    public void modifyAppointmentAction() throws IOException {
+        System.out.println("Modify Appointment button pressed");
+
+        //FXML code to open the main view after login successful
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/appointmentView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("modify Appointment");
+        stage.setScene(scene);
+        stage.show();
+
+        // Hide the mainView
+        Stage thisStage = (Stage) modifyAppointment.getScene().getWindow();
+        thisStage.hide();
+    }
+
+    /**Prompts user to confirm if they want to delete the selected appointment, if no appointment is selected an alert is shown.*/
     public void deleteAppointmentAction() {
         System.out.println("Delete Appointment button pressed");
 
@@ -70,8 +110,7 @@ public class mainViewController {
         }
 
         // Confirm deletion
-        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Are you sure you want to delete the selected appointment?", ButtonType.YES, ButtonType.NO);
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected appointment?", ButtonType.YES, ButtonType.NO);
         confirmationAlert.setTitle("Confirm Deletion");
         confirmationAlert.showAndWait();
 
@@ -79,11 +118,7 @@ public class mainViewController {
             try {
                 // Delete appointment from database
                 appointmentQuery.deleteAppointment(selectedAppointment.getAppointmentID());
-
-                // Remove appointment from table
                 appointmentTable.getItems().remove(selectedAppointment);
-
-                // Refresh table
                 appointmentTable.refresh();
 
                 // Show success message
@@ -103,7 +138,6 @@ public class mainViewController {
         }
     }
 
-
     /** Initialize populates the customer and appointment table.
      * <p>
      *     <b>Runtime Errors</b></n>
@@ -122,6 +156,7 @@ public class mainViewController {
 
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
+
         //each column is stored one by one
         appointmentID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
@@ -133,12 +168,13 @@ public class mainViewController {
         appointmentCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         appointmentContactID.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         appointmentUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+
         //appointment table is populated with the list
         appointmentTable.setItems(allAppointmentsList);
 
-
         //uses method to get all customers from sql database
         ObservableList<customers> allCustomersList = customerQuery.getAllCustomers();
+
         //each colum is stored
         customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -146,6 +182,7 @@ public class mainViewController {
         customerPostalCode.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
         customerPhone.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
         customerDivisionID.setCellValueFactory(new PropertyValueFactory<>("CustomerDivisionID"));
+
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
     }

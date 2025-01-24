@@ -21,8 +21,8 @@
               </columns>
             </TableView>
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
-            <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Appointment" />
-            <Button layoutX="147.0" layoutY="332.0" mnemonicParsing="false" text="Modify Appointment" />
+            <Button fx:id="addAppointment" layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#addAppointmentAction" text="Add Appointment" />
+            <Button fx:id="modifyAppointment" layoutX="147.0" layoutY="332.0" mnemonicParsing="false" onAction="#modifyAppointmentAction" text="Modify Appointment" />
             <Button fx:id="deleteAppointment" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteAppointmentAction" text="Delete Appointment" />
         </AnchorPane>
     </Tab>
