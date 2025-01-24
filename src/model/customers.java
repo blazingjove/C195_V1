@@ -2,14 +2,13 @@ package model;
 
 public class customers {
 
-   //private String divisionName;
     private int customerID;
     private String customerName;
     private String customerAddress;
     private String customerPostalCode;
     private String customerPhoneNumber;
-    //private int customerState;
     private int customerDivisionID;
+    //private String divisionName;
 
     public customers(int customerID, String customerName, String customerAddress, String customerPostalCode,
                          String customerPhoneNumber, int customerDivisionID)
@@ -103,8 +102,8 @@ public class customers {
         /**
          * @return divisionID
          */
-        //public String getDivisionName() {
-        //return divisionName;
+       // public String getDivisionName() {
+       // return divisionName;
         //}
 
         /**

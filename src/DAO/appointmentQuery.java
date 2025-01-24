@@ -13,7 +13,7 @@ import static main.JDBC.connection;
 public class appointmentQuery{
 
     /**Observablelist for all appointments in database.
-     * @throws SQLException
+     * @throws SQLException error catching
      * @return appointmentsObservableList
      */
     public static ObservableList<appointments> getAllAppointments() throws SQLException {
@@ -43,9 +43,9 @@ public class appointmentQuery{
     }
 
     /**Method that deletes appointment based on appointment ID.
-     * @param customer
+     * @param customer customer class
      * @return result
-     * @throws SQLException
+     * @throws SQLException error catching
      */
     public static int deleteAppointment(int customer) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";

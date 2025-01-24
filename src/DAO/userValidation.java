@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 public class userValidation extends users {
 
+    public userValidation(int userID, String userName, String userPassword) {
+        super(userID, userName, userPassword);
+    }
+
     /**
      * method used to validate username and password
      * @param username username entered in field

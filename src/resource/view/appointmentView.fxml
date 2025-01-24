@@ -5,52 +5,51 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.appointmentController">
-   <children>
-      <TextField layoutX="103.0" layoutY="105.0" />
-      <TextField layoutX="103.0" layoutY="70.0" />
-      <TextField disable="true" editable="false" layoutX="103.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
-      <TextField layoutX="103.0" layoutY="207.0" />
-      <TextField layoutX="103.0" layoutY="175.0" />
-      <TextField layoutX="103.0" layoutY="139.0" />
-      <Label layoutX="54.0" layoutY="39.0" text="ID">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="47.0" layoutY="74.0" text="Title">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="24.0" layoutY="109.0" text="Description">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="46.0" layoutY="143.0" text="Location">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="36.0" layoutY="179.0" text="Contact">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="58.0" layoutY="285.0" text="Start Date and Time">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="45.0" layoutY="211.0" text="Type">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="300.0" layoutY="285.0" text="End Date and Time">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-   </children>
+    <TextField layoutX="103.0" layoutY="105.0" />
+    <TextField layoutX="103.0" layoutY="70.0" />
+    <TextField disable="true" editable="false" layoutX="103.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
+    <TextField layoutX="103.0" layoutY="207.0" />
+    <TextField layoutX="103.0" layoutY="175.0" />
+    <TextField layoutX="103.0" layoutY="139.0" />
+    <Label layoutX="54.0" layoutY="39.0" text="ID">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="47.0" layoutY="74.0" text="Title">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="24.0" layoutY="109.0" text="Description">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="46.0" layoutY="143.0" text="Location">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="36.0" layoutY="179.0" text="Contact">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="58.0" layoutY="285.0" text="Start Date and Time">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="45.0" layoutY="211.0" text="Type">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="300.0" layoutY="285.0" text="End Date and Time">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+   <Button fx:id="appointmentExit" layoutX="526.0" layoutY="355.0" mnemonicParsing="false" onAction="#appointmentExitAction" text="Exit" />
 </AnchorPane>
