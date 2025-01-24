@@ -60,6 +60,4 @@ public class appointmentQuery{
         ps.close();
         return result;
     }
-
-
 }
