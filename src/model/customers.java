@@ -8,10 +8,10 @@ public class customers {
     private String customerPostalCode;
     private String customerPhoneNumber;
     private int customerDivisionID;
-    //private String divisionName;
+    private String divisionName;
 
     public customers(int customerID, String customerName, String customerAddress, String customerPostalCode,
-                         String customerPhoneNumber, int customerDivisionID)
+                         String customerPhoneNumber, int customerDivisionID, String divisionName)
     {
         this.customerID = customerID;
         this.customerName = customerName;
@@ -19,7 +19,7 @@ public class customers {
         this.customerPostalCode = customerPostalCode;
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerDivisionID = customerDivisionID;
-        //this.divisionName = divisionName;
+        this.divisionName = divisionName;
     }
 
         /**
@@ -100,11 +100,11 @@ public class customers {
         }
 
         /**
-         * @return divisionID
+         * @return divisionName
          */
-       // public String getDivisionName() {
-       // return divisionName;
-        //}
+        public String getDivisionName() {
+        return divisionName;
+        }
 
         /**
          * @param divisionID

@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<TabPane maxHeight="-Infinity"  maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
     <Tab text="Appointments">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="1049.0">
-            <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
+            <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="40.0" prefHeight="289.0" prefWidth="975.0">
               <columns>
                   <TableColumn fx:id="appointmentID" prefWidth="38.0" text="ID" />
                   <TableColumn fx:id="appointmentTitle" prefWidth="98.0" text="Title" />
@@ -24,6 +25,14 @@
             <Button fx:id="addAppointment" layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#addAppointmentAction" text="Add Appointment" />
             <Button fx:id="modifyAppointment" layoutX="147.0" layoutY="332.0" mnemonicParsing="false" onAction="#modifyAppointmentAction" text="Modify Appointment" />
             <Button fx:id="deleteAppointment" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteAppointmentAction" text="Delete Appointment" />
+         <RadioButton fx:id="appointmentDisplayWeek" layoutX="895.0" layoutY="17.0" mnemonicParsing="false" text="Current Week" />
+         <RadioButton fx:id="appointmentDisplayMonth" layoutX="786.0" layoutY="17.0" mnemonicParsing="false" text="Current Month" />
+         <RadioButton fx:id="appointmentDisplayAll" layoutX="698.0" layoutY="17.0" mnemonicParsing="false" text="Display All" />
+         <Label layoutX="534.0" layoutY="15.0" text="Filter  Appointments by: ">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+         </Label>
         </AnchorPane>
     </Tab>
     <Tab text="Customers">
@@ -31,11 +40,12 @@
             <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
                 <columns>
                     <TableColumn fx:id="customerID" prefWidth="38.0" text="ID" />
-                    <TableColumn fx:id="customerName" prefWidth="225.0" text="Name" />
-                    <TableColumn fx:id="customerAddress" prefWidth="326.0" text="Address" />
-                    <TableColumn fx:id="customerPostalCode" prefWidth="118.0" text="Postal Code" />
-                    <TableColumn fx:id="customerPhone" prefWidth="173.0" text="Phone" />
-                    <TableColumn fx:id="customerDivisionID" prefWidth="94.0" text="Division ID" />
+                    <TableColumn fx:id="customerName" prefWidth="186.0" text="Name" />
+                    <TableColumn fx:id="customerAddress" prefWidth="210.0" text="Address" />
+                    <TableColumn fx:id="customerPostalCode" prefWidth="88.0" text="Postal Code" />
+                    <TableColumn fx:id="customerPhone" prefWidth="176.0" text="Phone" />
+                    <TableColumn fx:id="customerDivisionID" prefWidth="125.0" text="Division ID" />
+               <TableColumn fx:id="customerDivisionName" prefWidth="151.0" text="Division Name" />
                 </columns>
             </TableView>
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />

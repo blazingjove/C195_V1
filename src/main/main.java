@@ -31,10 +31,13 @@ public class main extends Application {
      * commented out code is to change locale for troubleshooting.
      * @param args launches main*/
     public static void main(String[] args) {
+
         //Locale.setDefault(new Locale("fr")); //sets system language to French
 
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
+
+        System.out.println("Application closed");
     }
 }

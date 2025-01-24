@@ -47,6 +47,10 @@ public class mainViewController {
     @FXML private Button addAppointment;
     @FXML private Button modifyAppointment;
 
+    @FXML private RadioButton appointmentDisplayAll;
+    @FXML private RadioButton appointmentDisplayMonth;
+    @FXML private RadioButton appointmentDisplayWeek;
+
 
     /**Prompts user to select if they want to close the program.*/
     public void mainViewExitAction() {
@@ -138,21 +142,30 @@ public class mainViewController {
         }
     }
 
-    /** Initialize populates the customer and appointment table.
+    /**
+     * Initialize populates the customer and appointment table.
      * <p>
-     *     <b>Runtime Errors</b></n>
-     *     Had trouble figuring out the best way to present the information. I believe I have presented a good solution the data is presented statically and users modify the data
-     *     in other views so you don't have to jump around to different views the Tables as large and will enable you to find what you need.
+     * <b>Runtime Errors</b></n>
+     * Had trouble figuring out the best way to present the information. I believe I have presented a good solution the data is presented statically and users modify the data
+     * in other views so you don't have to jump around to different views the Tables as large and will enable you to find what you need.
      * </p>
-     *<p>
-     *     <b>Future Improvements</b></n>
-     *     I would like to add a search function that would come in handy when the table gets much larger, and you have to search for a specific item.
-     *     possibly with a drop-down menu so you search a specific column and narrow your search that much more.
-     *</p>
-     * * @throws SQLException*/
+     * <p>
+     * <b>Future Improvements</b></n>
+     * I would like to add a search function that would come in handy when the table gets much larger, and you have to search for a specific item.
+     * possibly with a drop-down menu so you search a specific column and narrow your search that much more.
+     * </p>
+     * * @throws SQLException
+     */
     public void initialize() throws SQLException {
 
         System.out.println("Main Controller initialized");
+
+        // Group radio buttons
+        ToggleGroup filterToggleGroup = new ToggleGroup();
+        appointmentDisplayAll.setToggleGroup(filterToggleGroup);
+        appointmentDisplayMonth.setToggleGroup(filterToggleGroup);
+        appointmentDisplayWeek.setToggleGroup(filterToggleGroup);
+        appointmentDisplayAll.setSelected(true); // Set default selection to "Display All"
 
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
@@ -185,5 +198,7 @@ public class mainViewController {
 
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
+
+
     }
 }
