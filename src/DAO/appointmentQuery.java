@@ -2,26 +2,24 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.JDBC;
 import model.appointments;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import static main.JDBC.connection;
 
 
 public class appointmentQuery{
 
-    /**
-     * Observablelist for all appointments in database.
+    /**Observablelist for all appointments in database.
      * @throws SQLException
      * @return appointmentsObservableList
      */
     public static ObservableList<appointments> getAllAppointments() throws SQLException {
         ObservableList<appointments> appointmentsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from appointments";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -44,14 +42,12 @@ public class appointmentQuery{
         return appointmentsObservableList;
     }
 
-    /**
-     * Method that deletes appointment based on appointment ID.
+    /**Method that deletes appointment based on appointment ID.
      * @param customer
-     * @param connection
      * @return result
      * @throws SQLException
      */
-    public static int deleteAppointment(int customer, Connection connection) throws SQLException {
+    public static int deleteAppointment(int customer) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID=?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, customer);

@@ -39,9 +39,6 @@ public class loginController implements Initializable{
      *     created user validate method do bump user inputs to existing users, much easier than other methods.
      * </p>
      * */
-    
-    
-    
     public void loginButtonAction() {
         System.out.println("Login button pressed");
         try{
@@ -80,7 +77,7 @@ public class loginController implements Initializable{
      * </p>
      */
     public void exitButtonAction() {
-        System.out.println("Exit button pressed");
+        System.out.println("Login exit button pressed");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, closeMessage, ButtonType.YES, ButtonType.NO);
         alert.setTitle(exitMessage);
         alert.showAndWait();

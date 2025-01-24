@@ -20,10 +20,10 @@
                   <TableColumn fx:id="appointmentUserID" prefWidth="88.0" text="User ID" />
               </columns>
             </TableView>
-            <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
             <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Appointment" />
             <Button layoutX="147.0" layoutY="332.0" mnemonicParsing="false" text="Modify Appointment" />
-            <Button layoutX="295.0" layoutY="332.0" mnemonicParsing="false" text="Delete Appointment" />
+            <Button fx:id="deleteAppointment" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteAppointmentAction" text="Delete Appointment" />
         </AnchorPane>
     </Tab>
     <Tab text="Customers">
@@ -38,7 +38,7 @@
                     <TableColumn fx:id="customerDivisionID" prefWidth="94.0" text="Division ID" />
                 </columns>
             </TableView>
-            <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
             <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Customer" />
             <Button layoutX="128.0" layoutY="332.0" mnemonicParsing="false" text="Modify Customer" />
             <Button layoutX="255.0" layoutY="332.0" mnemonicParsing="false" text="Delete Customer" />
@@ -46,7 +46,7 @@
     </Tab>
     <Tab text="Reports">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>
     </Tab>
 </TabPane>
