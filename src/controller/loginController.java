@@ -1,8 +1,11 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import main.JDBC;
 import DAO.userValidation;
 import java.time.ZoneId;
@@ -23,25 +26,40 @@ public class loginController implements Initializable{
     @FXML private Label passwordLabel;
     @FXML private Button loginButton;
     @FXML private Button exitButton;
-
     private String exitMessage; //class level variable
     private String closeMessage; //class level variable
     private String errorMessage; //class level variable
     private String incorrectMessage; //class level variable
+
     /**
-     * validates user inputs then logs-in
+     * validates user inputs then logs-in, opens main view
      * <p>
      *     <b>Runtime Error</b></n>
      *     Trouble catching errors on this page due to the many ways you can miss input the fields.
      *     created user validate method do bump user inputs to existing users, much easier than other methods.
      * </p>
      * */
+    
+    
+    
     public void loginButtonAction() {
         System.out.println("Login button pressed");
         try{
             int userId = userValidation.validateUser(usernameField.getText(), passwordField.getText());
             if (userId > 0) {
                 System.out.println("User logged in");
+
+                //FXML code to open the main view after login successful
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/mainView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setTitle("DB Client App");
+                stage.setScene(scene);
+                stage.show();
+
+                //close the login view
+                Stage thisStage = (Stage) loginButton.getScene().getWindow();
+                thisStage.close();
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
                 alert.setTitle(errorMessage);
@@ -87,17 +105,22 @@ public class loginController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try{
-            //defining user location
-            Locale locale = Locale.getDefault();
-            Locale.setDefault(locale);
-            ZoneId systemZone = ZoneId.systemDefault();
+        try {
+            // Fetch user's system locale
+            Locale userLocale = Locale.getDefault();
 
-            //displays current locale being used by program
-            System.out.println(locale.getDisplayLanguage());
-            //changing javafx components to English/French depending on language settings
-            locationLabel.setText(String.valueOf(systemZone));
-            resourceBundle = ResourceBundle.getBundle("language/login", Locale.getDefault());
+            //change zone ID here for troubleshooting
+            //ZoneId newZoneId = ZoneId.of("Europe/Paris");
+            ZoneId newZoneId = ZoneId.systemDefault();
+
+            // Optional: Log default locale for debugging
+            System.out.println("User Locale: " + userLocale.getDisplayLanguage());
+
+            // Dynamically load the appropriate resource bundle for UI localization
+            resourceBundle = ResourceBundle.getBundle("language/login", userLocale);
+
+            // Update UI labels with localized strings
+            locationLabel.setText(newZoneId.toString());
             usernameLabel.setText(resourceBundle.getString("username"));
             passwordLabel.setText(resourceBundle.getString("password"));
             loginButton.setText(resourceBundle.getString("login"));
@@ -107,10 +130,21 @@ public class loginController implements Initializable{
             closeMessage = resourceBundle.getString("close");
             errorMessage = resourceBundle.getString("Error");
             incorrectMessage = resourceBundle.getString("Incorrect");
-
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+        // code below will initiate login attempt when ENTER is pressed on keyboard
+        usernameField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case ENTER -> loginButtonAction();
+            }
+        });
+        passwordField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case ENTER -> loginButtonAction();
+            }
+        });
 
         System.out.println("Login Controller initialized");
     }

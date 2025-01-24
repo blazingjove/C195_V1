@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
-
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
+  <tabs>
+      <Tab text="Appointments">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="1049.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
+                    <columns>
+                      <TableColumn fx:id="appointmentID" prefWidth="38.0" text="ID" />
+                      <TableColumn fx:id="appointmentTitle" prefWidth="74.0" text="Title" />
+                        <TableColumn fx:id="appointmentDescription" prefWidth="106.0" text="Description" />
+                        <TableColumn fx:id="appointmentLocation" prefWidth="110.0" text="Location" />
+                        <TableColumn fx:id="appointmentType" prefWidth="106.0" text="Type" />
+                        <TableColumn fx:id="appointmentStart" prefWidth="135.0" text="Start" />
+                        <TableColumn fx:id="appointmentEnd" prefWidth="129.0" text="End" />
+                        <TableColumn fx:id="appointmentCustomerID" prefWidth="91.0" text="Customer ID" />
+                        <TableColumn fx:id="appointmentContactID" prefWidth="97.0" text="Contact ID" />
+                        <TableColumn fx:id="appointmentUserID" prefWidth="88.0" text="User ID" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+                  <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Appointment" />
+                  <Button layoutX="147.0" layoutY="332.0" mnemonicParsing="false" text="Modify Appointment" />
+                  <Button layoutX="295.0" layoutY="332.0" mnemonicParsing="false" text="Delete Appointment" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+    <Tab text="Customers">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
+                    <columns>
+                      <TableColumn prefWidth="38.0" text="ID" />
+                      <TableColumn prefWidth="225.0" text="Name" />
+                        <TableColumn prefWidth="326.0" text="Address" />
+                        <TableColumn prefWidth="118.0" text="Postal Code" />
+                        <TableColumn prefWidth="173.0" text="Phone" />
+                        <TableColumn prefWidth="94.0" text="Dividion ID" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+                  <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Customer" />
+                  <Button layoutX="128.0" layoutY="332.0" mnemonicParsing="false" text="Modify Customer" />
+                  <Button layoutX="255.0" layoutY="332.0" mnemonicParsing="false" text="Delete Customer" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Reports">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" text="Exit" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

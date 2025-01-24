@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 /** main class that creates an application.*/
@@ -30,7 +32,7 @@ public class main extends Application {
      * @param args launches main*/
     public static void main(String[] args) {
         //Locale.setDefault(new Locale("fr")); //sets system language to French
-        //System.out.println("language set to: " + Locale.getDefault());
+
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();

@@ -62,15 +62,12 @@ public class appointments {
         return appointmentType;
     }
 
-
     /**@return start
      */
     public LocalDateTime getStart() {
         System.out.println("start " + start);
         return start;
     }
-
-
 
     /**@return end
      */
@@ -85,7 +82,8 @@ public class appointments {
         return customerID;
     }
 
-    /**@return userID
+    /** foreign Key
+     * @return userID
      */
     public int getUserID() {
         return userID;
@@ -97,5 +95,4 @@ public class appointments {
     public int getContactID() {
         return contactID;
     }
-
 }
