@@ -1,13 +1,15 @@
 package controller;
 
+import DAO.customerQuery;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
-import DAO.appointmentQuery;
+import DAO.*;
 import java.sql.SQLException;
 import model.appointments;
+import model.customers;
 
 
 public class mainViewController {
@@ -26,6 +28,7 @@ public class mainViewController {
     @FXML private TableColumn<? ,?> appointmentUserID;
 
     //Customer Table Columns
+    @FXML private TableView<customers> customerTable;
     @FXML private TableColumn<? ,?> customerID;
     @FXML private TableColumn<? ,?> customerName;
     @FXML private TableColumn<? ,?> customerAddress;
@@ -33,24 +36,11 @@ public class mainViewController {
     @FXML private TableColumn<? ,?> customerPhone;
     @FXML private TableColumn<? ,?> customerDivisionID;
 
-
-
-
-
-
-
-
-
-
-
-
-
     public void initialize() throws SQLException {
         System.out.println("Main Controller initialized");
 
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
-
         //each column is stored one by one
         appointmentID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         appointmentTitle.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
@@ -62,8 +52,23 @@ public class mainViewController {
         appointmentCustomerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         appointmentContactID.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         appointmentUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
-
         //appointment table is populated with the list
         appointmentTable.setItems(allAppointmentsList);
+
+
+        //uses method to get all customers from sql database
+        ObservableList<customers> allCustomersList = customerQuery.getAllCustomers();
+
+        //each colum is stored
+        customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerAddress.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
+        customerPostalCode.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
+        customerPhone.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
+        customerDivisionID.setCellValueFactory(new PropertyValueFactory<>("CustomerDivisionID"));
+
+        //customer table populated with data that was stored above
+        customerTable.setItems(allCustomersList);
     }
+
 }
