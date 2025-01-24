@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.customerQuery;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,20 +51,27 @@ public class mainViewController {
     @FXML private RadioButton appointmentDisplayAll;
     @FXML private RadioButton appointmentDisplayMonth;
     @FXML private RadioButton appointmentDisplayWeek;
+    
+    @FXML private Button deleteCustomer;
 
 
     /**Prompts user to select if they want to close the program.*/
     public void mainViewExitAction() {
+
+        //FXML code to close the main view
         System.out.println("Login exit button pressed");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Close Program?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("EXIT");
         alert.showAndWait();
+
+        //closes the main view if user selects YES on CONFIRMATION alert
         if (alert.getResult() == ButtonType.YES){
             Stage thisStage = (Stage) mainViewExit.getScene().getWindow();
             thisStage.close();
         }
     }
 
+    /**Opens the appointmentView.*/
     public void addAppointmentAction() throws IOException {
         System.out.println("Add Appointment button pressed");
 
@@ -80,6 +88,8 @@ public class mainViewController {
         thisStage.hide();
     }
 
+    
+    /**Opens the appointmentView and populates the fields with the data of the selected appointment.*/
     public void modifyAppointmentAction() throws IOException {
         System.out.println("Modify Appointment button pressed");
 
@@ -142,6 +152,55 @@ public class mainViewController {
         }
     }
 
+    /**Deletes the selected customer.
+     * if no customer is selected an alert is shown. If user has associated appointments an alert is shown as well.
+     * will prompt user to confirm selection if user is selected and does not have associated appointments.*/
+    public void deleteCustomerAction() {
+        System.out.println("Delete Customer button pressed");
+
+        // Get the selected customer
+        customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+
+        // Check if no customer is selected
+        if (selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Delete Customer");
+            alert.setHeaderText("No Customer Selected");
+            alert.setContentText("Please select a customer to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Check if the customer has associated appointments
+        if (appointmentQuery.isCustomerInAppointments(selectedCustomer.getCustomerID())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Delete Customer");
+            alert.setHeaderText("Cannot Delete Customer");
+            alert.setContentText("This customer has associated appointments and cannot be deleted.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Confirm deletion
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected customer?", ButtonType.YES, ButtonType.NO);
+        confirmationAlert.setTitle("Confirm Deletion");
+        confirmationAlert.showAndWait();
+
+        if (confirmationAlert.getResult() == ButtonType.YES) {
+            // Delete customer from the database
+            customerQuery.deleteCustomer(selectedCustomer.getCustomerID());
+            customerTable.getItems().remove(selectedCustomer);
+            customerTable.refresh();
+
+            // Show success message
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Customer Deleted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("The customer has been successfully deleted.");
+            successAlert.showAndWait();
+        }
+    }
+
     /**
      * Initialize populates the customer and appointment table.
      * <p>
@@ -189,8 +248,7 @@ public class mainViewController {
                 errorAlert.showAndWait();
             }
         });
-
-
+        
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
 
@@ -225,4 +283,5 @@ public class mainViewController {
 
 
     }
+    
 }

@@ -51,7 +51,7 @@
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
             <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Customer" />
             <Button layoutX="128.0" layoutY="332.0" mnemonicParsing="false" text="Modify Customer" />
-            <Button layoutX="255.0" layoutY="332.0" mnemonicParsing="false" text="Delete Customer" />
+            <Button fx:id="deleteCustomer" layoutX="255.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteCustomerAction" text="Delete Customer" />
         </AnchorPane>
     </Tab>
     <Tab text="Reports">

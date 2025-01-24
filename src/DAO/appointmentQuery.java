@@ -53,6 +53,7 @@ public class appointmentQuery{
         ps.setInt(1, customer);
         int result = ps.executeUpdate();
         ps.close();
+
         return result;
     }
 
@@ -67,6 +68,7 @@ public class appointmentQuery{
                 appointmentsByMonth.add(appt);
             }
         }
+
         return appointmentsByMonth;
     }
     /**Method that filters appointments to display current week only.*/
@@ -83,6 +85,20 @@ public class appointmentQuery{
                 appointmentsByWeek.add(appt);
             }
         }
+
         return appointmentsByWeek;
+    }
+
+    public static boolean isCustomerInAppointments(Integer customerID) {
+        try {
+            String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, customerID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {}
+        return false;
     }
 }

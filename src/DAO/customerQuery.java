@@ -31,4 +31,14 @@ public class customerQuery {
         }
         return customersObservableList;
     }
+
+    public static void deleteCustomer(Integer customerID) {
+        String sql = "DELETE FROM customers WHERE Customer_ID = ?";
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(sql)) {
+            ps.setInt(1, customerID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
