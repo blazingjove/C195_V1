@@ -167,6 +167,30 @@ public class mainViewController {
         appointmentDisplayWeek.setToggleGroup(filterToggleGroup);
         appointmentDisplayAll.setSelected(true); // Set default selection to "Display All"
 
+        // Add listeners for radio buttons 
+        filterToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                if (appointmentDisplayAll.isSelected()) {
+                    ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
+                    appointmentTable.setItems(allAppointmentsList);
+                } else if (appointmentDisplayMonth.isSelected()) {
+                    ObservableList<appointments> monthlyAppointmentsList = appointmentQuery.getAppointmentsByCurrentMonth();
+                    appointmentTable.setItems(monthlyAppointmentsList);
+                } else if (appointmentDisplayWeek.isSelected()) {
+                    ObservableList<appointments> weeklyAppointmentsList = appointmentQuery.getAppointmentsByCurrentWeek();
+                    appointmentTable.setItems(weeklyAppointmentsList);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Data Load Error");
+                errorAlert.setContentText("An error occurred while loading the appointments.");
+                errorAlert.showAndWait();
+            }
+        });
+
+
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
 

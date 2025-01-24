@@ -55,4 +55,34 @@ public class appointmentQuery{
         ps.close();
         return result;
     }
+
+    /**Method that filters appointments to display current month only.*/
+    public static ObservableList<appointments> getAppointmentsByCurrentMonth() throws SQLException {
+        ObservableList<appointments> appointmentsByMonth = FXCollections.observableArrayList();
+        LocalDateTime now = LocalDateTime.now();
+        ObservableList<appointments> allAppointments = getAllAppointments();
+
+        for (appointments appt : allAppointments) {
+            if (appt.getStart().getMonth() == now.getMonth() && appt.getStart().getYear() == now.getYear()) {
+                appointmentsByMonth.add(appt);
+            }
+        }
+        return appointmentsByMonth;
+    }
+    /**Method that filters appointments to display current week only.*/
+    public static ObservableList<appointments> getAppointmentsByCurrentWeek() throws SQLException {
+        ObservableList<appointments> appointmentsByWeek = FXCollections.observableArrayList();
+        LocalDateTime now = LocalDateTime.now();
+        ObservableList<appointments> allAppointments = getAllAppointments();
+
+        for (appointments appt : allAppointments) {
+            LocalDateTime startOfWeek = now.minusDays(now.getDayOfWeek().getValue() - 1); // Start of the week (Monday)
+            LocalDateTime endOfWeek = startOfWeek.plusDays(6); // End of the week (Sunday)
+
+            if (!appt.getStart().isBefore(startOfWeek) && !appt.getStart().isAfter(endOfWeek)) {
+                appointmentsByWeek.add(appt);
+            }
+        }
+        return appointmentsByWeek;
+    }
 }
