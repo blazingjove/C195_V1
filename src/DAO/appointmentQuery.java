@@ -98,7 +98,28 @@ public class appointmentQuery{
             if (rs.next()) {
                 return true;
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
+
+    /**appointmentIDNext method parses the database for the highest appointment ID found and adds 1 and uses that ID for the next appointments
+     * to be created.
+     * @return 1 the appointment ID used if appointments table is empty.*/
+    public static int appointmentIDNext() {
+        try {
+            String sql = "SELECT MAX(Appointment_ID) AS MaxID FROM appointments";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("MaxID") + 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1; // Default to 1 if there are no existing appointments
+    }
+
 }

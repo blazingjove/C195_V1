@@ -76,7 +76,7 @@ public class mainViewController {
         System.out.println("Add Appointment button pressed");
 
         //FXML code to open the main view after login successful
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/appointmentView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/addAppointmentView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Add Appointment");
@@ -94,7 +94,7 @@ public class mainViewController {
         System.out.println("Modify Appointment button pressed");
 
         //FXML code to open the main view after login successful
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/appointmentView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/ModifyAppointmentView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("modify Appointment");
@@ -139,7 +139,7 @@ public class mainViewController {
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setTitle("Appointment Deleted");
                 successAlert.setHeaderText(null);
-                successAlert.setContentText("The appointment has been successfully deleted.");
+                successAlert.setContentText("The following appointment has ben successfully deleted:" + "\n Appointment ID: " + selectedAppointment.getAppointmentID() + "\n Type: " + selectedAppointment.getAppointmentType() );
                 successAlert.showAndWait();
             } catch (SQLException e) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -280,7 +280,6 @@ public class mainViewController {
 
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
-
 
     }
     
