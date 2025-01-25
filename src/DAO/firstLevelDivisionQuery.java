@@ -37,7 +37,18 @@ public class firstLevelDivisionQuery{
         return firstLevelDivisionList;
     }
 
-    public int getDivisionID(){ return divisionID;}
+    public int getDivisionID(String divisionName) throws SQLException {
+        String sqlQuery = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
+        ps.setString(1, divisionName);
+        ResultSet resultSet = ps.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("Division_ID");
+        } else {
+            throw new SQLException("No Division found with the provided name: " + divisionName);
+        }
+    }
 
     public String getDivisionName(){ return divisionName;}
 
