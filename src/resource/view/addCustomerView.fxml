@@ -36,7 +36,7 @@
       <TextField fx:id="addCustomerPhoneNumber" layoutX="151.0" layoutY="97.0" />
       <TextField fx:id="addCustomerPostalCode" layoutX="153.0" layoutY="230.0" />
       <ComboBox fx:id="addCustomerCountry" layoutX="151.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
-      <ComboBox fx:id="addCustomerFirstLevel" disable="true" layoutX="365.0" layoutY="130.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Country First" />
+      <ComboBox fx:id="addCustomerFirstLevel" layoutX="365.0" layoutY="130.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Country First" />
       <TextField fx:id="addCustomerAddress" layoutX="149.0" layoutY="169.0" prefHeight="33.0" prefWidth="339.0" />
       <Label layoutX="98.0" layoutY="176.0" text="Address">
          <font>

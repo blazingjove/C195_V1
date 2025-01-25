@@ -14,6 +14,9 @@ import model.firstLevelDivision;
 
 import java.sql.SQLException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class addCustomerViewController {
 
     @FXML private TextField addCustomerID;
@@ -60,13 +63,31 @@ public class addCustomerViewController {
 
     }
 
+    private  ObservableList<String> countryCode1Divisions = FXCollections.observableArrayList();
+    private  ObservableList<String> countryCode2Divisions = FXCollections.observableArrayList();
+    private  ObservableList<String> countryCode3Divisions = FXCollections.observableArrayList();
+
+
+
     public void initialize() throws SQLException {
+
+        System.out.println("Add Customer View initialized");
+
+        // Populate ObservableLists for each country
+        firstLevelDivisionQuery.getAllFirstLevelDivisions().forEach(division -> {
+            if (division.getCountryID() == 1) {
+                System.out.println(division.getDivisionName());
+                countryCode1Divisions.add(division.getDivisionName());
+            } else if (division.getCountryID() == 2) {
+                countryCode2Divisions.add(division.getDivisionName());
+            } else if (division.getCountryID() == 3) {
+                countryCode3Divisions.add(division.getDivisionName());
+            }
+        });
 
         // Populate addCustomerCountry ComboBox with country names
         addCustomerCountry.getItems().clear();
         countryQuery.getAllCountries().forEach(country -> addCustomerCountry.getItems().add(country.getCountryName()));
-
-
 
         // Add a listener to detect when a country is selected in addCustomerCountry
         addCustomerCountry.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -75,15 +96,15 @@ public class addCustomerViewController {
                 addCustomerFirstLevel.getItems().clear(); // Clear any previous data
 
                 // Populate addCustomerFirstLevel based on the new country selected
-                // Example: Replace with actual data-fetching logic
-                if (newValue.equals("U.S")) {
-                    addCustomerFirstLevel.getItems().addAll("California", "Texas", "New York");
-                } else if (newValue.equals("Canada")) {
-                    addCustomerFirstLevel.getItems().addAll("Ontario", "Quebec", "British Columbia");
-                } else if (newValue.equals("UK")) {
-                    addCustomerFirstLevel.getItems().addAll("Scotland", "Ireland");
+                // Populate addCustomerFirstLevel using ObservableLists
+                switch (newValue) {
+                    case "U.S" -> addCustomerFirstLevel.setItems(countryCode1Divisions);
+                    case "Canada" -> addCustomerFirstLevel.setItems(countryCode2Divisions);
+                    case "UK" -> addCustomerFirstLevel.setItems(countryCode3Divisions);
                 }
-
+                    
+                System.out.println(countryCode1Divisions);
+                
             } else {
                 addCustomerFirstLevel.setDisable(true); // Disable ComboBox if no country selected
                 addCustomerFirstLevel.getItems().clear();

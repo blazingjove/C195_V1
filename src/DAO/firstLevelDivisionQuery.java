@@ -21,15 +21,19 @@ public class firstLevelDivisionQuery{
     
     public static ObservableList<firstLevelDivision> getAllFirstLevelDivisions() throws SQLException{
         ObservableList<firstLevelDivision> firstLevelDivisionList = FXCollections.observableArrayList();
-        String sqlQuery = "SELECT Division_ID, Division FROM divisions WHERE Division_Level = 1";
-        try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
-             ResultSet resultSet = ps.executeQuery();) {
-            while (resultSet.next()){
-                int divisionID = resultSet.getInt("Division_ID");
-                String divisionName = resultSet.getString("Division");
-                int countryID = resultSet.getInt("Country_ID");
-            }
+        String sqlQuery = "SELECT * from first_level_divisions";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
+        ResultSet ds = ps.executeQuery();
+
+        while (ds.next()){
+            int divisionID = ds.getInt("Division_ID");
+            String divisionName = ds.getString("Division");
+            int countryID = ds.getInt("Country_ID");
+
+            firstLevelDivision firstLevelDivision = new firstLevelDivision(divisionID, divisionName, countryID);
+            firstLevelDivisionList.add(firstLevelDivision);
         }
+
         return firstLevelDivisionList;
     }
 
