@@ -133,7 +133,6 @@ public class addCustomerViewController {
         // Populate ObservableLists for each country
         firstLevelDivisionQuery.getAllFirstLevelDivisions().forEach(division -> {
             if (division.getCountryID() == 1) {
-                System.out.println(division.getDivisionName());
                 countryCode1Divisions.add(division.getDivisionName());
             } else if (division.getCountryID() == 2) {
                 countryCode2Divisions.add(division.getDivisionName());

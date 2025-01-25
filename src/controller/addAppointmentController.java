@@ -19,7 +19,6 @@ import static DAO.appointmentQuery.appointmentIDNext;
 
 public class addAppointmentController {
 
-
     @FXML private Button appointmentSave;
     @FXML private TextField addAppointmentUserID;
     @FXML private TextField addAppointmentID;
@@ -29,8 +28,12 @@ public class addAppointmentController {
     @FXML private TextField addAppointmentType;
     @FXML private ComboBox<String> addAppointmentContact;
     @FXML private TextField addAppointmentCustomerID;
-
     @FXML private Button appointmentExit;
+
+
+    //TODO need to set the time saved to be based of menus
+
+    //TODO populate the time selection 15 minute increments
 
     /**Captures all user inputs and saves the to the sql database
      * @throws RuntimeException error catching*/
