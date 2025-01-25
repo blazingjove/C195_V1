@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addCustomerViewController">
+   <children>
+      <Label layoutX="76.0" layoutY="39.0" text="Customer ID">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="101.0" text="Phone Number">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="57.0" layoutY="71.0" text="Customer Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="76.0" layoutY="234.0" text="Postal Code">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="97.0" layoutY="134.0" text="Country ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="276.0" layoutY="134.0" text="State/Province">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="addCustomerID" editable="false" layoutX="151.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="addCustomerName" layoutX="151.0" layoutY="67.0" />
+      <TextField fx:id="addCustomerPhoneNumber" layoutX="151.0" layoutY="97.0" />
+      <TextField fx:id="addCustomerPostalCode" layoutX="153.0" layoutY="230.0" />
+      <ComboBox fx:id="addCustomerCountry" layoutX="151.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
+      <ComboBox fx:id="addCustomerFirstLevel" layoutX="365.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
+      <TextField fx:id="addCustomerAddress" layoutX="149.0" layoutY="169.0" prefHeight="33.0" prefWidth="339.0" />
+      <Label layoutX="98.0" layoutY="176.0" text="Address">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="153.0" layoutY="202.0" text="Format of address" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
+      <Button fx:id="addCustomerSave" layoutX="276.0" layoutY="361.0" mnemonicParsing="false" onAction="#addCustomerSaveAction" text="Save" />
+      <Button fx:id="addCustomerExit" layoutX="551.0" layoutY="361.0" mnemonicParsing="false" onAction="#addCustomerExitAction" text="Exit" />
+   </children>
+</AnchorPane>

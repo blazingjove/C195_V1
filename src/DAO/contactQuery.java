@@ -29,7 +29,20 @@ public class contactQuery {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return contactsObservableList;
+    }
+
+
+    public static int getContactIDByName(String contactName) throws SQLException{
+        int contactID = 0;
+        String sqlQuery = "SELECT Contact_ID FROM contacts WHERE Contact_Name = ?";
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery)) {
+            ps.setString(1, contactName);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                contactID = resultSet.getInt("Contact_ID");
+            }
+        }
+        return contactID;
     }
 }

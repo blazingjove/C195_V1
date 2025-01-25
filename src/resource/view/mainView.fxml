@@ -5,20 +5,20 @@
 <?import javafx.scene.text.*?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainViewController">
-    <Tab text="Appointments">
+    <Tab closable="false" text="Appointments">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="1049.0">
             <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="40.0" prefHeight="289.0" prefWidth="975.0">
               <columns>
-                  <TableColumn fx:id="appointmentID" prefWidth="38.0" text="ID" />
-                  <TableColumn fx:id="appointmentTitle" prefWidth="98.0" text="Title" />
-                  <TableColumn fx:id="appointmentDescription" prefWidth="140.0" text="Description" />
-                  <TableColumn fx:id="appointmentLocation" prefWidth="173.0" text="Location" />
-                  <TableColumn fx:id="appointmentContactID" prefWidth="48.0" text="Contact" />
-                  <TableColumn fx:id="appointmentType" prefWidth="121.0" text="Type" />
-                  <TableColumn fx:id="appointmentStart" prefWidth="115.0" text="Start" />
-                  <TableColumn fx:id="appointmentEnd" prefWidth="107.0" text="End" />
-                  <TableColumn fx:id="appointmentCustomerID" prefWidth="82.0" text="Customer ID" />
-                  <TableColumn fx:id="appointmentUserID" prefWidth="52.0" text="User ID" />
+                  <TableColumn fx:id="appointmentID" editable="false" prefWidth="38.0" text="ID" />
+                  <TableColumn fx:id="appointmentTitle" editable="false" prefWidth="98.0" text="Title" />
+                  <TableColumn fx:id="appointmentDescription" editable="false" prefWidth="140.0" text="Description" />
+                  <TableColumn fx:id="appointmentLocation" editable="false" prefWidth="173.0" text="Location" />
+                  <TableColumn fx:id="appointmentContactID" editable="false" prefWidth="48.0" text="Contact" />
+                  <TableColumn fx:id="appointmentType" editable="false" prefWidth="121.0" text="Type" />
+                  <TableColumn fx:id="appointmentStart" editable="false" prefWidth="115.0" text="Start" />
+                  <TableColumn fx:id="appointmentEnd" editable="false" prefWidth="107.0" text="End" />
+                  <TableColumn fx:id="appointmentCustomerID" editable="false" prefWidth="82.0" text="Customer ID" />
+                  <TableColumn fx:id="appointmentUserID" editable="false" prefWidth="52.0" text="User ID" />
               </columns>
             </TableView>
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
@@ -35,26 +35,26 @@
          </Label>
         </AnchorPane>
     </Tab>
-    <Tab text="Customers">
+    <Tab closable="false" text="Customers">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
                 <columns>
-                    <TableColumn fx:id="customerID" prefWidth="38.0" text="ID" />
-                    <TableColumn fx:id="customerName" prefWidth="186.0" text="Name" />
-                    <TableColumn fx:id="customerAddress" prefWidth="210.0" text="Address" />
-                    <TableColumn fx:id="customerPostalCode" prefWidth="88.0" text="Postal Code" />
-                    <TableColumn fx:id="customerPhone" prefWidth="176.0" text="Phone" />
-                    <TableColumn fx:id="customerDivisionID" prefWidth="125.0" text="Division ID" />
-               <TableColumn fx:id="customerDivisionName" prefWidth="151.0" text="Division Name" />
+                    <TableColumn fx:id="customerID" editable="false" prefWidth="38.0" text="ID" />
+                    <TableColumn fx:id="customerName" editable="false" prefWidth="186.0" text="Name" />
+                    <TableColumn fx:id="customerAddress" editable="false" prefWidth="210.0" text="Address" />
+                    <TableColumn fx:id="customerPostalCode" editable="false" prefWidth="88.0" text="Postal Code" />
+                    <TableColumn fx:id="customerPhone" editable="false" prefWidth="176.0" text="Phone" />
+                    <TableColumn fx:id="customerDivisionID" editable="false" prefWidth="125.0" text="Division ID" />
+                    <TableColumn fx:id="customerDivisionName" editable="false" prefWidth="151.0" text="Division Name" />
                 </columns>
             </TableView>
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
-            <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" text="Add Customer" />
-            <Button layoutX="128.0" layoutY="332.0" mnemonicParsing="false" text="Modify Customer" />
+            <Button fx:id="addCustomer" layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#addCustomerAction" text="Add Customer" />
+            <Button fx:id="modifyCustomer" layoutX="128.0" layoutY="332.0" mnemonicParsing="false" onAction="#modifyCustomerAction" text="Modify Customer" />
             <Button fx:id="deleteCustomer" layoutX="255.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteCustomerAction" text="Delete Customer" />
         </AnchorPane>
     </Tab>
-    <Tab text="Reports">
+    <Tab closable="false" text="Reports">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>

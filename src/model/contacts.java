@@ -15,7 +15,7 @@ public class contacts {
      * @return contactID
      * int(10)
      */
-    public int getId() {
+    public int getID() {
         return contactID;
     }
 

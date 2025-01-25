@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import static main.JDBC.connection;
 
-
 public class appointmentQuery{
 
     /**Observablelist for all appointments in database.
@@ -57,7 +56,8 @@ public class appointmentQuery{
         return result;
     }
 
-    /**Method that filters appointments to display current month only.*/
+    /**Method that filters appointments to display current month only.
+     * @return appointmentsByMonth returns list of appointments that are that month*/
     public static ObservableList<appointments> getAppointmentsByCurrentMonth() throws SQLException {
         ObservableList<appointments> appointmentsByMonth = FXCollections.observableArrayList();
         LocalDateTime now = LocalDateTime.now();
@@ -71,7 +71,8 @@ public class appointmentQuery{
 
         return appointmentsByMonth;
     }
-    /**Method that filters appointments to display current week only.*/
+    /**Method that filters appointments to display current week only.
+     * @return appointmentsByWeek only appointments that are from that week*/
     public static ObservableList<appointments> getAppointmentsByCurrentWeek() throws SQLException {
         ObservableList<appointments> appointmentsByWeek = FXCollections.observableArrayList();
         LocalDateTime now = LocalDateTime.now();
@@ -89,6 +90,9 @@ public class appointmentQuery{
         return appointmentsByWeek;
     }
 
+    /**IsCustomerInAppointments checks if there are appointments associated with the input customer ID.
+     * @param customerID customer_ID from sql server as INT
+     * @return Boolean returns true or false*/
     public static boolean isCustomerInAppointments(Integer customerID) {
         try {
             String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
@@ -122,4 +126,29 @@ public class appointmentQuery{
         return 1; // Default to 1 if there are no existing appointments
     }
 
+    public static boolean createAppointment(int appointmentID, String title, String description, String location, String type, int customerID, int userID, int contactID) {
+        String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            // You would replace these date placeholders with actual LocalDateTime inputs when integrating
+            LocalDateTime start = LocalDateTime.now();
+            LocalDateTime end = LocalDateTime.now().plusHours(1);
+
+            ps.setInt(1, appointmentID);
+            ps.setString(2, title);
+            ps.setString(3, description);
+            ps.setString(4, location);
+            ps.setString(5, type);
+            ps.setTimestamp(6, java.sql.Timestamp.valueOf(start));
+            ps.setTimestamp(7, java.sql.Timestamp.valueOf(end));
+            ps.setInt(8, customerID);
+            ps.setInt(9, userID);
+            ps.setInt(10, contactID);
+
+            int affectedRows = ps.executeUpdate(); // Execute the query
+            return affectedRows > 0; // Return true if rows were added successfully
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Return false if insertion failed
+    }
 }

@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import DAO.*;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.stage.Stage;
@@ -19,6 +18,7 @@ import model.customers;
 
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
+
 
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
@@ -41,12 +41,15 @@ public class mainViewController {
     @FXML private TableColumn<? ,?> customerPostalCode;
     @FXML private TableColumn<? ,?> customerPhone;
     @FXML private TableColumn<? ,?> customerDivisionID;
+    @FXML private TableColumn<?, ?> customerDivisionName;
 
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
-    @FXML private Button deleteAppointment;
     @FXML private Button addAppointment;
     @FXML private Button modifyAppointment;
+    @FXML private Button addCustomer;
+    @FXML private Button modifyCustomer;
+    @FXML private Button deleteAppointment;
 
     @FXML private RadioButton appointmentDisplayAll;
     @FXML private RadioButton appointmentDisplayMonth;
@@ -150,6 +153,25 @@ public class mainViewController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void addCustomerAction(ActionEvent actionEvent) throws IOException{
+        System.out.println("Add customer button pressed");
+
+        //FXML code to open the main view after login successful
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/addCustomerView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Add Customer");
+        stage.setScene(scene);
+        stage.show();
+
+        // Hide the mainView
+        Stage thisStage = (Stage) addCustomer.getScene().getWindow();
+        thisStage.hide();
+    }
+
+    public void modifyCustomerAction(ActionEvent actionEvent) {
     }
 
     /**Deletes the selected customer.
@@ -282,5 +304,5 @@ public class mainViewController {
         customerTable.setItems(allCustomersList);
 
     }
-    
+
 }

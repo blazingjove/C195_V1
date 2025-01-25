@@ -5,13 +5,14 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="403.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addAppointmentController">
-   <TextField fx:id="addAppointmentID" editable="false" layoutX="128.0" layoutY="28.0" prefHeight="25.0" prefWidth="35.0" />
+   <TextField fx:id="addAppointmentID" editable="false" layoutX="128.0" layoutY="28.0" opacity="0.75" prefHeight="25.0" prefWidth="35.0" />
     <TextField fx:id="addAppointmentTitle" layoutX="128.0" layoutY="60.0" />
     <TextField fx:id="addAppointmentDescription" layoutX="128.0" layoutY="90.0" />
     <TextField fx:id="addAppointmentLocation" layoutX="128.0" layoutY="120.0" />
     <TextField fx:id="addAppointmentType" layoutX="128.0" layoutY="150.0" />
    <ComboBox fx:id="addAppointmentContact" layoutX="128.0" layoutY="180.0" prefWidth="150.0" />
     <TextField fx:id="addAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefHeight="25.0" prefWidth="35.0" />
+   <TextField fx:id="addAppointmentUserID" layoutX="128.0" layoutY="240.0" prefHeight="25.0" prefWidth="35.0" />
    <DatePicker layoutX="178.0" layoutY="281.0" />
    <ComboBox layoutX="366.0" layoutY="281.0" prefWidth="150.0" />
    <DatePicker layoutX="178.0" layoutY="319.0" />
@@ -62,4 +63,10 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Label>
+   <Label layoutX="51.0" layoutY="244.0" text="User ID">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Button fx:id="appointmentSave" layoutX="283.0" layoutY="364.0" mnemonicParsing="false" onAction="#appointmentSaveAction" text="Save" />
 </AnchorPane>
