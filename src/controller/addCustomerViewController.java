@@ -1,5 +1,8 @@
 package controller;
 
+import DAO.firstLevelDivisionQuery;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import DAO.countryQuery;
+import model.firstLevelDivision;
 
 import java.sql.SQLException;
 
@@ -62,7 +66,29 @@ public class addCustomerViewController {
         addCustomerCountry.getItems().clear();
         countryQuery.getAllCountries().forEach(country -> addCustomerCountry.getItems().add(country.getCountryName()));
 
-        //
+
+
+        // Add a listener to detect when a country is selected in addCustomerCountry
+        addCustomerCountry.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                addCustomerFirstLevel.setDisable(false); // Enable ComboBox
+                addCustomerFirstLevel.getItems().clear(); // Clear any previous data
+
+                // Populate addCustomerFirstLevel based on the new country selected
+                // Example: Replace with actual data-fetching logic
+                if (newValue.equals("U.S")) {
+                    addCustomerFirstLevel.getItems().addAll("California", "Texas", "New York");
+                } else if (newValue.equals("Canada")) {
+                    addCustomerFirstLevel.getItems().addAll("Ontario", "Quebec", "British Columbia");
+                } else if (newValue.equals("UK")) {
+                    addCustomerFirstLevel.getItems().addAll("Scotland", "Ireland");
+                }
+
+            } else {
+                addCustomerFirstLevel.setDisable(true); // Disable ComboBox if no country selected
+                addCustomerFirstLevel.getItems().clear();
+            }
+        });
     }
 
 }

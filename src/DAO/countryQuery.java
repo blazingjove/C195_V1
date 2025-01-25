@@ -3,7 +3,6 @@ package DAO;
 import model.country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import main.JDBC;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,4 +28,5 @@ public class countryQuery extends country {
         }
         return countryList;
     }
+
 }
