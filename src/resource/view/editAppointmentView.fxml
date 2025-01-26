@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="403.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.editAppointmentController">
+   <TextField fx:id="editAppointmentID" disable="true" editable="false" layoutX="128.0" layoutY="28.0" opacity="0.75" prefHeight="25.0" prefWidth="35.0" />
+    <TextField fx:id="editAppointmentTitle" layoutX="128.0" layoutY="60.0" />
+    <TextField fx:id="editAppointmentDescription" layoutX="128.0" layoutY="90.0" />
+    <TextField fx:id="editAppointmentLocation" layoutX="128.0" layoutY="120.0" />
+    <TextField fx:id="editAppointmentType" layoutX="128.0" layoutY="150.0" />
+   <ComboBox fx:id="editAppointmentContact" layoutX="128.0" layoutY="180.0" prefWidth="150.0" />
+    <TextField fx:id="editAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefHeight="25.0" prefWidth="35.0" />
+   <TextField fx:id="editAppointmentUserID" layoutX="128.0" layoutY="240.0" prefHeight="25.0" prefWidth="35.0" />
+   <DatePicker layoutX="178.0" layoutY="281.0" />
+   <ComboBox layoutX="366.0" layoutY="281.0" prefWidth="150.0" />
+   <DatePicker layoutX="178.0" layoutY="319.0" />
+   <ChoiceBox layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
+    <Label layoutX="38.0" layoutY="214.0" text="Customer ID">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="59.0" layoutY="64.0" text="Title">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="39.0" layoutY="94.0" text="Description">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="48.0" layoutY="124.0" text="Location">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="50.0" layoutY="184.0" text="Contact">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="58.0" layoutY="285.0" text="Start Date and Time">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="58.0" layoutY="154.0" text="Type">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="56.0" layoutY="323.0" text="End Date and Time">
+        <font>
+          <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+   <Button fx:id="editAppointmentExit" layoutX="551.0" layoutY="364.0" mnemonicParsing="false" onAction="#editAppointmentExitAction" text="Exit" />
+   <Label layoutX="26.0" layoutY="32.0" text="Appointment ID">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="51.0" layoutY="244.0" text="User ID">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Button fx:id="editAppointmentSave" layoutX="283.0" layoutY="364.0" mnemonicParsing="false" onAction="#editAppointmentSaveAction" text="Save" />
+</AnchorPane>

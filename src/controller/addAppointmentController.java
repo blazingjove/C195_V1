@@ -44,7 +44,6 @@ public class addAppointmentController {
 
         try {
             // Extract input values
-            int appointmentID = Integer.parseInt(addAppointmentID.getText());
             String title = addAppointmentTitle.getText();
             String description = addAppointmentDescription.getText();
             String location = addAppointmentLocation.getText();
@@ -53,6 +52,11 @@ public class addAppointmentController {
             int customerID = Integer.parseInt(addAppointmentCustomerID.getText());
             int userID = Integer.parseInt(addAppointmentUserID.getText());
 
+            //time hard coded must come and change so it is dynamic
+
+            LocalDateTime start = LocalDateTime.now();
+            LocalDateTime end = start.plusHours(1);
+            
             // Validate required fields
             if (title.isEmpty() || description.isEmpty() || location.isEmpty() || type.isEmpty() || contactName == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "All fields must be filled!", ButtonType.OK);
@@ -74,7 +78,21 @@ public class addAppointmentController {
             }
 
             // Insert into database
-            boolean success = appointmentQuery.createAppointment(appointmentID, title, description, location, type, customerID, userID, contactID);
+            boolean success;
+            String sqlInsert = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlInsert)) {
+                ps.setString(1, title);
+                ps.setString(2, description);
+                ps.setString(3, location);
+                ps.setString(4, type);
+                ps.setTimestamp(5, java.sql.Timestamp.valueOf(start));
+                ps.setTimestamp(6, java.sql.Timestamp.valueOf(end));
+                ps.setInt(7, customerID);
+                ps.setInt(8, userID);
+                ps.setInt(9, contactID);
+                success = ps.executeUpdate() > 0;
+            }
 
             // Notify the user
             if (success) {
