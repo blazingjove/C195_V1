@@ -40,6 +40,9 @@ public class editCustomerViewController {
     public void editCustomerExitAction() throws IOException {
         System.out.println("Edit Customer Exit button pressed");
 
+        //close the edit customer view
+        editCustomerExit.getScene().getWindow().hide();
+
         //closes the edit customer view and opens main view
         showMainView();
 
@@ -47,6 +50,9 @@ public class editCustomerViewController {
 
     public void editCustomerSaveAction() throws IOException {
         System.out.println("Customer Save button pressed");
+
+        //close the edit customer view
+        editCustomerExit.getScene().getWindow().hide();
 
         //close edit customer view and opens main view
         showMainView();
@@ -93,9 +99,6 @@ public class editCustomerViewController {
                 }
                 //System.out.println(countryCode1Divisions);
 
-            } else {
-                //addCustomerFirstLevel.setDisable(true); // Disable ComboBox if no country selected
-                editCustomerFirstLevel.getItems().clear();
             }
         });
 
@@ -114,8 +117,9 @@ public class editCustomerViewController {
         editCustomerName.setText(selectedCustomer.getCustomerName());
         editCustomerPhoneNumber.setText(selectedCustomer.getCustomerPhone());
         editCustomerPostalCode.setText(selectedCustomer.getCustomerPostalCode());
+        editCustomerAddress.setText(selectedCustomer.getCustomerAddress());
+
         //editCustomerCountry.setItems(selectedCustomer.getDivisionName());
         //editCustomerFirstLevel.setItems(selectedCustomer.getCustomerDivisionID());
-        editCustomerAddress.setText(selectedCustomer.getCustomerAddress());
     }
 }
