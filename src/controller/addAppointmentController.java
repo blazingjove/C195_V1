@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.customerQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,12 +9,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.JDBC;
 import model.contacts;
-import DAO.contactQuery;
+import DAO.*;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import static DAO.appointmentQuery.appointmentIDNext;
 
 public class addAppointmentController {
 
@@ -169,7 +167,9 @@ public class addAppointmentController {
         addAppointmentCustomerID.setItems(customerNames);
 
         //defining the list to hold user's names
-
+        ObservableList<String> userNames = FXCollections.observableArrayList();
+        userQuery.getAllUsers().forEach(users -> userNames.add(users.getUserName()));
+        addAppointmentUserID.setItems(userNames);
 
     }
 
