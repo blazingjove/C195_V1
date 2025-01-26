@@ -11,13 +11,13 @@
     <TextField fx:id="addAppointmentLocation" layoutX="128.0" layoutY="120.0" />
     <TextField fx:id="addAppointmentType" layoutX="128.0" layoutY="150.0" />
    <ComboBox fx:id="addAppointmentContact" layoutX="128.0" layoutY="180.0" prefWidth="150.0" />
-    <TextField fx:id="addAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefHeight="25.0" prefWidth="35.0" />
-   <TextField fx:id="addAppointmentUserID" layoutX="128.0" layoutY="240.0" prefHeight="25.0" prefWidth="35.0" />
+   <ComboBox fx:id="addAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefWidth="150.0" />
+   <ComboBox fx:id="addAppointmentUserID" layoutX="128.0" layoutY="240.0" prefWidth="150.0" />
    <DatePicker layoutX="178.0" layoutY="281.0" />
    <ComboBox layoutX="366.0" layoutY="281.0" prefWidth="150.0" />
    <DatePicker layoutX="178.0" layoutY="319.0" />
    <ChoiceBox layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
-    <Label layoutX="38.0" layoutY="214.0" text="Customer ID">
+    <Label layoutX="38.0" layoutY="214.0" text="Customer">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>
@@ -63,7 +63,7 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Label>
-   <Label layoutX="51.0" layoutY="244.0" text="User ID">
+   <Label layoutX="51.0" layoutY="244.0" text="User">
       <font>
          <Font name="System Bold" size="12.0" />
       </font>

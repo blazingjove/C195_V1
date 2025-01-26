@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.customerQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,14 +20,14 @@ import static DAO.appointmentQuery.appointmentIDNext;
 public class addAppointmentController {
 
     @FXML private Button appointmentSave;
-    @FXML private TextField addAppointmentUserID;
+    @FXML private ComboBox<String> addAppointmentUserID;
     @FXML private TextField addAppointmentID;
     @FXML private TextField addAppointmentTitle;
     @FXML private TextField addAppointmentDescription;
     @FXML private TextField addAppointmentLocation;
     @FXML private TextField addAppointmentType;
     @FXML private ComboBox<String> addAppointmentContact;
-    @FXML private TextField addAppointmentCustomerID;
+    @FXML private ComboBox<String> addAppointmentCustomerID;
     @FXML private Button appointmentExit;
 
 
@@ -46,8 +47,8 @@ public class addAppointmentController {
             String location = addAppointmentLocation.getText();
             String type = addAppointmentType.getText();
             String contactName = addAppointmentContact.getSelectionModel().getSelectedItem();
-            int customerID = Integer.parseInt(addAppointmentCustomerID.getText());
-            int userID = Integer.parseInt(addAppointmentUserID.getText());
+            int customerID = 1;
+            int userID = 1;
 
             //time hard coded must come and change so it is dynamic
 
@@ -153,15 +154,22 @@ public class addAppointmentController {
     public void initialize() throws SQLException {
         System.out.println("Add Appointment View initialized");
 
-        //defining the two observable list that will be usd in lambda expression
+        //defining the two observable list that will be usd in lambda expression populating combo box
         ObservableList<contacts> contactsObservableList = contactQuery.getContacts();
         ObservableList<String> allContactsNames = FXCollections.observableArrayList();
-
         // lambda #1
         contactsObservableList.forEach(contacts -> allContactsNames.add(contacts.getContactName()));
-
         //System.out.println(allContactsNames);
         addAppointmentContact.setItems(allContactsNames);
+
+        //defining the list to hold customer Names
+        ObservableList<String> customerNames = FXCollections.observableArrayList();
+        // retrieves customer names
+        customerQuery.getAllCustomers().forEach(customer -> customerNames.add(customer.getCustomerName()));
+        addAppointmentCustomerID.setItems(customerNames);
+
+        //defining the list to hold user's names
+
 
     }
 

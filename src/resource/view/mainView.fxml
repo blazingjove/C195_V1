@@ -35,7 +35,7 @@
          </Label>
         </AnchorPane>
     </Tab>
-    <Tab closable="false" text="Customers">
+    <Tab fx:id="customersTab" closable="false" text="Customers">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="975.0">
                 <columns>
@@ -48,7 +48,7 @@
                     <TableColumn fx:id="customerDivisionName" editable="false" prefWidth="151.0" text="Division Name" />
                 </columns>
             </TableView>
-            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
+            <Button  layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
             <Button fx:id="addCustomer" layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#addCustomerAction" text="Add Customer" />
             <Button fx:id="editCustomer" layoutX="128.0" layoutY="332.0" mnemonicParsing="false" onAction="#editCustomerAction" text="Edit Customer" />
             <Button fx:id="deleteCustomer" layoutX="255.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteCustomerAction" text="Delete Customer" />
@@ -56,15 +56,15 @@
     </Tab>
     <Tab closable="false" text="Reports">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
-         <Button layoutX="235.0" layoutY="79.0" mnemonicParsing="false" prefWidth="126.0" text="Appointment Stats" />
+            <Button  layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
+         <Button layoutX="235.0" layoutY="79.0" mnemonicParsing="false" prefWidth="126.0" text="Sorty by type" />
          <Button layoutX="235.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
          <Button layoutX="235.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="3rd report" />
         </AnchorPane>
     </Tab>
     <Tab closable="false" text="Settings">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
+            <Button  layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>
     </Tab>
 </TabPane>
