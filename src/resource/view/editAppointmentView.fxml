@@ -11,13 +11,12 @@
     <TextField fx:id="editAppointmentLocation" layoutX="128.0" layoutY="120.0" />
     <TextField fx:id="editAppointmentType" layoutX="128.0" layoutY="150.0" />
    <ComboBox fx:id="editAppointmentContact" layoutX="128.0" layoutY="180.0" prefWidth="150.0" />
-    <TextField fx:id="editAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefHeight="25.0" prefWidth="35.0" />
-   <TextField fx:id="editAppointmentUserID" layoutX="128.0" layoutY="240.0" prefHeight="25.0" prefWidth="35.0" />
-   <DatePicker layoutX="178.0" layoutY="281.0" />
-   <ComboBox layoutX="366.0" layoutY="281.0" prefWidth="150.0" />
-   <DatePicker layoutX="178.0" layoutY="319.0" />
-   <ChoiceBox layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
-    <Label layoutX="38.0" layoutY="214.0" text="Customer ID">
+   <ComboBox fx:id="editAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefWidth="150.0" />
+   <ComboBox fx:id="editAppointmentUserID" layoutX="128.0" layoutY="240.0" prefWidth="150.0" />
+   <DatePicker fx:id="editAppointmentDate" layoutX="178.0" layoutY="281.0" />
+   <ComboBox fx:id="editAppointmentStartTime" layoutX="178.0" layoutY="319.0" prefWidth="150.0" />
+   <ComboBox fx:id="editAppointmentEndTime" layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
+    <Label layoutX="38.0" layoutY="214.0" text="Customer">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>
@@ -42,7 +41,7 @@
           <Font name="System Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="58.0" layoutY="285.0" text="Start Date and Time">
+    <Label layoutX="58.0" layoutY="285.0" text="Appointment date">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>
@@ -52,7 +51,7 @@
           <Font name="System Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="56.0" layoutY="323.0" text="End Date and Time">
+    <Label layoutX="56.0" layoutY="323.0" text="start and end time">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>
@@ -63,7 +62,7 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Label>
-   <Label layoutX="51.0" layoutY="244.0" text="User ID">
+   <Label layoutX="51.0" layoutY="244.0" text="User">
       <font>
          <Font name="System Bold" size="12.0" />
       </font>

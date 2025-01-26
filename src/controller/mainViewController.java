@@ -92,6 +92,19 @@ public class mainViewController {
     public void editAppointmentAction() throws IOException {
         System.out.println("Edit Appointment button pressed");
 
+        // Get the selected customer
+        appointments selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+
+        // Check if no customer is selected
+        if (selectedAppointment == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Edit Appointment");
+            alert.setHeaderText("No Appointment Selected");
+            alert.setContentText("Please select a Appointment to edit");
+            alert.showAndWait();
+            return;
+        }
+
         //code to open the edit appointment view after login successful
         openThisView("/resource/view/editAppointmentView.fxml","Edit Appointment");
     }
