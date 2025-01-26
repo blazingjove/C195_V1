@@ -170,9 +170,6 @@ public class addAppointmentController {
     public void initialize() throws SQLException {
         System.out.println("Add Appointment View initialized");
 
-        // Populate next appointment ID
-        addAppointmentID.setText(String.valueOf(appointmentIDNext()));
-
         //defining the two observable list that will be usd in lambda expression
         ObservableList<contacts> contactsObservableList = contactQuery.getContacts();
         ObservableList<String> allContactsNames = FXCollections.observableArrayList();

@@ -2,9 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.JDBC;
 
 import java.io.IOException;
@@ -26,7 +24,14 @@ public class editAppointmentController {
     public void editAppointmentExitAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Edit Appointment Exit button pressed");
 
-        mainViewController.showMainView();
+        //notify user if they want to close the Edit Appointment view and open the Main view
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Close window?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("EXIT");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            mainViewController.showMainView();
+        }
 
     }
 

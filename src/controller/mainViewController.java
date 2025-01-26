@@ -81,7 +81,7 @@ public class mainViewController {
         System.out.println("Add Appointment button pressed");
 
         //code to open the edit appointment view after login successful
-        openThisView("/resource/view/addAppointmentView.fxml");
+        openThisView("/resource/view/addAppointmentView.fxml","Add Appointment");
     }
 
     
@@ -90,7 +90,7 @@ public class mainViewController {
         System.out.println("Edit Appointment button pressed");
 
         //code to open the edit appointment view after login successful
-        openThisView("/resource/view/ModifyAppointmentView.fxml");
+        openThisView("/resource/view/editAppointmentView.fxml","Edit Appointment");
     }
 
     /**Prompts user to confirm if they want to delete the selected appointment, if no appointment is selected an alert is shown.*/
@@ -144,7 +144,7 @@ public class mainViewController {
         System.out.println("Add customer button pressed");
 
         //open the add customer view with method
-        openThisView("/resource/view/addCustomerView.fxml");
+        openThisView("/resource/view/addCustomerView.fxml","Add Customer");
 
     }
 
@@ -330,13 +330,13 @@ public class mainViewController {
         stage.show();
     }
 
-    public static void openThisView(String viewString) throws IOException {
+    public static void openThisView(String viewString,String titleView) throws IOException {
 
         //FXML code to open the add customer view
         FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource(viewString));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("Add Customer");
+        stage.setTitle(titleView);
         stage.setScene(scene);
         stage.show();
 

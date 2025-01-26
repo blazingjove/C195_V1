@@ -5,10 +5,7 @@ import DAO.firstLevelDivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.customers;
 
 import java.io.IOException;
@@ -37,11 +34,7 @@ public class editCustomerViewController {
     public void editCustomerExitAction() throws IOException {
         System.out.println("Edit Customer Exit button pressed");
 
-        //close the edit customer view
-        editCustomerExit.getScene().getWindow().hide();
-
-        //closes the edit customer view and opens main view
-        showMainView();
+        //notify user if they want to exit the window
 
     }
 
