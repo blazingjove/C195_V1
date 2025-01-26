@@ -27,4 +27,17 @@ public class userQuery {
         }
         return usersObservableList;
     }
+
+    public static String getUserByUserID(int userID) {
+        String userName = null;
+        String sqlQuery = "SELECT User_Name FROM users WHERE User_ID = ?";
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery)) {
+            ps.setInt(1, userID);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                userName = resultSet.getString("User_Name");
+            }
+        } catch (SQLException ex) {}
+        return userName;
+    }
 }

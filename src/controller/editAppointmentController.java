@@ -264,6 +264,10 @@ public class editAppointmentController {
         // select the matching customer in combobox
         String appointmentCustomer = customerQuery.getCustomerByCustomerID(selectedAppointment.getCustomerID());
         editAppointmentCustomerID.setValue(appointmentCustomer);
+
+        // select matching user in combo box
+        String appointmentUser = userQuery.getUserByUserID(selectedAppointment.getUserID());
+        editAppointmentUserID.setValue(appointmentUser);
         
     }
 }
