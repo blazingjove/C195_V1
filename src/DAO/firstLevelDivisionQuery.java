@@ -52,6 +52,19 @@ public class firstLevelDivisionQuery{
         return countryName;
     }
 
+    public static String getDivisionNameByDivisionID(int divisionID) throws SQLException {
+        String divisionName = null;
+        String sqlQuery = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
+        ps.setInt(1, divisionID);
+        ResultSet resultSet = ps.executeQuery();
+
+        if (resultSet.next()) {
+            divisionName = resultSet.getString("Division");
+        }
+        return divisionName;
+    }
+
     public int getDivisionID(String divisionName) throws SQLException {
         String sqlQuery = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);

@@ -125,7 +125,7 @@ public class editCustomerViewController {
 
         // Set country and division based on division ID
         int divisionID = selectedCustomer.getCustomerDivisionID();
-        String countryName = firstLevelDivisionQuery.getCountryNameByDivisionID(divisionID); // Assuming this method exists
+        String countryName = firstLevelDivisionQuery.getCountryNameByDivisionID(divisionID);
         editCustomerCountry.setValue(countryName);
 
         // Set the divisions for the selected country
@@ -136,6 +136,10 @@ public class editCustomerViewController {
         }
 
         // Set the customer's specific division
-        editCustomerFirstLevel.setValue(firstLevelDivisionQuery.getCountryNameByDivisionID(divisionID)); // Assuming this method exists
+        String divisionName = firstLevelDivisionQuery.getDivisionNameByDivisionID(divisionID);
+        editCustomerFirstLevel.setValue(divisionName);
+
+        System.out.println("Country: "+editCustomerCountry.getValue());
+        System.out.println("State: "+editCustomerFirstLevel.getValue());
     }
 }
