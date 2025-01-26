@@ -119,18 +119,19 @@ public class editAppointmentController {
 
             // Insert into database
             boolean success;
-            String sqlInsert = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sqlInsert = "REPLACE INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlInsert)) {
-                ps.setString(1, title);
-                ps.setString(2, description);
-                ps.setString(3, location);
-                ps.setString(4, type);
-                ps.setTimestamp(5, java.sql.Timestamp.valueOf(start));
-                ps.setTimestamp(6, java.sql.Timestamp.valueOf(end));
-                ps.setInt(7, customerID);
-                ps.setInt(8, userID);
-                ps.setInt(9, contactID);
+                ps.setInt(1, selectedAppointment.getAppointmentID());
+                ps.setString(2, title);
+                ps.setString(3, description);
+                ps.setString(4, location);
+                ps.setString(5, type);
+                ps.setTimestamp(6, java.sql.Timestamp.valueOf(start));
+                ps.setTimestamp(7, java.sql.Timestamp.valueOf(end));
+                ps.setInt(8, customerID);
+                ps.setInt(9, userID);
+                ps.setInt(10, contactID);
                 success = ps.executeUpdate() > 0;
             }
 
