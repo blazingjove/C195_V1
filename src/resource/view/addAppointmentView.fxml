@@ -13,7 +13,7 @@
    <ComboBox fx:id="addAppointmentContact" layoutX="128.0" layoutY="180.0" prefWidth="150.0" />
    <ComboBox fx:id="addAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefWidth="150.0" />
    <ComboBox fx:id="addAppointmentUserID" layoutX="128.0" layoutY="240.0" prefWidth="150.0" />
-   <DatePicker layoutX="178.0" layoutY="281.0" />
+   <DatePicker fx:id="addAppointmentDate" layoutX="178.0" layoutY="281.0" />
    <ComboBox fx:id="addAppointmentStartTime" layoutX="178.0" layoutY="319.0" prefWidth="150.0" />
    <ComboBox fx:id="addAppointmentEndTime" layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
     <Label layoutX="38.0" layoutY="214.0" text="Customer">

@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 
 public class addAppointmentController {
 
+    @FXML private DatePicker addAppointmentDate;
     @FXML private ComboBox<String > addAppointmentEndTime;
     @FXML private ComboBox<String> addAppointmentStartTime;
     @FXML private Button appointmentSave;
@@ -74,15 +75,15 @@ public class addAppointmentController {
                 return;
             }
 
-            // Convert selected times to LocalDateTime objects (assumes same day)
-            LocalDateTime start = LocalDateTime.now().withHour(Integer.parseInt(selectedStartTime.split(":")[0]))
-                    .withMinute(Integer.parseInt(selectedStartTime.split(":")[1]))
-                    .withSecond(0)
-                    .withNano(0);
-            LocalDateTime end = LocalDateTime.now().withHour(Integer.parseInt(selectedEndTime.split(":")[0]))
-                    .withMinute(Integer.parseInt(selectedEndTime.split(":")[1]))
-                    .withSecond(0)
-                    .withNano(0);
+            // Convert selected times and appointment date to LocalDateTime objects
+            LocalDateTime start = LocalDateTime.of(addAppointmentDate.getValue(),
+                    java.time.LocalTime.of(
+                            Integer.parseInt(selectedStartTime.split(":")[0]),
+                            Integer.parseInt(selectedStartTime.split(":")[1])));
+            LocalDateTime end = LocalDateTime.of(addAppointmentDate.getValue(),
+                    java.time.LocalTime.of(
+                            Integer.parseInt(selectedEndTime.split(":")[0]),
+                            Integer.parseInt(selectedEndTime.split(":")[1])));
 
             // Validate that end time is after start time
             if (!end.isAfter(start)) {
