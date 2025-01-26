@@ -14,9 +14,8 @@
    <ComboBox fx:id="addAppointmentCustomerID" layoutX="128.0" layoutY="210.0" prefWidth="150.0" />
    <ComboBox fx:id="addAppointmentUserID" layoutX="128.0" layoutY="240.0" prefWidth="150.0" />
    <DatePicker layoutX="178.0" layoutY="281.0" />
-   <ComboBox layoutX="366.0" layoutY="281.0" prefWidth="150.0" />
-   <DatePicker layoutX="178.0" layoutY="319.0" />
-   <ChoiceBox layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
+   <ComboBox fx:id="addAppointmentStartTime" layoutX="178.0" layoutY="319.0" prefWidth="150.0" />
+   <ComboBox fx:id="addAppointmentEndTime" layoutX="366.0" layoutY="319.0" prefWidth="150.0" />
     <Label layoutX="38.0" layoutY="214.0" text="Customer">
         <font>
           <Font name="System Bold" size="12.0" />
@@ -42,7 +41,7 @@
           <Font name="System Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="58.0" layoutY="285.0" text="Start Date and Time">
+    <Label layoutX="58.0" layoutY="285.0" text="Appointment date">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>
@@ -52,7 +51,7 @@
           <Font name="System Bold" size="12.0" />
         </font>
     </Label>
-    <Label layoutX="56.0" layoutY="323.0" text="End Date and Time">
+    <Label layoutX="56.0" layoutY="323.0" text="start and end time">
         <font>
           <Font name="System Bold" size="12.0" />
         </font>

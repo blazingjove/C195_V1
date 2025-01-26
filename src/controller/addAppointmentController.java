@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import main.JDBC;
 import model.contacts;
 import DAO.*;
+import model.users;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,6 +19,8 @@ import java.time.LocalDateTime;
 
 public class addAppointmentController {
 
+    @FXML private ComboBox<String > addAppointmentEndTime;
+    @FXML private ComboBox<String> addAppointmentStartTime;
     @FXML private Button appointmentSave;
     @FXML private ComboBox<String> addAppointmentUserID;
     @FXML private TextField addAppointmentID;
@@ -45,24 +49,49 @@ public class addAppointmentController {
             String location = addAppointmentLocation.getText();
             String type = addAppointmentType.getText();
             String contactName = addAppointmentContact.getSelectionModel().getSelectedItem();
-            
+
+            //streams to filter appropriate ID from input selected in combobox
             int customerID = customerQuery.getAllCustomers().stream()
                     .filter(customer -> customer.getCustomerName().equals(addAppointmentCustomerID.getSelectionModel().getSelectedItem()))
                     .findFirst()
                     .map(customer -> customer.getCustomerID())
                     .orElseThrow(() -> new RuntimeException("Customer not found in the database"));;
-
             int userID = userQuery.getAllUsers().stream()
                     .filter(user -> user.getUserName().equals(addAppointmentUserID.getSelectionModel().getSelectedItem()))
                     .findFirst()
-                    .map(user -> user.getUserID())
+                    .map(users::getUserID)
                     .orElseThrow(() -> new RuntimeException("User not found in the database"));;
 
-            //time hard coded must come and change so it is dynamic
+            // Retrieve and parse start and end times from ComboBoxes
+            String selectedStartTime = addAppointmentStartTime.getSelectionModel().getSelectedItem();
+            String selectedEndTime = addAppointmentEndTime.getSelectionModel().getSelectedItem();
 
-            LocalDateTime start = LocalDateTime.now();
-            LocalDateTime end = start.plusHours(1);
-            
+            // Validate time selections
+            if (selectedStartTime == null || selectedEndTime == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Start time and end time must be selected.", ButtonType.OK);
+                alert.setTitle("Time Validation Error");
+                alert.showAndWait();
+                return;
+            }
+
+            // Convert selected times to LocalDateTime objects (assumes same day)
+            LocalDateTime start = LocalDateTime.now().withHour(Integer.parseInt(selectedStartTime.split(":")[0]))
+                    .withMinute(Integer.parseInt(selectedStartTime.split(":")[1]))
+                    .withSecond(0)
+                    .withNano(0);
+            LocalDateTime end = LocalDateTime.now().withHour(Integer.parseInt(selectedEndTime.split(":")[0]))
+                    .withMinute(Integer.parseInt(selectedEndTime.split(":")[1]))
+                    .withSecond(0)
+                    .withNano(0);
+
+            // Validate that end time is after start time
+            if (!end.isAfter(start)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "End time must be greater than start time.", ButtonType.OK);
+                alert.setTitle("Time Validation Error");
+                alert.showAndWait();
+                return;
+            }
+
             // Validate required fields
             if (title.isEmpty() || description.isEmpty() || location.isEmpty() || type.isEmpty() || contactName == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "All fields must be filled!", ButtonType.OK);
@@ -70,6 +99,8 @@ public class addAppointmentController {
                 alert.showAndWait();
                 return;
             }
+            
+            
 
             // Get contact ID based on contact name
             int contactID = 0;
@@ -100,7 +131,7 @@ public class addAppointmentController {
                 success = ps.executeUpdate() > 0;
             }
 
-            // Notify the user
+            // Notify the user upon success
             if (success) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Appointment saved successfully!", ButtonType.OK);
                 alert.setTitle("Success");
@@ -117,7 +148,7 @@ public class addAppointmentController {
             }
 
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid number format in one or more fields.", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid format in one or more fields.", ButtonType.OK);
             alert.setTitle("Input Error");
             alert.showAndWait();
         } catch (SQLException e) {
@@ -154,6 +185,7 @@ public class addAppointmentController {
                 e.printStackTrace();
             }
         }
+
     }
 
     /**
@@ -189,6 +221,21 @@ public class addAppointmentController {
         userQuery.getAllUsers().forEach(users -> userNames.add(users.getUserName()));
         addAppointmentUserID.setItems(userNames);
 
+        //defining start and end time combo boxes
+
+        // Populate the start time ComboBox with 15-minute increments
+        ObservableList<String> timeSlots = FXCollections.observableArrayList();
+        for (int hour = 0; hour < 24; hour++) {
+            for (int minute = 0; minute < 60; minute += 15) {
+                String formattedTime = String.format("%02d:%02d", hour, minute);
+                timeSlots.add(formattedTime);
+            }
+        }
+
+        // assigns the time list above to the time slots
+        addAppointmentStartTime.setItems(timeSlots);
+        addAppointmentEndTime.setItems(timeSlots);
+        
     }
 
 }
