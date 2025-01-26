@@ -165,4 +165,19 @@ public class appointmentQuery{
         }
         return uniqueTypes;
     }
+
+    public static int getAppointmentCountByMonthAndType(String selectedMonth, String selectedType) {
+        String sql = "SELECT COUNT(*) AS Count FROM appointments WHERE MONTHNAME(Start) = ? AND Type = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, selectedMonth);
+            ps.setString(2, selectedType);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Return 0 if no matches are found or an error occurs
+    }
 }

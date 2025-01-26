@@ -47,7 +47,6 @@ public class editCustomerViewController {
             //close edit customer view and opens main view
             showMainView();
         }
-
     }
 
     public void editCustomerSaveAction() throws IOException {

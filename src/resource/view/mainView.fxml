@@ -68,7 +68,13 @@
             </font>
          </Label>
          <ComboBox fx:id="reportType" layoutX="413.0" layoutY="39.0" prefWidth="150.0" />
-         <Button layoutX="437.0" layoutY="92.0" mnemonicParsing="false" prefWidth="126.0" text="Sorty Appt. By Type" />
+         <Label layoutX="663.0" layoutY="43.0" prefHeight="17.0" prefWidth="132.0" text="Number In A Month">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Label>
+         <TextField fx:id="reportNumberInMonth" layoutX="807.0" layoutY="39.0" prefHeight="25.0" prefWidth="56.0" />
+         <Button fx:id="reportAppointmentTypeButton" layoutX="424.0" layoutY="93.0" mnemonicParsing="false" onAction="#reportAppointmentTypeButtonAction" prefHeight="25.0" prefWidth="152.0" text="number of Appt. By Type" />
          <Button layoutX="438.0" layoutY="199.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
          <Button layoutX="424.0" layoutY="307.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Closest Appointment" />
          <Separator layoutX="10.0" layoutY="118.0" prefHeight="4.0" prefWidth="981.0" />

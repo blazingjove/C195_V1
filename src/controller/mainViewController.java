@@ -21,7 +21,6 @@ import model.customers;
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
     
-    @FXML private Tab customersTab;
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
     @FXML private TableColumn<? ,?> appointmentID;
@@ -48,6 +47,7 @@ public class mainViewController {
     //Report Table components
     @FXML private ComboBox<String> reportType;
     @FXML private ComboBox<String> reportMonth;
+    @FXML private TextField reportNumberInMonth;
 
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
@@ -56,6 +56,7 @@ public class mainViewController {
     @FXML private Button addCustomer;
     @FXML private Button editCustomer;
     @FXML private Button deleteAppointment;
+    @FXML private Button reportAppointmentTypeButton;
 
     @FXML private RadioButton appointmentDisplayAll;
     @FXML private RadioButton appointmentDisplayMonth;
@@ -262,6 +263,33 @@ public class mainViewController {
             successAlert.setContentText("The customer has been successfully deleted.");
             successAlert.showAndWait();
         }
+    }
+
+    /**
+     * counts the types of selected type in selected month and displays in text field
+     */
+    public void reportAppointmentTypeButtonAction() {
+        System.out.println("Report button pressed");
+
+        // Ensure both reportMonth and reportType are selected
+        String selectedMonth = reportMonth.getValue();
+        String selectedType = reportType.getValue();
+
+        if (selectedMonth == null || selectedType == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Selection Error");
+            errorAlert.setHeaderText("Missing Selection");
+            errorAlert.setContentText("Please select both a Month and a Type before proceeding.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        // Retrieve count of appointments based on selection
+        int appointmentCount = appointmentQuery.getAppointmentCountByMonthAndType(selectedMonth, selectedType);
+
+        // Display the count in the text field
+        reportNumberInMonth.setText(String.valueOf(appointmentCount));
+        System.out.println("Appointment count is " + appointmentCount);
     }
 
     /**
