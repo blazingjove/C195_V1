@@ -5,12 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import main.JDBC;
 import DAO.userValidation;
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -46,17 +48,14 @@ public class loginController implements Initializable{
             if (userId > 0) {
                 System.out.println("User logged in");
 
-                //FXML code to open the main view after login successful
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/mainView.fxml"));
+                // Load and show the mainView.fxml
+                FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource("/resource/view/mainView.fxml"));
                 Scene scene = new Scene(loader.load());
                 Stage stage = new Stage();
                 stage.setTitle("DB Client App");
                 stage.setScene(scene);
                 stage.show();
 
-                //close the login view
-                Stage thisStage = (Stage) loginButton.getScene().getWindow();
-                thisStage.close();
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
                 alert.setTitle(errorMessage);
@@ -133,13 +132,13 @@ public class loginController implements Initializable{
 
         // code below will initiate login attempt when ENTER is pressed on keyboard
         usernameField.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case ENTER -> loginButtonAction();
+            if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
+                loginButtonAction();
             }
         });
         passwordField.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case ENTER -> loginButtonAction();
+            if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
+                loginButtonAction();
             }
         });
 
