@@ -20,7 +20,8 @@ import model.customers;
 
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
-    
+
+
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
     @FXML private TableColumn<? ,?> appointmentID;
@@ -48,6 +49,7 @@ public class mainViewController {
     @FXML private ComboBox<String> reportType;
     @FXML private ComboBox<String> reportMonth;
     @FXML private TextField reportNumberInMonth;
+    @FXML private ComboBox<String> reportContact;
 
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
@@ -57,6 +59,7 @@ public class mainViewController {
     @FXML private Button editCustomer;
     @FXML private Button deleteAppointment;
     @FXML private Button reportAppointmentTypeButton;
+    @FXML private Button reportContactButton;
 
     @FXML private RadioButton appointmentDisplayAll;
     @FXML private RadioButton appointmentDisplayMonth;
@@ -292,6 +295,36 @@ public class mainViewController {
         System.out.println("Appointment count is " + appointmentCount);
     }
 
+    /**this report returns all the appointments selected contact has in reportView*/
+    public void reportContactButtonAction(ActionEvent actionEvent) throws IOException {
+
+        String selectedContact = reportContact.getValue();
+
+        if (selectedContact == null) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Selection Error");
+            errorAlert.setHeaderText("No Contact Selected");
+            errorAlert.setContentText("Please select a contact before proceeding.");
+            errorAlert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/reportView.fxml"));
+        Parent root = loader.load();
+
+        reportViewController reportViewController = loader.getController();
+        reportViewController.setSelectedContact(selectedContact);
+
+        Stage stage = new Stage();
+        stage.setTitle("Appointments For "+ selectedContact);
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        // Hide the main view
+        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
+        currentStage.close();
+    }
+
     /**
      * Initialize populates the customer and appointment table.
      * <p>
@@ -383,6 +416,9 @@ public class mainViewController {
         ObservableList<String> uniqueAppointmentTypes = appointmentQuery.getUniqueAppointmentTypes();
         reportType.getItems().setAll(uniqueAppointmentTypes);
 
+        //initialize the report contact ComboBox with all contact names
+        ObservableList<String> allContactNames = contactQuery.getAllContactNames();
+        reportContact.getItems().setAll(allContactNames);
 
     }
 

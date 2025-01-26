@@ -81,8 +81,8 @@
                <Font name="System Bold" size="12.0" />
             </font>
          </Label>
-         <ComboBox layoutX="476.0" layoutY="147.0" prefWidth="150.0" />
-         <Button layoutX="438.0" layoutY="199.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
+         <ComboBox fx:id="reportContact" layoutX="476.0" layoutY="147.0" prefWidth="150.0" />
+         <Button fx:id="reportContactButton" layoutX="438.0" layoutY="199.0" mnemonicParsing="false" onAction="#reportContactButtonAction" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
          <Separator layoutX="14.0" layoutY="228.0" prefHeight="0.0" prefWidth="981.0" />
          <Button layoutX="424.0" layoutY="307.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Closest Appointment" />
          <Separator layoutX="14.0" layoutY="334.0" prefHeight="0.0" prefWidth="981.0" />
