@@ -268,6 +268,12 @@ public class editAppointmentController {
         // select matching user in combo box
         String appointmentUser = userQuery.getUserByUserID(selectedAppointment.getUserID());
         editAppointmentUserID.setValue(appointmentUser);
-        
+
+        // Set the value of editAppointmentDate to the start date
+        editAppointmentDate.setValue(selectedAppointment.getStart().toLocalDate() );
+
+        //set the values of start and end times
+        editAppointmentStartTime.setValue(selectedAppointment.getStart().toLocalTime().toString().substring(0, 5));
+        editAppointmentEndTime.setValue(selectedAppointment.getEnd().toLocalTime().toString().substring(0, 5));
     }
 }

@@ -89,10 +89,10 @@ public class mainViewController {
     /**Opens the appointmentView and populates the fields with the data of the selected appointment.*/
     public void editAppointmentAction() throws IOException {
         System.out.println("Edit Appointment button pressed");
-
+        
         // Get the selected customer
         appointments selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
-
+        
         // Check if no customer is selected
         if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -101,9 +101,9 @@ public class mainViewController {
             alert.setContentText("Please select a Appointment to edit");
             alert.showAndWait();
             return;
+            
         } else {
-
-            System.out.println("selected customer is "+ selectedAppointment.getAppointmentID());
+            System.out.println("selected appointment is "+ selectedAppointment.getAppointmentID());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/editAppointmentView.fxml"));
             Parent root = loader.load();
 
@@ -111,11 +111,9 @@ public class mainViewController {
             editAppointmentViewController.setAppointmentDate(selectedAppointment);
 
             Stage stage = new Stage();
-            stage.setTitle("Edit Customer");
+            stage.setTitle("Edit appointment");
             stage.setScene(new Scene(root));
             stage.show();
-
-
 
         }
 
@@ -310,7 +308,7 @@ public class mainViewController {
                 errorAlert.showAndWait();
             }
         });
-        
+
         //uses method to get all appointments from sql database
         ObservableList<appointments> allAppointmentsList = appointmentQuery.getAllAppointments();
 
