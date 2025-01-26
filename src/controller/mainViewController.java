@@ -18,10 +18,13 @@ import javafx.stage.Window;
 import model.appointments;
 import model.customers;
 
+import static DAO.firstLevelDivisionQuery.getDivisionNameByDivisionID;
+
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
 
 
+    @FXML private Tab customersTab;
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
     @FXML private TableColumn<? ,?> appointmentID;
@@ -311,6 +314,8 @@ public class mainViewController {
         customerPostalCode.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
         customerPhone.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
         customerDivisionID.setCellValueFactory(new PropertyValueFactory<>("CustomerDivisionID"));
+        //customerDivisionName.setCellValueFactory(new PropertyValueFactory<>(getDivisionNameByDivisionID(Integer.parseInt(customerID))));
+
 
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
