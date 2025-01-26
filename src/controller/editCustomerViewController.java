@@ -23,6 +23,7 @@ public class editCustomerViewController {
     @FXML private TextField editCustomerAddress;
     @FXML private Label editCustomerAddressFormat;
     @FXML private Button editCustomerExit;
+    @FXML private Button editCustomerSave;
 
     //initializing the list that will hold the First level divisions
     private final ObservableList<String> countryCode1Divisions = FXCollections.observableArrayList();
@@ -34,7 +35,16 @@ public class editCustomerViewController {
     public void editCustomerExitAction() throws IOException {
         System.out.println("Edit Customer Exit button pressed");
 
-        //notify user if they want to exit the window
+        //close the edit customer view after confirmation
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to close without saving?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Confirm Exit");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            editCustomerExit.getScene().getWindow().hide();
+
+            //close edit customer view and opens main view
+            showMainView();
+        }
 
     }
 
@@ -42,7 +52,7 @@ public class editCustomerViewController {
         System.out.println("Customer Save button pressed");
 
         //close the edit customer view
-        editCustomerExit.getScene().getWindow().hide();
+        editCustomerSave.getScene().getWindow().hide();
 
         //close edit customer view and opens main view
         showMainView();
