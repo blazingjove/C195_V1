@@ -151,4 +151,18 @@ public class appointmentQuery{
         }
         return false; // Return false if insertion failed
     }
+
+    public static ObservableList<String> getUniqueAppointmentTypes() {
+        ObservableList<String> uniqueTypes = FXCollections.observableArrayList();
+        String sql = "SELECT DISTINCT Type FROM appointments";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                uniqueTypes.add(rs.getString("Type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return uniqueTypes;
+    }
 }

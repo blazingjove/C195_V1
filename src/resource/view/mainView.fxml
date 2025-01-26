@@ -56,13 +56,25 @@
     </Tab>
     <Tab closable="false" text="Reports">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <Button layoutX="951.0" layoutY="337.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
+         <Label layoutX="30.0" layoutY="43.0" prefHeight="17.0" prefWidth="83.0" text="Select Month">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="reportMonth" layoutX="122.0" layoutY="39.0" prefWidth="150.0" />
+         <Label layoutX="337.0" layoutY="43.0" text="Select Type">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="reportType" layoutX="413.0" layoutY="39.0" prefWidth="150.0" />
          <Button layoutX="437.0" layoutY="92.0" mnemonicParsing="false" prefWidth="126.0" text="Sorty Appt. By Type" />
          <Button layoutX="438.0" layoutY="199.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
          <Button layoutX="424.0" layoutY="307.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="Closest Appointment" />
          <Separator layoutX="10.0" layoutY="118.0" prefHeight="4.0" prefWidth="981.0" />
          <Separator layoutX="14.0" layoutY="228.0" prefHeight="0.0" prefWidth="981.0" />
          <Separator layoutX="14.0" layoutY="334.0" prefHeight="0.0" prefWidth="981.0" />
+            <Button layoutX="951.0" layoutY="337.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>
     </Tab>
     <Tab closable="false" text="Settings">

@@ -20,8 +20,7 @@ import model.customers;
 
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
-
-
+    
     @FXML private Tab customersTab;
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
@@ -45,6 +44,10 @@ public class mainViewController {
     @FXML private TableColumn<? ,?> customerPhone;
     @FXML private TableColumn<? ,?> customerDivisionID;
     @FXML private TableColumn<?, ?> customerDivisionName;
+    
+    //Report Table components
+    @FXML private ComboBox<String> reportType;
+    @FXML private ComboBox<String> reportMonth;
 
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
@@ -341,6 +344,17 @@ public class mainViewController {
 
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
+
+        //initializing report table contents
+        reportMonth.getItems().addAll(
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        );
+
+        // Fetch unique appointment types to populate reportType ComboBox
+        ObservableList<String> uniqueAppointmentTypes = appointmentQuery.getUniqueAppointmentTypes();
+        reportType.getItems().setAll(uniqueAppointmentTypes);
+
 
     }
 
