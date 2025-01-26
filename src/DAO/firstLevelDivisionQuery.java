@@ -37,6 +37,21 @@ public class firstLevelDivisionQuery{
         return firstLevelDivisionList;
     }
 
+    public static String getCountryNameByDivisionID(int divisionID) throws SQLException {
+        String countryName = null;
+        String sqlQuery = "SELECT countries.Country FROM countries " +
+                "JOIN first_level_divisions ON first_level_divisions.Country_ID = countries.Country_ID " +
+                "WHERE first_level_divisions.Division_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
+        ps.setInt(1, divisionID);
+        ResultSet resultSet = ps.executeQuery();
+
+        if (resultSet.next()) {
+            countryName = resultSet.getString("Country");
+        }
+        return countryName;
+    }
+
     public int getDivisionID(String divisionName) throws SQLException {
         String sqlQuery = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);

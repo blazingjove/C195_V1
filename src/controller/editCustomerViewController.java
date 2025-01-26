@@ -51,6 +51,10 @@ public class editCustomerViewController {
     public void editCustomerSaveAction() throws IOException {
         System.out.println("Customer Save button pressed");
 
+
+
+
+
         //close the edit customer view
         editCustomerSave.getScene().getWindow().hide();
 
@@ -104,13 +108,13 @@ public class editCustomerViewController {
 
     }
     /**Uses method below to pull information from selected item into the edit customer view*/
-    public void setCustomerData(customers selectedCustomer) {
+    public void setCustomerData(customers selectedCustomer) throws SQLException {
         this.selectedCustomer = selectedCustomer;
 
         displaySelectedCustomerData();
     }
 
-    private void displaySelectedCustomerData() {
+    private void displaySelectedCustomerData() throws SQLException {
         //populate the fields of view with selected customers data
 
         editCustomerID.setText(String.valueOf(selectedCustomer.getCustomerID()));
@@ -119,7 +123,19 @@ public class editCustomerViewController {
         editCustomerPostalCode.setText(selectedCustomer.getCustomerPostalCode());
         editCustomerAddress.setText(selectedCustomer.getCustomerAddress());
 
-        //editCustomerCountry.setItems(selectedCustomer.getDivisionName());
-        //editCustomerFirstLevel.setItems(selectedCustomer.getCustomerDivisionID());
+        // Set country and division based on division ID
+        int divisionID = selectedCustomer.getCustomerDivisionID();
+        String countryName = firstLevelDivisionQuery.getCountryNameByDivisionID(divisionID); // Assuming this method exists
+        editCustomerCountry.setValue(countryName);
+
+        // Set the divisions for the selected country
+        switch (countryName) {
+            case "U.S" -> editCustomerFirstLevel.setItems(countryCode1Divisions);
+            case "UK" -> editCustomerFirstLevel.setItems(countryCode2Divisions);
+            case "Canada" -> editCustomerFirstLevel.setItems(countryCode3Divisions);
+        }
+
+        // Set the customer's specific division
+        editCustomerFirstLevel.setValue(firstLevelDivisionQuery.getCountryNameByDivisionID(divisionID)); // Assuming this method exists
     }
 }
