@@ -45,8 +45,18 @@ public class addAppointmentController {
             String location = addAppointmentLocation.getText();
             String type = addAppointmentType.getText();
             String contactName = addAppointmentContact.getSelectionModel().getSelectedItem();
-            int customerID = 1;
-            int userID = 1;
+            
+            int customerID = customerQuery.getAllCustomers().stream()
+                    .filter(customer -> customer.getCustomerName().equals(addAppointmentCustomerID.getSelectionModel().getSelectedItem()))
+                    .findFirst()
+                    .map(customer -> customer.getCustomerID())
+                    .orElseThrow(() -> new RuntimeException("Customer not found in the database"));;
+
+            int userID = userQuery.getAllUsers().stream()
+                    .filter(user -> user.getUserName().equals(addAppointmentUserID.getSelectionModel().getSelectedItem()))
+                    .findFirst()
+                    .map(user -> user.getUserID())
+                    .orElseThrow(() -> new RuntimeException("User not found in the database"));;
 
             //time hard coded must come and change so it is dynamic
 
@@ -147,7 +157,14 @@ public class addAppointmentController {
     }
 
     /**
-     * Initialize populates the view with information such as dates and timeframes available for scheduling
+     * Initialize populates the view with information such as dates and timeframes available for scheduling.
+     *
+     * <p><b>Purpose of Lambda Expressions:</b></p>
+     * <ul>
+     *     <li>The first lambda expression extracts contact names and adds them to the {@code allContactsNames} list.</li>
+     *     <li>The second lambda expression retrieves customer names and adds them to the {@code customerNames} list.</li>
+     *     <li>The third lambda expression retrieves usernames and adds them to the {@code userNames} list.</li>
+     * </ul>
      */
     public void initialize() throws SQLException {
         System.out.println("Add Appointment View initialized");
@@ -160,6 +177,7 @@ public class addAppointmentController {
         //System.out.println(allContactsNames);
         addAppointmentContact.setItems(allContactsNames);
 
+        //lambda #2
         //defining the list to hold customer Names
         ObservableList<String> customerNames = FXCollections.observableArrayList();
         // retrieves customer names
