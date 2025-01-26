@@ -15,10 +15,10 @@
                   <TableColumn fx:id="appointmentLocation" editable="false" prefWidth="144.0" text="Location" />
                   <TableColumn fx:id="appointmentContactID" editable="false" prefWidth="120.0" text="Contact" />
                   <TableColumn fx:id="appointmentType" editable="false" prefWidth="98.0" text="Type" />
-                  <TableColumn fx:id="appointmentStart" editable="false" prefWidth="96.0" text="Start" />
-                  <TableColumn fx:id="appointmentEnd" editable="false" prefWidth="101.0" text="End" />
-                  <TableColumn fx:id="appointmentCustomerID" editable="false" prefWidth="83.0" text="Customer ID" />
-                  <TableColumn fx:id="appointmentUserID" editable="false" prefWidth="90.0" text="User ID" />
+                  <TableColumn fx:id="appointmentStart" editable="false" prefWidth="107.0" text="Start" />
+                  <TableColumn fx:id="appointmentEnd" editable="false" prefWidth="116.0" text="End" />
+                  <TableColumn fx:id="appointmentCustomerID" editable="false" prefWidth="81.0" text="Customer ID" />
+                  <TableColumn fx:id="appointmentUserID" editable="false" prefWidth="66.0" text="User ID" />
               </columns>
             </TableView>
             <Button fx:id="mainViewExit" layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
