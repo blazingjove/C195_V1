@@ -10,12 +10,10 @@ import javafx.stage.Stage;
 import main.JDBC;
 import model.contacts;
 import DAO.contactQuery;
-import DAO.appointmentQuery;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static DAO.appointmentQuery.appointmentIDNext;
 

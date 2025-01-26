@@ -4,9 +4,7 @@ import DAO.countryQuery;
 import DAO.firstLevelDivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,7 +25,6 @@ public class editCustomerViewController {
     @FXML private ComboBox<String> editCustomerFirstLevel;
     @FXML private TextField editCustomerAddress;
     @FXML private Label editCustomerAddressFormat;
-    @FXML private Button editCustomerSave;
     @FXML private Button editCustomerExit;
 
     //initializing the list that will hold the First level divisions
