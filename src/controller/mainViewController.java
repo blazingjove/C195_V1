@@ -4,6 +4,7 @@ import DAO.customerQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -79,17 +80,8 @@ public class mainViewController {
     public void addAppointmentAction() throws IOException {
         System.out.println("Add Appointment button pressed");
 
-        //FXML code to open the main view after login successful
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/addAppointmentView.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Add Appointment");
-        stage.setScene(scene);
-        stage.show();
-
-        // Hide the mainView
-        Stage thisStage = (Stage) addAppointment.getScene().getWindow();
-        thisStage.hide();
+        //code to open the edit appointment view after login successful
+        openThisView("/resource/view/addAppointmentView.fxml");
     }
 
     
@@ -97,17 +89,8 @@ public class mainViewController {
     public void editAppointmentAction() throws IOException {
         System.out.println("Edit Appointment button pressed");
 
-        //FXML code to open the main view after login successful
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/ModifyAppointmentView.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Edit Appointment");
-        stage.setScene(scene);
-        stage.show();
-
-        // Hide the mainView
-        Stage thisStage = (Stage) editAppointment.getScene().getWindow();
-        thisStage.hide();
+        //code to open the edit appointment view after login successful
+        openThisView("/resource/view/ModifyAppointmentView.fxml");
     }
 
     /**Prompts user to confirm if they want to delete the selected appointment, if no appointment is selected an alert is shown.*/
@@ -155,24 +138,49 @@ public class mainViewController {
             }
         }
     }
-
+    /**Opens the add customer view
+     * @throws IOException error catching */
     public void addCustomerAction(ActionEvent actionEvent) throws IOException{
         System.out.println("Add customer button pressed");
 
-        //FXML code to open the main view after login successful
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/addCustomerView.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Add Customer");
-        stage.setScene(scene);
-        stage.show();
+        //open the add customer view with method
+        openThisView("/resource/view/addCustomerView.fxml");
 
-        // Hide the mainView
-        Stage thisStage = (Stage) addCustomer.getScene().getWindow();
-        thisStage.hide();
     }
 
-    public void editCustomerAction(ActionEvent actionEvent) {
+    /**captures selected customer and pulls information into the edit customer view
+     * @throws IOException error catching*/
+    public void editCustomerAction() throws IOException {
+        System.out.println("Edit Customer button pressed");
+
+
+        if (customerTable.getSelectionModel().getSelectedItem() != null) {
+            try{
+
+                customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+                System.out.println("selected customer is "+ selectedCustomer.getCustomerName());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/editCustomerView.fxml"));
+                Parent root = loader.load();
+
+                editCustomerViewController editCustomerViewController = loader.getController();
+                editCustomerViewController.setCustomerData(selectedCustomer);
+
+                Stage stage = new Stage();
+                stage.setTitle("Edit Customer");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Customer Selected");
+            alert.setContentText("Please select a customer to edit.");
+            alert.showAndWait();
+        }
 
     }
 
@@ -320,6 +328,22 @@ public class mainViewController {
         stage.setTitle("DB Client App");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void openThisView(String viewString) throws IOException {
+
+        //FXML code to open the add customer view
+        FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource(viewString));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Add Customer");
+        stage.setScene(scene);
+        stage.show();
+
+        // Hide the mainView
+        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
+        currentStage.close();
+
     }
 
 }
