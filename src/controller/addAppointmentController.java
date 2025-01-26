@@ -181,8 +181,6 @@ public class addAppointmentController {
         //if user selects YES appointment view is closed and main view opened. if NO is selected nothing is done.
         if (alert.getResult() == ButtonType.YES) {
             try {
-                // Close the current view
-                appointmentExit.getScene().getWindow().hide();
                 // Open the main view
                 mainViewController.showMainView();
 

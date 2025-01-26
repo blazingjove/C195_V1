@@ -2,6 +2,7 @@ package controller;
 
 import DAO.contactQuery;
 import DAO.customerQuery;
+import DAO.firstLevelDivisionQuery;
 import DAO.userQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -256,5 +257,13 @@ public class editAppointmentController {
         editAppointmentLocation.setText(selectedAppointment.getAppointmentLocation());
         editAppointmentType.setText(selectedAppointment.getAppointmentType());
 
+        // Select the matching contact in the ComboBox
+        String appointmentContact = contactQuery.getContactByContactID(selectedAppointment.getContactID());
+        editAppointmentContact.setValue(appointmentContact);
+
+        // select the matching customer in combobox
+        String appointmentCustomer = customerQuery.getCustomerByCustomerID(selectedAppointment.getCustomerID());
+        editAppointmentCustomerID.setValue(appointmentCustomer);
+        
     }
 }

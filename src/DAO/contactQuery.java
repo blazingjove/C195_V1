@@ -2,6 +2,7 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 import model.contacts;
 
 import main.JDBC;
@@ -45,4 +46,20 @@ public class contactQuery {
         }
         return contactID;
     }
+
+    public static String getContactByContactID(int editAppointmentContactID) {
+        String contactName = null;
+        String sqlQuery = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery)) {
+            ps.setInt(1, editAppointmentContactID);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                contactName = resultSet.getString("Contact_Name");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return contactName;
+    }
+
 }

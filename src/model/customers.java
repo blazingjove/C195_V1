@@ -112,4 +112,6 @@ public class customers {
         public void setCustomerDivisionID(Integer divisionID) {
             this.customerDivisionID = divisionID;
         }
+
+
     }

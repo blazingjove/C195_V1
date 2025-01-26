@@ -1,5 +1,6 @@
 package DAO;
 
+import javafx.scene.control.TextField;
 import model.firstLevelDivision;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,9 +78,4 @@ public class firstLevelDivisionQuery{
             throw new SQLException("No Division found with the provided name: " + divisionName);
         }
     }
-
-    public String getDivisionName(){ return divisionName;}
-
-    public int getCountryID(){ return countryID;}
-
 }

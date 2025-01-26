@@ -41,4 +41,17 @@ public class customerQuery {
             e.printStackTrace();
         }
     }
+
+    public static String getCustomerByCustomerID(int CustomerID) {
+        String customerName = null;
+        String sqlQuery = "SELECT Customer_Name FROM customers WHERE Customer_ID = ?";
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery)) {
+            ps.setInt(1, CustomerID);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                customerName = resultSet.getString("Customer_Name");
+            }
+        } catch (SQLException ex) {}
+        return customerName;
+    }
 }

@@ -177,7 +177,8 @@ public class editCustomerViewController {
         String divisionName = firstLevelDivisionQuery.getDivisionNameByDivisionID(divisionID);
         editCustomerFirstLevel.setValue(divisionName);
 
-        System.out.println("Country: "+editCustomerCountry.getValue());
-        System.out.println("State: "+editCustomerFirstLevel.getValue());
+        //System.out.println("Country: "+editCustomerCountry.getValue());
+
+        //System.out.println("State: "+editCustomerFirstLevel.getValue());
     }
 }
