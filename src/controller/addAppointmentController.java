@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import main.JDBC;
 import model.contacts;
 import DAO.contactQuery;
 import DAO.appointmentQuery;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,11 +62,16 @@ public class addAppointmentController {
             }
 
             // Get contact ID based on contact name
-            int contactID = contactQuery.getContacts().stream()
-                    .filter(contact -> contact.getContactName().equals(contactName))
-                    .findFirst()
-                    .orElseThrow(() -> new SQLException("Contact not found"))
-                    .getID();
+            int contactID = 0;
+            for (contacts contact : contactQuery.getContacts()) {
+                if (contact.getContactName().equals(contactName)) {
+                    contactID = contact.getID();
+                    break;
+                }
+            }
+            if (contactID == 0) {
+                throw new SQLException("Contact not found");
+            }
 
             // Insert into database
             boolean success = appointmentQuery.createAppointment(appointmentID, title, description, location, type, customerID, userID, contactID);

@@ -13,6 +13,7 @@ import DAO.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.appointments;
 import model.customers;
 
@@ -46,9 +47,9 @@ public class mainViewController {
     //buttons
     @FXML private Button mainViewExit; //located on every tab in the mainView
     @FXML private Button addAppointment;
-    @FXML private Button modifyAppointment;
+    @FXML private Button editAppointment;
     @FXML private Button addCustomer;
-    @FXML private Button modifyCustomer;
+    @FXML private Button editCustomer;
     @FXML private Button deleteAppointment;
 
     @FXML private RadioButton appointmentDisplayAll;
@@ -93,19 +94,19 @@ public class mainViewController {
 
     
     /**Opens the appointmentView and populates the fields with the data of the selected appointment.*/
-    public void modifyAppointmentAction() throws IOException {
-        System.out.println("Modify Appointment button pressed");
+    public void editAppointmentAction() throws IOException {
+        System.out.println("Edit Appointment button pressed");
 
         //FXML code to open the main view after login successful
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/ModifyAppointmentView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.setTitle("modify Appointment");
+        stage.setTitle("Edit Appointment");
         stage.setScene(scene);
         stage.show();
 
         // Hide the mainView
-        Stage thisStage = (Stage) modifyAppointment.getScene().getWindow();
+        Stage thisStage = (Stage) editAppointment.getScene().getWindow();
         thisStage.hide();
     }
 
@@ -171,7 +172,8 @@ public class mainViewController {
         thisStage.hide();
     }
 
-    public void modifyCustomerAction(ActionEvent actionEvent) {
+    public void editCustomerAction(ActionEvent actionEvent) {
+
     }
 
     /**Deletes the selected customer.
@@ -303,6 +305,21 @@ public class mainViewController {
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);
 
+    }
+
+    public static void showMainView() throws IOException {
+
+        // Close the current view
+        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
+        currentStage.close();
+
+        // Load and show the mainView.fxml
+        FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource("/resource/view/mainView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("DB Client App");
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

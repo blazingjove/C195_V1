@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addCustomerViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.editCustomerViewController">
    <children>
       <Label layoutX="76.0" layoutY="39.0" text="Customer ID">
          <font>
@@ -31,22 +31,22 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TextField fx:id="addCustomerID" editable="false" layoutX="151.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
-      <TextField fx:id="addCustomerName" layoutX="151.0" layoutY="67.0" />
-      <TextField fx:id="addCustomerPhoneNumber" layoutX="151.0" layoutY="97.0" />
-      <TextField fx:id="addCustomerPostalCode" layoutX="153.0" layoutY="230.0" />
-      <ComboBox fx:id="addCustomerCountry" layoutX="151.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
-      <ComboBox fx:id="addCustomerFirstLevel" layoutX="365.0" layoutY="130.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Country First" />
-      <TextField fx:id="addCustomerAddress" layoutX="149.0" layoutY="169.0" prefHeight="33.0" prefWidth="339.0" />
+      <TextField fx:id="editCustomerID" editable="false" layoutX="151.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="editCustomerName" layoutX="151.0" layoutY="67.0" />
+      <TextField fx:id="editCustomerPhoneNumber" layoutX="151.0" layoutY="97.0" />
+      <TextField fx:id="editCustomerPostalCode" layoutX="153.0" layoutY="230.0" />
+      <ComboBox fx:id="editCustomerCountry" layoutX="151.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
+      <ComboBox fx:id="editCustomerFirstLevel" layoutX="365.0" layoutY="130.0" prefHeight="25.0" prefWidth="149.0" promptText="Select Country First" />
+      <TextField fx:id="editCustomerAddress" layoutX="149.0" layoutY="169.0" prefHeight="33.0" prefWidth="339.0" />
       <Label layoutX="98.0" layoutY="176.0" text="Address">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="addCustomerAddressFormat" layoutX="153.0" layoutY="202.0" text="Format of address" underline="true">
+      <Label fx:id="editCustomerAddressFormat" layoutX="153.0" layoutY="202.0" text="Format of address" underline="true">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
-      <Button fx:id="addCustomerSave" layoutX="276.0" layoutY="361.0" mnemonicParsing="false" onAction="#addCustomerSaveAction" text="Save" />
-      <Button fx:id="addCustomerExit" layoutX="551.0" layoutY="361.0" mnemonicParsing="false" onAction="#addCustomerExitAction" text="Exit" />
+      <Button fx:id="editCustomerSave" layoutX="276.0" layoutY="361.0" mnemonicParsing="false" onAction="#editCustomerSaveAction" text="Save" />
+      <Button fx:id="editCustomerExit" layoutX="551.0" layoutY="361.0" mnemonicParsing="false" onAction="#editCustomerExitAction" text="Exit" />
    </children>
 </AnchorPane>
