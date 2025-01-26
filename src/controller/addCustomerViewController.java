@@ -102,7 +102,7 @@ public class addCustomerViewController {
             try {
 
                 //method to show main view
-                showMainView();
+                mainViewController.showMainView();
 
             } catch (Exception e) {
                 e.printStackTrace();

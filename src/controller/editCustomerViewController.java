@@ -6,9 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.JDBC;
 import model.customers;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static controller.mainViewController.showMainView;
@@ -51,16 +53,52 @@ public class editCustomerViewController {
     public void editCustomerSaveAction() throws IOException {
         System.out.println("Customer Save button pressed");
 
+        try {
+            // Retrieve form data
+            int customerID = Integer.parseInt(editCustomerID.getText());
+            String customerName = editCustomerName.getText();
+            String customerPhone = editCustomerPhoneNumber.getText();
+            String customerPostalCode = editCustomerPostalCode.getText();
+            String customerAddress = editCustomerAddress.getText();
+            String customerDivision = editCustomerFirstLevel.getValue();
 
+            // Validate inputs (example: you can add validation logic here if needed)
+            if (customerName.isBlank() || customerPhone.isBlank() || customerPostalCode.isBlank() || customerAddress.isBlank() || customerDivision == null) {
+                throw new IllegalArgumentException("All fields must be filled in before saving.");
+            }
 
+            // Update the database
+            boolean isUpdated;
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = (SELECT Division_ID FROM first_level_divisions WHERE Division = ?) WHERE Customer_ID = ?";
+            try (PreparedStatement ps = JDBC.connection.prepareStatement(sql)) {
+                ps.setString(1, customerName);
+                ps.setString(2, customerAddress);
+                ps.setString(3, customerPostalCode);
+                ps.setString(4, customerPhone);
+                ps.setString(5, customerDivision);
+                ps.setInt(6, customerID);
+                isUpdated = ps.executeUpdate() > 0;
+            }
 
+            // Log success or failure
+            if (isUpdated) {
+                System.out.println("The customer has been successfully updated in the database.");
+            } else {
+                System.out.println("Failed to update the customer in the database.");
+            }
 
-        //close the edit customer view
+        } catch (SQLException e) {
+            System.err.println("Error occurred while updating the customer in the database: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.err.println("Input Validation Error: " + e.getMessage());
+        }
+
+        // Close the edit customer view
         editCustomerSave.getScene().getWindow().hide();
 
-        //close edit customer view and opens main view
+        // Close edit customer view and open the main view
         showMainView();
-
     }
 
     public void initialize() throws SQLException {

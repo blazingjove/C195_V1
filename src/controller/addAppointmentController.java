@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-
 import static DAO.appointmentQuery.appointmentIDNext;
 
 public class addAppointmentController {
@@ -98,17 +97,8 @@ public class addAppointmentController {
                 alert.setTitle("Success");
                 alert.showAndWait();
 
-                // Close current window (addAppointmentView)
-                Stage thisStage = (Stage) appointmentSave.getScene().getWindow();
-                thisStage.close();
-
                 // Load and show the mainView.fxml
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/mainView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("DB Client App");
-                stage.setScene(scene);
-                stage.show();
+                mainViewController.showMainView();
 
 
             } else {
@@ -147,16 +137,9 @@ public class addAppointmentController {
         //if user selects YES appointment view is closed and main view opened. if NO is selected nothing is done.
         if (alert.getResult() == ButtonType.YES) {
             try {
-                Stage thisStage = (Stage) appointmentExit.getScene().getWindow();
-                thisStage.close();
 
                 // Load and show the mainView.fxml
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/mainView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("DB Client App");
-                stage.setScene(scene);
-                stage.show();
+                mainViewController.showMainView();
 
             } catch (Exception e) {
                 e.printStackTrace();
