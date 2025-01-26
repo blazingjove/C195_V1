@@ -48,13 +48,8 @@ public class loginController implements Initializable{
             if (userId > 0) {
                 System.out.println("User logged in");
 
-                // Load and show the mainView.fxml
-                FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource("/resource/view/mainView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("DB Client App");
-                stage.setScene(scene);
-                stage.show();
+                //Hides login view and shows the main View
+                mainViewController.showMainView();
 
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);

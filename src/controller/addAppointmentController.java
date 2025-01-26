@@ -44,7 +44,7 @@ public class addAppointmentController {
 
         try {
             // Extract input values
-            int appointmentID = Integer.parseInt(addAppointmentID.getText());
+            //int appointmentID = Integer.parseInt(addAppointmentID.getText());
             String title = addAppointmentTitle.getText();
             String description = addAppointmentDescription.getText();
             String location = addAppointmentLocation.getText();
