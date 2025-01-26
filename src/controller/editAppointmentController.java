@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.JDBC;
+import model.appointments;
 import model.contacts;
 import model.users;
 
@@ -32,6 +33,7 @@ public class editAppointmentController {
     @FXML private ComboBox<String> editAppointmentCustomerID;
     @FXML private Button editAppointmentExit;
 
+    private appointments selectedAppointment;
 
     //TODO need to set the time saved to be based of menus
 
@@ -177,10 +179,10 @@ public class editAppointmentController {
         //if user selects YES appointment view is closed and main view opened. if NO is selected nothing is done.
         if (alert.getResult() == ButtonType.YES) {
             try {
-
-                // Load and show the mainView.fxml
+                // Close the current view
+                editAppointmentExit.getScene().getWindow().hide();
+                // Open the main view
                 mainViewController.showMainView();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -238,4 +240,21 @@ public class editAppointmentController {
         
     }
 
+
+    public void setAppointmentDate(appointments selectedAppointment) {
+        //defining selected appointment as appointment object
+        this.selectedAppointment = selectedAppointment;
+        //populate fields with selected appointment
+        displaySelectedAppointmentData();
+    }
+
+    private void displaySelectedAppointmentData() {
+
+        editAppointmentID.setText(String.valueOf(selectedAppointment.getAppointmentID()));
+        editAppointmentTitle.setText(selectedAppointment.getAppointmentTitle());
+        editAppointmentDescription.setText(selectedAppointment.getAppointmentDescription());
+        editAppointmentLocation.setText(selectedAppointment.getAppointmentLocation());
+        editAppointmentType.setText(selectedAppointment.getAppointmentType());
+
+    }
 }

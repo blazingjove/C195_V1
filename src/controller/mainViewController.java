@@ -18,8 +18,6 @@ import javafx.stage.Window;
 import model.appointments;
 import model.customers;
 
-import static DAO.firstLevelDivisionQuery.getDivisionNameByDivisionID;
-
 /**mainViewController houses the appointment and customer tables as well as buttons that allows users to modify, and a reports tab that generates specific reports when prompted.*/
 public class mainViewController {
 
@@ -103,10 +101,24 @@ public class mainViewController {
             alert.setContentText("Please select a Appointment to edit");
             alert.showAndWait();
             return;
+        } else {
+
+            System.out.println("selected customer is "+ selectedAppointment.getAppointmentID());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/editAppointmentView.fxml"));
+            Parent root = loader.load();
+
+            editAppointmentController editAppointmentViewController = loader.getController();
+            editAppointmentViewController.setAppointmentDate(selectedAppointment);
+
+            Stage stage = new Stage();
+            stage.setTitle("Edit Customer");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+
         }
 
-        //code to open the edit appointment view after login successful
-        openThisView("/resource/view/editAppointmentView.fxml","Edit Appointment");
     }
 
     /**Prompts user to confirm if they want to delete the selected appointment, if no appointment is selected an alert is shown.*/
@@ -328,7 +340,6 @@ public class mainViewController {
         customerPhone.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
         customerDivisionID.setCellValueFactory(new PropertyValueFactory<>("CustomerDivisionID"));
         //customerDivisionName.setCellValueFactory(new PropertyValueFactory<>(getDivisionNameByDivisionID(Integer.parseInt(customerID))));
-
 
         //customer table populated with data that was stored above
         customerTable.setItems(allCustomersList);

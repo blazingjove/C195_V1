@@ -138,6 +138,9 @@ public class addAppointmentController {
                 alert.setTitle("Success");
                 alert.showAndWait();
 
+                //close current view
+                appointmentSave.getScene().getWindow().hide();
+
                 // Load and show the mainView.fxml
                 mainViewController.showMainView();
 
@@ -178,8 +181,9 @@ public class addAppointmentController {
         //if user selects YES appointment view is closed and main view opened. if NO is selected nothing is done.
         if (alert.getResult() == ButtonType.YES) {
             try {
-
-                // Load and show the mainView.fxml
+                // Close the current view
+                appointmentExit.getScene().getWindow().hide();
+                // Open the main view
                 mainViewController.showMainView();
 
             } catch (Exception e) {
