@@ -57,14 +57,6 @@ public class reportViewController {
      * @param contactID the contact ID selected in reports tab*/
     public void populateAppointmentsByContactID(int contactID) {
         var appointments = appointmentQuery.getAppointmentsByContactID(contactID); // Fetch appointments for contact
-        if (appointments.isEmpty()) {
-            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-            alert.setTitle("No Appointments Found");
-            alert.setHeaderText(null);
-            alert.setContentText("No appointments are available for the selected contact.");
-            alert.showAndWait(); // Display alert
-            return; // Exit the method
-        }
 
         reportViewTable.setItems(appointments); // Set table data from query
         reportViewAppointmentID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));

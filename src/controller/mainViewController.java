@@ -306,7 +306,7 @@ public class mainViewController {
     }
 
     /**this report returns all the appointments selected contact has in reportView*/
-    public void reportContactButtonAction(ActionEvent actionEvent) throws IOException {
+    public void reportContactButtonAction() throws IOException, SQLException {
 
         String selectedContact = reportContact.getValue();
 
@@ -319,6 +319,18 @@ public class mainViewController {
             return;
         }
 
+
+        // Check if the selected contact has appointments
+        int contactID = contactQuery.getContactIDByName(selectedContact);
+        if (appointmentQuery.getAppointmentsByContactID(contactID).isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Appointments Found");
+            alert.setHeaderText(null);
+            alert.setContentText("No appointments are available for the selected contact.");
+            alert.showAndWait();
+            return;
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/reportView.fxml"));
         Parent root = loader.load();
 
@@ -326,7 +338,7 @@ public class mainViewController {
         reportViewController.setSelectedContact(selectedContact);
 
         Stage stage = new Stage();
-        stage.setTitle("Appointments For "+ selectedContact);
+        stage.setTitle("Appointments For " + selectedContact);
         stage.setScene(new Scene(root));
         stage.show();
 
