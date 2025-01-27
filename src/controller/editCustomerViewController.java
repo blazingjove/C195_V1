@@ -16,6 +16,21 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+/**
+ * This controller manages the Edit Customer View in the application.
+ * <p>
+ * The {@code editCustomerViewController} class is responsible for enabling users to modify a customer's details and save the changes to the database.
+ * It provides functionality to:
+ * <ul>
+ *   <li>Initialize and populate ComboBoxes for selecting countries and first-level divisions.</li>
+ *   <li>Display data of a selected customer to be edited.</li>
+ *   <li>Handle user actions such as saving or exiting without saving.</li>
+ *   <li>Ensure proper validation of input fields before saving changes.</li>
+ * </ul>
+ * This class interacts with the DAO classes (`countryQuery`, `firstLevelDivisionQuery`) for fetching country and division data
+ * and communicates with the {@code mainViewController} to navigate back to the main view.
+ */
 public class editCustomerViewController {
     @FXML private TextField editCustomerID;
     @FXML private TextField editCustomerName;

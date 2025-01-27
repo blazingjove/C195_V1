@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**Provides functionality for interacting with the user*/
 public class userQuery {
 
     /**gets all users from the database

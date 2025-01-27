@@ -15,6 +15,11 @@ import DAO.appointmentQuery;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
+/**
+ * Controller class for the report view. It manages the display of appointment reports
+ * based on selected contacts and provides functionality for navigating back to the main view.
+ */
 public class reportViewController {
 
     @FXML private TableColumn<?, ?> reportViewAppointmentID;
@@ -31,13 +36,27 @@ public class reportViewController {
     @FXML
     private TableView<appointments> reportViewTable; // Add TableView for binding appointments
 
-    /**closes the report view and opens the main view
-     * @throws IOException general error catching*/
+    /**
+     * Closes the report view and navigates back to the main view.
+     * <p>
+     * This method uses the {@link mainViewController#showMainView()} to display
+     * the main application view and ensures that any necessary cleanup is performed.
+     *
+     * @throws IOException if an error occurs while loading the main view.
+     */
     public void reportViewExitAction() throws IOException {
         mainViewController.showMainView();
     }
 
-    /**defines the selected contact that was selected from the reports tab*/
+    /**
+     * Sets the selected contact from the reports tab and retrieves its associated data.
+     * <p>
+     * This method determines the ID of the provided contact name by querying the database
+     * and updates the table view with appointments of the selected contact.
+     *
+     * @param selectedContact the name of the contact selected in the reports tab.
+     * @throws SQLException if a database access error occurs during the contact query.
+     */
     public void setSelectedContact(String selectedContact) {
         try {
             int contactID = contactQuery.getContactIDByName(selectedContact);
@@ -53,8 +72,15 @@ public class reportViewController {
         }
     }
 
-    /**this populates the table with all appointments associated with the given contact ID taken from reports table
-     * @param contactID the contact ID selected in reports tab*/
+    /**
+     * Populates the table view with appointments for the specified contact ID.
+     * <p>
+     * This method retrieves all appointments associated with the given contact ID,
+     * binds the data to the table view, and maps table columns to the appropriate properties
+     * of the {@link appointments} model.
+     *
+     * @param contactID the ID of the contact for which appointments need to be displayed.
+     */
     public void populateAppointmentsByContactID(int contactID) {
         var appointments = appointmentQuery.getAppointmentsByContactID(contactID); // Fetch appointments for contact
 

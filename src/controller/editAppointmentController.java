@@ -18,6 +18,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+
+/**
+ * Controller class for editing existing appointments in the application.
+ *
+ * <p>This class serves as the bridge between the UI and the database for editing
+ * appointments. It includes functionality for populating fields based on a selected
+ * appointment, validating user inputs, saving changes to the database, and handling
+ * user interactions such as exiting the edit view.</p>
+ */
 public class editAppointmentController {
 
     @FXML private DatePicker editAppointmentDate;
@@ -36,8 +45,16 @@ public class editAppointmentController {
 
     private appointments selectedAppointment;
 
-    /**Captures all user inputs and saves the to the sql database
-     * @throws RuntimeException error catching*/
+    /**
+     * Captures all user inputs, validates them, and saves the changes to the SQL database.
+     *
+     * <p>This method ensures that the user-provided details, such as timings, contact, and
+     * customer information, are valid before updating the database. It checks for overlapping
+     * appointments, verifies required fields, and performs the save operation if all conditions
+     * are met. Additionally, it handles any errors that might occur during the process.</p>
+     *
+     * @throws RuntimeException if an input or database-related error occurs that cannot be managed gracefully.
+     */
     public void editAppointmentSaveAction() {
         System.out.println("Appointment save button pressed");
 
@@ -187,11 +204,14 @@ public class editAppointmentController {
         }
     }
 
-    /**Prompts user to select if they want to close the program.
-     * <p><b>Future Improvements </b></n>
-     * I would like to implement an exit button that checks if any of the fields have been changed and prompts user that
-     * they will lose information if they choose to exit the view. Sort of a reminder that they will lose unsaved data.
-     * </p>*/
+    /**
+     * Handles the action for exiting the Edit Appointment view.
+     *
+     * <p>This method prompts the user with a confirmation dialog to ensure they want to close
+     * the current window. If the user confirms, the method closes the Edit Appointment view
+     * and navigates back to the main view. Future improvements may include implementing a
+     * warning for unsaved changes before exiting.</p>
+     */
     public void editAppointmentExitAction() {
         System.out.println("Appointment view exit button pressed");
         
@@ -215,14 +235,14 @@ public class editAppointmentController {
     }
 
     /**
-     * Initialize populates the view with information such as dates and timeframes available for scheduling.
+     * Initializes and populates the Edit Appointment view with necessary data.
      *
-     * <p><b>Purpose of Lambda Expressions:</b></p>
-     * <ul>
-     *     <li>The first lambda expression extracts contact names and adds them to the {@code allContactsNames} list.</li>
-     *     <li>The second lambda expression retrieves customer names and adds them to the {@code customerNames} list.</li>
-     *     <li>The third lambda expression retrieves usernames and adds them to the {@code userNames} list.</li>
-     * </ul>
+     * <p>This method prepares the ComboBoxes and other UI elements by loading
+     * contacts, customers, and users from the database. Time-related fields are initialized
+     * with 15-minute increments to simplify scheduling. Lambda expressions are used for
+     * efficient data population into the ComboBoxes.</p>
+     *
+     * @throws SQLException if an SQL error occurs while fetching data for initialization.
      */
     public void initialize() throws SQLException {
         System.out.println("Add Appointment View initialized");
@@ -264,7 +284,14 @@ public class editAppointmentController {
         
     }
 
-    /**creates appointment object with information from selected appointment in main view*/
+    /**
+     * Sets the selected appointment to be edited and prepopulates the fields with its details.
+     *
+     * <p>This method assigns the selected appointment and uses it to populate
+     * the input fields with its existing data, making it ready for editing.</p>
+     *
+     * @param selectedAppointment the appointment to be edited in this view.
+     */
     public void setAppointmentDate(appointments selectedAppointment) {
         //defining selected appointment as appointment object
         this.selectedAppointment = selectedAppointment;
@@ -272,7 +299,13 @@ public class editAppointmentController {
         displaySelectedAppointmentData();
     }
 
-    /**Populates the edit appointment view with the information of the selected object*/
+    /**
+     * Populates the Edit Appointment view with the details of the selected appointment.
+     *
+     * <p>This method retrieves data from the selected appointment and fills the
+     * corresponding input fields in the view. It also ensures that the correct
+     * items are selected in the ComboBoxes.</p>
+     */
     private void displaySelectedAppointmentData() {
 
         editAppointmentID.setText(String.valueOf(selectedAppointment.getAppointmentID()));

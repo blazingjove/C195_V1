@@ -3,6 +3,7 @@ package main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**JDBC opens and closes connection with the database*/
 public class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";

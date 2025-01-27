@@ -8,11 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**customerQuery gets all customers along from pulling specific information from the customer object*/
 public class customerQuery {
 
-    /**gets all customers in the database
-     * @return customersObservableList list containing customers*/
+    /**
+     * Fetches all customers from the database.
+     * @return ObservableList of customers containing all customer records
+     */
     public static ObservableList<customers> getAllCustomers() throws SQLException {
         ObservableList<customers> customersObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from customers";
@@ -34,8 +36,11 @@ public class customerQuery {
         return customersObservableList;
     }
 
-    /**delete customer from database the contains the given customerID
-     * @param customerID Integer*/
+    /**
+     * Deletes a customer from the database with the specified customer ID.
+     *
+     * @param customerID the ID of the customer to delete
+     */
     public static void deleteCustomer(Integer customerID) {
         String sql = "DELETE FROM customers WHERE Customer_ID = ?";
         try (PreparedStatement ps = JDBC.connection.prepareStatement(sql)) {
@@ -46,9 +51,12 @@ public class customerQuery {
         }
     }
 
-    /**fetches customer name from customerID
-     * @param CustomerID int
-     * @return customerName the customer name as string */
+    /**
+     * Retrieves the customer name associated with the given customer ID.
+     *
+     * @param CustomerID the ID of the customer
+     * @return the name of the customer as a String
+     */
     public static String getCustomerByCustomerID(int CustomerID) {
         String customerName = null;
         String sqlQuery = "SELECT Customer_Name FROM customers WHERE Customer_ID = ?";

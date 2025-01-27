@@ -12,7 +12,14 @@ import java.time.ZonedDateTime;
 
 import static main.JDBC.connection;
 
-public class appointmentQuery{
+
+/**
+ * The appointmentQuery class provides a range of methods for interacting with the database
+ * to manage and retrieve appointment data. This includes functionality for fetching all appointments,
+ * filtering appointments by specific criteria (e.g., month, week), managing CRUD operations,
+ * and retrieving specialized appointment data such as nearest appointments or unique appointment types.
+ */
+public class appointmentQuery {
 
     /**list for all appointments in database that are in database as "appointments" objects.
      * @throws SQLException error catching

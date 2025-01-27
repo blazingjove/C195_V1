@@ -11,6 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * The {@code contactQuery} class provides methods to interact with the contacts table in the database.
+ * It includes functionality to retrieve contact details, such as contact IDs, names, and a list of all contacts.
+ * These methods utilize SQL queries to fetch the required data from the database.
+ */
 public class contactQuery {
 
     /**parses database for all contact

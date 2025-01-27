@@ -18,6 +18,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+
+/**
+ * The {@code addAppointmentController} class is responsible for handling the user interactions
+ * and logic related to adding new appointments within the application.
+ *
+ * <p>This class includes methods for capturing user inputs, validating and saving them into a database,
+ * as well as initializing the interface with relevant data like contacts, customers, and scheduling time slots.
+ * It also provides functionality to handle user exits gracefully, offering prompts to save data or confirm actions.</p>
+ *
+ * <p>Main functionalities include:</p>
+ * <ul>
+ *     <li>Saving new appointments to the database.</li>
+ *     <li>Validating appointment time conflicts and proper data formats.</li>
+ *     <li>Populating necessary UI elements such as ComboBoxes with data from the database.</li>
+ * </ul>
+ */
 public class addAppointmentController {
 
     @FXML private DatePicker addAppointmentDate;

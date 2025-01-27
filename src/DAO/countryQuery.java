@@ -8,6 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The countryQuery class provides methods for interacting with the 'countries' database table.
+ * It includes functionality to retrieve all countries and provides a way to represent country data.
+ */
 public class countryQuery extends country {
 
     public countryQuery(int countryID, String countryName) {

@@ -14,6 +14,11 @@ import model.firstLevelDivision;
 import java.sql.SQLException;
 import static controller.mainViewController.showMainView;
 
+
+/**
+ * Controller class for managing the "Add Customer" view.
+ * Provides functionality to add new customers, validate input, and interact with the database.
+ */
 public class addCustomerViewController {
     private final Connection connection = JDBC.connection; // Ensure connection reference
 
@@ -33,7 +38,13 @@ public class addCustomerViewController {
     private final ObservableList<String> countryCode2Divisions = FXCollections.observableArrayList();
     private final ObservableList<String> countryCode3Divisions = FXCollections.observableArrayList();
 
-    /**button saves al customer parameters in the database by using the INSERT method*/
+    /**
+     * Handles the Save action on the "Add Customer" form.
+     * Collects user input, validates it, and inserts a new customer record into the database.
+     * Shows an error alert if any fields are empty or the database insertion fails.
+     *
+     * @param actionEvent The action event triggered when the Save button is clicked.
+     */
     public void addCustomerSaveAction(ActionEvent actionEvent) {
         System.out.println("Add Customer Save button pressed");
 
@@ -90,7 +101,11 @@ public class addCustomerViewController {
         }
     }
 
-    /** closes the current view*/
+    /**
+     * Handles the Exit action for the "Add Customer" form.
+     * Prompts the user with a confirmation dialog to confirm exiting.
+     * If confirmed, the current view is closed, and the main view is displayed.
+     */
     public void addCustomerExitAction() {
         System.out.println("Add Customer Exit button pressed");
 
@@ -112,17 +127,17 @@ public class addCustomerViewController {
         }
 
     }
-    
-    /**here is the code that is initialized upon view being opened
-     *2ne Lambda expression used to create a listener that enables or disables the first level combo box
-     * <p><b>Runtime Error</b></n>
-     * I had a very hard time coding the division menu to change when a different country was selected took a very long time
-     * the code can still be improved by not hardcoding the country name in the switch statement but as it is working right now
-     * any change might break the code.
-     *</n>
-     * Also had a problem where the combo boxes would be blank if you cycled through selection, the lines that clear the combo boxes where causing the problems.
-     * Commented those lines of codes out.
-     * </p>*/
+
+    /**
+     * Initializes the "Add Customer" form when the view is opened.
+     * Populates the country and division lists and sets up a listener for country selection.
+     * <p><b>Runtime Error:</b></p>
+     * Encountered issues with updating division lists on new country selection;
+     * resolved by removing problematic clear() lines for ComboBox values.
+     * <p><b>Note:</b> Further optimization could reduce the dependence on hardcoded country names.</p>
+     *
+     * @throws SQLException If fetching data from the database fails.
+     */
     public void initialize() throws SQLException {
 
         System.out.println("Add Customer View initialized");

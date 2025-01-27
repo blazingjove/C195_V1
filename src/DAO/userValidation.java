@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**provides functionality with the users*/
 public class userValidation extends users {
 
     public userValidation(int userID, String userName, String userPassword) {

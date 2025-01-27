@@ -9,22 +9,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class firstLevelDivisionQuery{
+
+/**
+ * Provides functionality for interacting with first-level divisions in the database.
+ * <p>
+ * This class defines an object to represent first-level divisions and includes methods
+ * for retrieving information from the database about divisions, countries, and related details.
+ */
+public class firstLevelDivisionQuery {
     private int divisionID;
     private String divisionName;
     public int countryID;
 
-    /**defines the first level division object*/
+    /**
+     * Initializes a new instance of the firstLevelDivisionQuery class, representing
+     * a first-level geographic division with a specified unique ID, name, and associated country ID.
+     *
+     * @param divisionID   The unique identifier for the division.
+     * @param divisionName The name of the division.
+     * @param countryID    The unique identifier for the country associated with the division.
+     */
     public firstLevelDivisionQuery(int divisionID, String divisionName, int countryID) {
         this.divisionID = divisionID;
         this.divisionName = divisionName;
         this.countryID = countryID;
     }
 
-    /**gets all first level division objects from the database
-     * @return firstLevelDivisionList list
-     * * @throws SQLException basic error handling*/
-    public static ObservableList<firstLevelDivision> getAllFirstLevelDivisions() throws SQLException{
+    /**
+     * Retrieves a complete list of all first-level divisions from the database.
+     * <p>
+     * Executes a SQL query to fetch first-level division records from the `first_level_divisions` table
+     * and returns them as an ObservableList of firstLevelDivision objects.
+     *
+     * @return An ObservableList containing all firstLevelDivision objects retrieved from the database.
+     * @throws SQLException If an SQL error occurs while executing the query or accessing the database.
+     */
+    public static ObservableList<firstLevelDivision> getAllFirstLevelDivisions() throws SQLException {
         ObservableList<firstLevelDivision> firstLevelDivisionList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * from first_level_divisions";
         PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
@@ -42,10 +62,16 @@ public class firstLevelDivisionQuery{
         return firstLevelDivisionList;
     }
 
-    /**the country name associated with the division ID
-     * @param divisionID in
-     * @return countryName string
-     * @throws SQLException basic error handling*/
+    /**
+     * Retrieves the name of the country associated with a specific division ID from the database.
+     * <p>
+     * Executes a SQL query to find the corresponding country name for the provided division ID
+     * by joining the `countries` and `first_level_divisions` tables.
+     *
+     * @param divisionID The unique identifier of the division for which the country name is being retrieved.
+     * @return A string representing the corresponding country name, or null if no matching record is found.
+     * @throws SQLException If an SQL error occurs during query execution or database access.
+     */
     public static String getCountryNameByDivisionID(int divisionID) throws SQLException {
         String countryName = null;
         String sqlQuery = "SELECT countries.Country FROM countries " +
@@ -61,10 +87,16 @@ public class firstLevelDivisionQuery{
         return countryName;
     }
 
-    /**gets the state/country name associated with the give division ID
-     * @param divisionID int
-     * @return divisionName string
-     * @throws SQLException basic error handling*/
+    /**
+     * Retrieves the name of the division (e.g., state or province) associated with a given division ID from the database.
+     * <p>
+     * Executes a SQL query to fetch the division name corresponding to the provided division ID
+     * from the `first_level_divisions` table.
+     *
+     * @param divisionID The unique identifier of the division whose name is being retrieved.
+     * @return A string containing the division name associated with the specified division ID, or null if no match is found.
+     * @throws SQLException If an SQL error occurs during query execution or database access.
+     */
     public static String getDivisionNameByDivisionID(int divisionID) throws SQLException {
         String divisionName = null;
         String sqlQuery = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
