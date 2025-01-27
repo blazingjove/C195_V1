@@ -31,7 +31,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <TextField fx:id="addCustomerID" editable="false" layoutX="151.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="addCustomerID" disable="true" editable="false" layoutX="151.0" layoutY="35.0" prefHeight="25.0" prefWidth="35.0" />
       <TextField fx:id="addCustomerName" layoutX="151.0" layoutY="67.0" />
       <TextField fx:id="addCustomerPhoneNumber" layoutX="151.0" layoutY="97.0" />
       <TextField fx:id="addCustomerPostalCode" layoutX="153.0" layoutY="230.0" />

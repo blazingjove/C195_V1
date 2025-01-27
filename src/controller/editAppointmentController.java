@@ -85,7 +85,7 @@ public class editAppointmentController {
 
             // Ensure start and end times are in the future
             if (start.isBefore(LocalDateTime.now()) || end.isBefore(LocalDateTime.now())) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be in the future.", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Date, start and end times must be in the future.", ButtonType.OK);
                 alert.setTitle("Time Validation Error");
                 alert.showAndWait();
                 return;
