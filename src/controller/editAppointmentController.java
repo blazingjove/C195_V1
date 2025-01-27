@@ -119,6 +119,23 @@ public class editAppointmentController {
                 throw new SQLException("Contact not found");
             }
 
+            // Check for overlapping appointments ignore the appointment ID that matched the selected appointment being edited
+            String overlapQuery = "SELECT Appointment_ID FROM appointments WHERE Customer_ID = ? AND Appointment_ID != ? AND ((Start <= ? AND End > ?) OR (Start < ? AND End >= ?))";
+            try (PreparedStatement psOverlap = JDBC.connection.prepareStatement(overlapQuery)) {
+                psOverlap.setInt(1, customerID);
+                psOverlap.setInt(2, selectedAppointment.getAppointmentID());
+                psOverlap.setTimestamp(3, java.sql.Timestamp.valueOf(start));
+                psOverlap.setTimestamp(4, java.sql.Timestamp.valueOf(start));
+                psOverlap.setTimestamp(5, java.sql.Timestamp.valueOf(end));
+                psOverlap.setTimestamp(6, java.sql.Timestamp.valueOf(end));
+                if (psOverlap.executeQuery().next()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Appointment time overlaps with selected customers existing appointment. \n please select a different time", ButtonType.OK);
+                    alert.setTitle("Time Conflict");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+            
             // Insert into database
             boolean success;
             String sqlInsert = "REPLACE INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
