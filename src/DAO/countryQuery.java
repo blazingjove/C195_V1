@@ -14,6 +14,8 @@ public class countryQuery extends country {
         super(countryID, countryName);
     }
 
+    /**gets all countries in the database
+     * @return countryList */
     public static ObservableList<country> getAllCountries() throws SQLException{
         ObservableList<country> countryList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT Country_ID, Country FROM countries";

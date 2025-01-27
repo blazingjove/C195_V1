@@ -36,10 +36,6 @@ public class editAppointmentController {
 
     private appointments selectedAppointment;
 
-    //TODO need to set the time saved to be based of menus
-
-    //TODO populate the time selection 15 minute increments
-
     /**Captures all user inputs and saves the to the sql database
      * @throws RuntimeException error catching*/
     public void editAppointmentSaveAction() {
@@ -142,7 +138,7 @@ public class editAppointmentController {
                 alert.showAndWait();
 
                 //closes the edit appointment scene after saving the information in the database
-                //editAppointmentSave.getScene().getWindow().hide();
+                editAppointmentSave.getScene().getWindow().hide();
 
                 // Load and show the mainView.fxml
                 mainViewController.showMainView();
@@ -245,7 +241,7 @@ public class editAppointmentController {
         
     }
 
-
+    /**creates appointment object with information from selected appointment in main view*/
     public void setAppointmentDate(appointments selectedAppointment) {
         //defining selected appointment as appointment object
         this.selectedAppointment = selectedAppointment;
@@ -253,6 +249,7 @@ public class editAppointmentController {
         displaySelectedAppointmentData();
     }
 
+    /**Populates the edit appointment view with the information of the selected object*/
     private void displaySelectedAppointmentData() {
 
         editAppointmentID.setText(String.valueOf(selectedAppointment.getAppointmentID()));

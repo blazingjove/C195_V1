@@ -47,6 +47,7 @@ public class editCustomerViewController {
         }
     }
 
+    /**saves the customer object into the database retaining the customer ID*/
     public void editCustomerSaveAction() throws IOException {
         System.out.println("Customer Save button pressed");
 
@@ -84,6 +85,8 @@ public class editCustomerViewController {
                 System.out.println("Failed to update the customer in the database.");
             }
 
+            editCustomerSave.getScene().getWindow().hide();
+
         } catch (SQLException e) {
             System.err.println("Error occurred while updating the customer in the database: " + e.getMessage());
             e.printStackTrace();
@@ -98,11 +101,10 @@ public class editCustomerViewController {
         mainViewController.showMainView();
     }
 
+    /**Initialize populates the ComboBoxes with the information required*/
     public void initialize() throws SQLException {
         System.out.println("Edit Customer View initialized");
 
-        
-        
         // Populate ObservableLists for each country
         firstLevelDivisionQuery.getAllFirstLevelDivisions().forEach(division -> {
             if (division.getCountryID() == 1) {
@@ -151,6 +153,7 @@ public class editCustomerViewController {
 
     }
 
+    /**populates the view with the data of the selected customer*/
     private void displaySelectedCustomerData() throws SQLException {
         //populate the fields of view with selected customers data
 
@@ -177,7 +180,6 @@ public class editCustomerViewController {
         editCustomerFirstLevel.setValue(divisionName);
 
         //System.out.println("Country: "+editCustomerCountry.getValue());
-
         //System.out.println("State: "+editCustomerFirstLevel.getValue());
     }
 }

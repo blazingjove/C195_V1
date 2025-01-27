@@ -13,6 +13,8 @@ import java.sql.SQLException;
 
 public class contactQuery {
 
+    /**parses database for all contact
+     * @return contactsObservableList a list of all contacts in the database*/
     public static ObservableList<contacts> getContacts() {
         ObservableList<contacts> contactsObservableList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * FROM contacts";
@@ -34,7 +36,9 @@ public class contactQuery {
         return contactsObservableList;
     }
 
-
+    /**fetches contact name with given name
+     * @param contactName the given contact name as a string
+     * @return contactID the contact ID*/
     public static int getContactIDByName(String contactName) throws SQLException{
         int contactID = 0;
         String sqlQuery = "SELECT Contact_ID FROM contacts WHERE Contact_Name = ?";
@@ -48,6 +52,9 @@ public class contactQuery {
         return contactID;
     }
 
+    /**gets the contact associated with contact ID
+     * @param editAppointmentContactID the contactID
+     * @return contactName a string of name*/
     public static String getContactByContactID(int editAppointmentContactID) {
         String contactName = null;
         String sqlQuery = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
@@ -63,6 +70,8 @@ public class contactQuery {
         return contactName;
     }
 
+    /**gets all the contact names in the database
+     * @return contactNamesList a list of all contact names*/
     public static ObservableList<String> getAllContactNames() {
         ObservableList<String> contactNamesList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT Contact_Name FROM contacts";

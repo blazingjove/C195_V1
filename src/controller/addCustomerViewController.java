@@ -33,6 +33,7 @@ public class addCustomerViewController {
     private final ObservableList<String> countryCode2Divisions = FXCollections.observableArrayList();
     private final ObservableList<String> countryCode3Divisions = FXCollections.observableArrayList();
 
+    /**button saves al customer parameters in the database by using the INSERT method*/
     public void addCustomerSaveAction(ActionEvent actionEvent) {
         System.out.println("Add Customer Save button pressed");
 
@@ -89,6 +90,7 @@ public class addCustomerViewController {
         }
     }
 
+    /** closes the current view*/
     public void addCustomerExitAction() {
         System.out.println("Add Customer Exit button pressed");
 

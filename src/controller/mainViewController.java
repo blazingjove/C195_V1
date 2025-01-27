@@ -175,7 +175,7 @@ public class mainViewController {
     }
     /**Opens the add customer view
      * @throws IOException error catching */
-    public void addCustomerAction(ActionEvent actionEvent) throws IOException{
+    public void addCustomerAction() throws IOException{
         System.out.println("Add customer button pressed");
 
         //open the add customer view with method
@@ -327,6 +327,8 @@ public class mainViewController {
         currentStage.close();
     }
 
+    /**this button is the logic that shows the next appointment that will happen the soonest
+     * */
     public void reportAppointmentButtonNextAction() {
         System.out.println("Report button pressed");
 
@@ -451,6 +453,8 @@ public class mainViewController {
 
     }
 
+    /**method that shows the main view and hides current view that is open
+     * @throws IOException general error catching*/
     public static void showMainView() throws IOException {
 
         // Close the current view
@@ -466,7 +470,14 @@ public class mainViewController {
         stage.show();
     }
 
+    /**Opens the view that is input into the function
+     * @param viewString the path of the view from src folder
+     * @param titleView the title of the new view*/
     public static void openThisView(String viewString,String titleView) throws IOException {
+
+        // Hide the mainView
+        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
+        currentStage.close();
 
         //FXML code to open the add customer view
         FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource(viewString));
@@ -476,9 +487,6 @@ public class mainViewController {
         stage.setScene(scene);
         stage.show();
 
-        // Hide the mainView
-        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
-        currentStage.close();
 
     }
 

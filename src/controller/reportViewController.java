@@ -31,12 +31,13 @@ public class reportViewController {
     @FXML
     private TableView<appointments> reportViewTable; // Add TableView for binding appointments
 
-
+    /**closes the report view and opens the main view
+     * @throws IOException general error catching*/
     public void reportViewExitAction() throws IOException {
         mainViewController.showMainView();
     }
 
-
+    /**defines the selected contact that was selected from the reports tab*/
     public void setSelectedContact(String selectedContact) {
         try {
             int contactID = contactQuery.getContactIDByName(selectedContact);
@@ -52,6 +53,8 @@ public class reportViewController {
         }
     }
 
+    /**this populates the table with all appointments associated with the given contact ID taken from reports table
+     * @param contactID the contact ID selected in reports tab*/
     public void populateAppointmentsByContactID(int contactID) {
         var appointments = appointmentQuery.getAppointmentsByContactID(contactID); // Fetch appointments for contact
         if (appointments.isEmpty()) {

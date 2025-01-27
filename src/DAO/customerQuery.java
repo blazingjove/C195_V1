@@ -11,6 +11,8 @@ import java.sql.SQLException;
 
 public class customerQuery {
 
+    /**gets all customers in the database
+     * @return customersObservableList list containing customers*/
     public static ObservableList<customers> getAllCustomers() throws SQLException {
         ObservableList<customers> customersObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * from customers";
@@ -32,6 +34,8 @@ public class customerQuery {
         return customersObservableList;
     }
 
+    /**delete customer from database the contains the given customerID
+     * @param customerID Integer*/
     public static void deleteCustomer(Integer customerID) {
         String sql = "DELETE FROM customers WHERE Customer_ID = ?";
         try (PreparedStatement ps = JDBC.connection.prepareStatement(sql)) {
@@ -42,6 +46,9 @@ public class customerQuery {
         }
     }
 
+    /**fetches customer name from customerID
+     * @param CustomerID int
+     * @return customerName the customer name as string */
     public static String getCustomerByCustomerID(int CustomerID) {
         String customerName = null;
         String sqlQuery = "SELECT Customer_Name FROM customers WHERE Customer_ID = ?";

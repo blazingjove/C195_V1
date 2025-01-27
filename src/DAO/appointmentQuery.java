@@ -111,7 +111,6 @@ public class appointmentQuery{
         return false;
     }
 
-
     public static boolean createAppointment(int appointmentID, String title, String description, String location, String type, int customerID, int userID, int contactID) {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -138,6 +137,8 @@ public class appointmentQuery{
         return false; // Return false if insertion failed
     }
 
+    /**parses database for unique types among appointments
+     * @return uniqueTypes a list of types found in th appointment table, not case sensative*/
     public static ObservableList<String> getUniqueAppointmentTypes() {
         ObservableList<String> uniqueTypes = FXCollections.observableArrayList();
         String sql = "SELECT DISTINCT Type FROM appointments";
@@ -152,6 +153,10 @@ public class appointmentQuery{
         return uniqueTypes;
     }
 
+    /**parses the appointment database object for appointments with specific month and type
+     * @param selectedType the selected type selected in the reports tab
+     * @param selectedMonth the selected month selected in the reports tab
+     * @return Int the number of appointments that meet both parameters*/
     public static int getAppointmentCountByMonthAndType(String selectedMonth, String selectedType) {
         String sql = "SELECT COUNT(*) AS Count FROM appointments WHERE MONTHNAME(Start) = ? AND Type = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -167,7 +172,9 @@ public class appointmentQuery{
         return 0; // Return 0 if no matches are found or an error occurs
     }
 
-
+    /**get appointments associated with the given contact ID
+     * @param contactID the given contactID
+     * @return appointmentsByContact list of appointments that have the given contactID in them*/
     public static ObservableList<appointments> getAppointmentsByContactID(int contactID) {
         ObservableList<appointments> appointmentsByContact = FXCollections.observableArrayList();
         String sql = "SELECT * FROM appointments WHERE Contact_ID = ?";
@@ -193,6 +200,8 @@ public class appointmentQuery{
         return appointmentsByContact;
     }
 
+    /**gets the appointment that will occur the soonest in the future
+     * @return appointment returns appointments object*/
     public static appointments getNearestAppointment() {
         String sql = "SELECT * FROM appointments WHERE Start > ? ORDER BY Start ASC LIMIT 1";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -217,6 +226,8 @@ public class appointmentQuery{
         return null; // Return null if no future appointment is found or on error
     }
 
+    /**when logging in it returns an appointment that is nearest for the user
+     * @return appointments an appointments that is withing 15 start from the user login time*/
     public static appointments getUpcomingAppointment(int userId, ZonedDateTime currentTime) {
         String sql = "SELECT * FROM appointments WHERE User_ID = ? AND Start > ? AND Start <= ? ORDER BY Start ASC LIMIT 1";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
