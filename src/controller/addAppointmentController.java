@@ -239,6 +239,7 @@ public class addAppointmentController {
         customerQuery.getAllCustomers().forEach(customer -> customerNames.add(customer.getCustomerName()));
         addAppointmentCustomerID.setItems(customerNames);
 
+        //lambda #3
         //defining the list to hold user's names
         ObservableList<String> userNames = FXCollections.observableArrayList();
         userQuery.getAllUsers().forEach(users -> userNames.add(users.getUserName()));

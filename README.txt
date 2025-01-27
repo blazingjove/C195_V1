@@ -19,6 +19,8 @@ java 17.0.8 sdk
 
 Additional report: located in the reports tab generates an alert of the next occurring appointment with all the appointment information in the alert
 
+3 Lambda expressions: located in addAppointmentController under the Initialize Method
+
 The program starts, connects to sql database and prompts user to log in with a username and password that is checked
 against the user information in the database. after login a tabbed window is Displayed with appointments, customers, reports, and settings.
 week is defined and sunday to saturday in the program (on local time)
