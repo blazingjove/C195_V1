@@ -83,6 +83,14 @@ public class editAppointmentController {
                             Integer.parseInt(selectedEndTime.split(":")[0]),
                             Integer.parseInt(selectedEndTime.split(":")[1])));
 
+            // Ensure start and end times are in the future
+            if (start.isBefore(LocalDateTime.now()) || end.isBefore(LocalDateTime.now())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be in the future.", ButtonType.OK);
+                alert.setTitle("Time Validation Error");
+                alert.showAndWait();
+                return;
+            }
+
             // Validate that end time is after start time
             if (!end.isAfter(start)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "End time must be greater than start time.", ButtonType.OK);
@@ -98,8 +106,6 @@ public class editAppointmentController {
                 alert.showAndWait();
                 return;
             }
-            
-            
 
             // Get contact ID based on contact name
             int contactID = 0;
