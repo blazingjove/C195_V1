@@ -206,4 +206,28 @@ public class appointmentQuery{
         }
         return appointmentsByContact;
     }
+
+    public static appointments getNearestAppointment() {
+        String sql = "SELECT * FROM appointments WHERE Start > ? ORDER BY Start ASC LIMIT 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setTimestamp(1, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentLocation = rs.getString("Location");
+                String appointmentType = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int customerID = rs.getInt("Customer_ID");
+                int userID = rs.getInt("User_ID");
+                int contactID = rs.getInt("Contact_ID");
+                return new appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no future appointment is found or on error
+    }
 }

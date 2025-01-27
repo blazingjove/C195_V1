@@ -89,7 +89,7 @@
                <Font name="System Bold" size="12.0" />
             </font>
          </Label>
-         <Button layoutX="418.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Next Appointment" />
+         <Button fx:id="reportAppointmentButtonNext" layoutX="418.0" layoutY="258.0" mnemonicParsing="false" onAction="#reportAppointmentButtonNextAction" prefHeight="25.0" prefWidth="163.0" text="Next Appointment" />
          <Separator layoutX="14.0" layoutY="334.0" prefHeight="0.0" prefWidth="981.0" />
             <Button layoutX="951.0" layoutY="337.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>

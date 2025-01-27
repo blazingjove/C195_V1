@@ -22,6 +22,7 @@ import model.customers;
 public class mainViewController {
 
 
+
     //appointment table tab table columns
     @FXML private TableView<appointments> appointmentTable;
     @FXML private TableColumn<? ,?> appointmentID;
@@ -60,6 +61,7 @@ public class mainViewController {
     @FXML private Button deleteAppointment;
     @FXML private Button reportAppointmentTypeButton;
     @FXML private Button reportContactButton;
+    @FXML private Button reportAppointmentButtonNext;
 
     @FXML private RadioButton appointmentDisplayAll;
     @FXML private RadioButton appointmentDisplayMonth;
@@ -323,6 +325,33 @@ public class mainViewController {
         // Hide the main view
         Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
         currentStage.close();
+    }
+
+    public void reportAppointmentButtonNextAction() {
+        System.out.println("Report button pressed");
+
+        appointments nearestAppointment = appointmentQuery.getNearestAppointment();
+        if (nearestAppointment == null) {
+            Alert noAppointmentAlert = new Alert(Alert.AlertType.INFORMATION);
+            noAppointmentAlert.setTitle("No Upcoming Appointments");
+            noAppointmentAlert.setHeaderText(null);
+            noAppointmentAlert.setContentText("There are no upcoming appointments.");
+            noAppointmentAlert.showAndWait();
+            return;
+        }
+
+        Alert nearestAppointmentAlert = new Alert(Alert.AlertType.INFORMATION);
+        nearestAppointmentAlert.setTitle("Nearest Appointment Details");
+        nearestAppointmentAlert.setHeaderText("Nearest Upcoming Appointment:");
+        nearestAppointmentAlert.setContentText(
+                "Appointment ID: " + nearestAppointment.getAppointmentID() + "\n" +
+                        "Title: " + nearestAppointment.getAppointmentTitle() + "\n" +
+                        "Description: " + nearestAppointment.getAppointmentDescription() + "\n" +
+                        "Type: " + nearestAppointment.getAppointmentType() + "\n" +
+                        "Start: " + nearestAppointment.getStart() + "\n" +
+                        "End: " + nearestAppointment.getEnd()
+        );
+        nearestAppointmentAlert.showAndWait();
     }
 
     /**

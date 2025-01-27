@@ -33,7 +33,6 @@ public class reportViewController {
 
 
     public void reportViewExitAction() throws IOException {
-
         mainViewController.showMainView();
     }
 
