@@ -1,15 +1,11 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import main.JDBC;
 import DAO.userValidation;
-
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;
@@ -66,9 +62,20 @@ public class loginController implements Initializable{
                 mainViewController.showMainView();
 
             }else {
+
+                // Log successful login to login_activity.txt
+                ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
+                String logEntry = "User " +usernameField.getText()+ " gave invalid login at " + utcTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " UTC\n";
+                try (FileWriter writer = new FileWriter("login_activity.txt", true)) {
+                    writer.write(logEntry);
+                } catch (IOException e) {
+                    System.out.println("Error writing to log file: " + e.getMessage());
+                }
+
                 Alert alert = new Alert(Alert.AlertType.ERROR, incorrectMessage, ButtonType.OK);
                 alert.setTitle(errorMessage);
                 alert.showAndWait();
+
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
