@@ -52,6 +52,9 @@ public class loginController implements Initializable{
             if (userId > 0) {
                 System.out.println("User logged in");
 
+                // Hides login view and shows the main View
+                mainViewController.showMainView();
+
                 // Log successful login to login_activity.txt
                 ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
                 String logEntry = "User " +usernameField.getText()+ " successfully logged in at " + utcTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " UTC\n";
@@ -60,9 +63,6 @@ public class loginController implements Initializable{
                 } catch (IOException e) {
                     System.out.println("Error writing to log file: " + e.getMessage());
                 }
-
-                // Hides login view and shows the main View
-                mainViewController.showMainView();
 
                 //show alert if user that logged in successfully is associated with an appointment within 15 minutes of logging in
                 ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("UTC"));

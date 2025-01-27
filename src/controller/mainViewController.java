@@ -187,9 +187,9 @@ public class mainViewController {
      * @throws IOException error catching*/
     public void editCustomerAction() throws IOException {
         System.out.println("Edit Customer button pressed");
-        
-        if (customerTable.getSelectionModel().getSelectedItem() != null) {
 
+
+        if (customerTable.getSelectionModel().getSelectedItem() != null) {
             try{
 
                 customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
@@ -204,10 +204,6 @@ public class mainViewController {
                 stage.setTitle("Edit Customer");
                 stage.setScene(new Scene(root));
                 stage.show();
-
-                // Hide the current view containing the editCustomer button
-                Stage currentStage = (Stage) editCustomer.getScene().getWindow();
-                currentStage.hide();
 
 
             } catch (IOException e) {
@@ -383,7 +379,7 @@ public class mainViewController {
         appointmentDisplayWeek.setToggleGroup(filterToggleGroup);
         appointmentDisplayAll.setSelected(true); // Set default selection to "Display All"
 
-        // Add listeners for radio buttons 
+        // Add listeners for radio buttons
         filterToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 if (appointmentDisplayAll.isSelected()) {
@@ -456,6 +452,10 @@ public class mainViewController {
     }
 
     public static void showMainView() throws IOException {
+
+        // Close the current view
+        Stage currentStage = (Stage) Stage.getWindows().filtered(Window::isShowing).get(0);
+        currentStage.close();
 
         // Load and show the mainView.fxml
         FXMLLoader loader = new FXMLLoader(mainViewController.class.getResource("/resource/view/mainView.fxml"));
