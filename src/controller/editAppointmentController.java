@@ -128,18 +128,18 @@ public class editAppointmentController {
             java.time.ZoneId estZoneId = java.time.ZoneId.of("America/New_York");
             java.time.ZoneId localZoneId = java.time.ZoneId.systemDefault();
 
-            java.time.ZonedDateTime startEST = start.atZone(estZoneId).withZoneSameInstant(localZoneId);
-            java.time.ZonedDateTime endEST = end.atZone(estZoneId).withZoneSameInstant(localZoneId);
+            java.time.LocalTime startLocal = start.toLocalTime();
+            java.time.LocalTime endLocal = end.toLocalTime();
 
             java.time.LocalTime businessStart = java.time.ZonedDateTime.of(start.toLocalDate(), java.time.LocalTime.of(8, 0), estZoneId)
                     .withZoneSameInstant(localZoneId).toLocalTime();
             java.time.LocalTime businessEnd = java.time.ZonedDateTime.of(end.toLocalDate(), java.time.LocalTime.of(22, 0), estZoneId)
                     .withZoneSameInstant(localZoneId).toLocalTime();
 
-            System.out.println("startEST: " + startEST.toLocalTime() + " endEST: " + endEST.toLocalTime() + " businessStart: " + businessStart + " businessEnd: " + businessEnd);
+            System.out.println("startEST: " + startLocal + " endEST: " + endLocal + " businessStart: " + businessStart + " businessEnd: " + businessEnd);
 
-            if (startEST.toLocalTime().isBefore(businessStart) || endEST.toLocalTime().isAfter(businessEnd)) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be within business hours (8:00 AM to 10:00 PM EST).", ButtonType.OK);
+            if (startLocal.isBefore(businessStart) || endLocal.isAfter(businessEnd)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be within business hours " + businessStart + " and " + businessEnd, ButtonType.OK);
                 alert.setTitle("Time Validation Error");
                 alert.showAndWait();
                 return;
