@@ -21,6 +21,8 @@ Additional report: located in the reports tab generates an alert of the next occ
 
 The program starts, connects to sql database and prompts user to log in with a username and password that is checked
 against the user information in the database. after login a tabbed window is Displayed with appointments, customers, reports, and settings.
+week is defined and sunday to saturday in the program (on local time)
+month is defined as the calendar month (in local time)
 
 Time in sql server is UTC.
 All Time displayed in program is local time.

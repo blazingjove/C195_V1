@@ -90,8 +90,8 @@ public class appointmentQuery{
         ObservableList<appointments> allAppointments = getAllAppointments();
 
         for (appointments appt : allAppointments) {
-            LocalDateTime startOfWeek = now.minusDays(now.getDayOfWeek().getValue() - 1); // Start of the week (Monday)
-            LocalDateTime endOfWeek = startOfWeek.plusDays(6); // End of the week (Sunday)
+            LocalDateTime startOfWeek = now.minusDays(now.getDayOfWeek().getValue() % 7); // Start of the week (Sunday)
+            LocalDateTime endOfWeek = startOfWeek.plusDays(6); // End of the week (Saturday)
 
             if (!appt.getStart().isBefore(startOfWeek) && !appt.getStart().isAfter(endOfWeek)) {
                 appointmentsByWeek.add(appt);
