@@ -1,11 +1,14 @@
 package controller;
 
+import DAO.appointmentQuery;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import main.JDBC;
 import DAO.userValidation;
+import model.appointments;
+
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;
@@ -56,6 +59,29 @@ public class loginController implements Initializable{
                     writer.write(logEntry);
                 } catch (IOException e) {
                     System.out.println("Error writing to log file: " + e.getMessage());
+                }
+
+                // Hides login view and shows the main View
+                //mainViewController.showMainView();
+
+                //show alert if user that logged in successfully is associated with an appointment within 15 minutes of logging in
+                ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("UTC"));
+                appointments upcomingAppointment = appointmentQuery.getUpcomingAppointment(userId, currentTime);
+
+                if (upcomingAppointment != null) {
+                    String alertMessage = String.format(
+                            "You have an appointment within 15 minutes.\n\nAppointment ID: %d\nAppointment Type: %s\nTime: %s",
+                            upcomingAppointment.getAppointmentID(),
+                            upcomingAppointment.getAppointmentType(),
+                            upcomingAppointment.getStart().atZone(ZoneId.of("UTC")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"))
+                    );
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK);
+                    alert.setTitle("Upcoming Appointment");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "No Upcoming Appointments", ButtonType.OK);
+                    alert.setTitle("Upcoming Appointment");
+                    alert.showAndWait();
                 }
 
                 // Hides login view and shows the main View

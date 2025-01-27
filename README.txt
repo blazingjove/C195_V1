@@ -19,3 +19,6 @@ Additional report: located in the reports tab generates an alert of the next occ
 
 The program starts, connects to sql database and prompts user to login with a username and password that is checked
 against the user information in the database. after login a tabbed window is Displayed with appointments, customers, reports, and settings.
+Time in sql server is UTC.
+Time is shows as local time.
+Time of company is in EST.

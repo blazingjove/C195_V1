@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 import static main.JDBC.connection;
 
 public class appointmentQuery{
@@ -109,22 +111,6 @@ public class appointmentQuery{
         return false;
     }
 
-//    /**appointmentIDNext method parses the database for the highest appointment ID found and adds 1 and uses that ID for the next appointments
-//     * to be created.
-//     * @return 1 the appointment ID used if appointments table is empty.*/
-//    public static int appointmentIDNext() {
-//        try {
-//            String sql = "SELECT MAX(Appointment_ID) AS MaxID FROM appointments";
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                return rs.getInt("MaxID") + 1;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return 1; // Default to 1 if there are no existing appointments
-//    }
 
     public static boolean createAppointment(int appointmentID, String title, String description, String location, String type, int customerID, int userID, int contactID) {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -229,5 +215,30 @@ public class appointmentQuery{
             e.printStackTrace();
         }
         return null; // Return null if no future appointment is found or on error
+    }
+
+    public static appointments getUpcomingAppointment(int userId, ZonedDateTime currentTime) {
+        String sql = "SELECT * FROM appointments WHERE User_ID = ? AND Start > ? AND Start <= ? ORDER BY Start ASC LIMIT 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setTimestamp(2, java.sql.Timestamp.valueOf(currentTime.toLocalDateTime()));
+            ps.setTimestamp(3, java.sql.Timestamp.valueOf(currentTime.toLocalDateTime().plusMinutes(15)));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int appointmentID = rs.getInt("Appointment_ID");
+                String appointmentTitle = rs.getString("Title");
+                String appointmentDescription = rs.getString("Description");
+                String appointmentLocation = rs.getString("Location");
+                String appointmentType = rs.getString("Type");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                int customerID = rs.getInt("Customer_ID");
+                int contactID = rs.getInt("Contact_ID");
+                return new appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userId, contactID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no upcoming appointment is found or on error
     }
 }
