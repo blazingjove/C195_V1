@@ -9,12 +9,15 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import main.JDBC;
 import DAO.userValidation;
+
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.io.*;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * controller class mainController provides logic for main view of the application.
@@ -46,10 +49,20 @@ public class loginController implements Initializable{
         System.out.println("Login button pressed");
         try{
             int userId = userValidation.validateUser(usernameField.getText(), passwordField.getText());
+
             if (userId > 0) {
                 System.out.println("User logged in");
 
-                //Hides login view and shows the main View
+                // Log successful login to login_activity.txt
+                ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
+                String logEntry = "User " +usernameField.getText()+ " successfully logged in at " + utcTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " UTC\n";
+                try (FileWriter writer = new FileWriter("login_activity.txt", true)) {
+                    writer.write(logEntry);
+                } catch (IOException e) {
+                    System.out.println("Error writing to log file: " + e.getMessage());
+                }
+
+                // Hides login view and shows the main View
                 mainViewController.showMainView();
 
             }else {
