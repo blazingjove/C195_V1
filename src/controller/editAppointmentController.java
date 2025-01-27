@@ -124,14 +124,19 @@ public class editAppointmentController {
                 return;
             }
 
-            // Validate start and end times are within business hours (8:00 AM to 10:00 PM EST)
-            java.time.ZoneId localZoneId = java.time.ZoneId.systemDefault();
+            // Validate start and end times are within business hours (8:00 AM to 10:00 PM EST). Convert the business hours to local time for comparison
             java.time.ZoneId estZoneId = java.time.ZoneId.of("America/New_York");
-            java.time.ZonedDateTime startEST = start.atZone(localZoneId).withZoneSameInstant(estZoneId);
-            java.time.ZonedDateTime endEST = end.atZone(localZoneId).withZoneSameInstant(estZoneId);
+            java.time.ZoneId localZoneId = java.time.ZoneId.systemDefault();
 
-            java.time.LocalTime businessStart = java.time.LocalTime.of(8, 0); // 8:00 AM EST
-            java.time.LocalTime businessEnd = java.time.LocalTime.of(22, 0); // 10:00 PM EST
+            java.time.ZonedDateTime startEST = start.atZone(estZoneId).withZoneSameInstant(localZoneId);
+            java.time.ZonedDateTime endEST = end.atZone(estZoneId).withZoneSameInstant(localZoneId);
+
+            java.time.LocalTime businessStart = java.time.ZonedDateTime.of(start.toLocalDate(), java.time.LocalTime.of(8, 0), estZoneId)
+                    .withZoneSameInstant(localZoneId).toLocalTime();
+            java.time.LocalTime businessEnd = java.time.ZonedDateTime.of(end.toLocalDate(), java.time.LocalTime.of(22, 0), estZoneId)
+                    .withZoneSameInstant(localZoneId).toLocalTime();
+
+            System.out.println("startEST: " + startEST.toLocalTime() + " endEST: " + endEST.toLocalTime() + " businessStart: " + businessStart + " businessEnd: " + businessEnd);
 
             if (startEST.toLocalTime().isBefore(businessStart) || endEST.toLocalTime().isAfter(businessEnd)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be within business hours (8:00 AM to 10:00 PM EST).", ButtonType.OK);
