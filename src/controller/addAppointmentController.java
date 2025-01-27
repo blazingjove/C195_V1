@@ -71,7 +71,7 @@ public class addAppointmentController {
                 return;
             }
 
-            // Convert selected times and appointment date to UTC objects in preparation for storage into the sql database
+            // join selected appointment date components
             LocalDateTime start = LocalDateTime.of(addAppointmentDate.getValue(),
                     java.time.LocalTime.of(
                             Integer.parseInt(selectedStartTime.split(":")[0]),
@@ -115,6 +115,26 @@ public class addAppointmentController {
             }
             if (contactID == 0) {
                 throw new SQLException("Contact not found");
+            }
+
+            System.out.println("Start time " + start);
+            System.out.println("end time " + end);
+
+
+            // Check for overlapping appointments
+            String overlapQuery = "SELECT Appointment_ID FROM appointments WHERE Customer_ID = ? AND ((Start <= ? AND End > ?) OR (Start < ? AND End >= ?))";
+            try (PreparedStatement psOverlap = JDBC.connection.prepareStatement(overlapQuery)) {
+                psOverlap.setInt(1, customerID);
+                psOverlap.setTimestamp(2, java.sql.Timestamp.valueOf(start));
+                psOverlap.setTimestamp(3, java.sql.Timestamp.valueOf(start));
+                psOverlap.setTimestamp(4, java.sql.Timestamp.valueOf(end));
+                psOverlap.setTimestamp(5, java.sql.Timestamp.valueOf(end));
+                if (psOverlap.executeQuery().next()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Appointment time overlaps with selected customers existing appointment. \n please select a different time", ButtonType.OK);
+                    alert.setTitle("Time Conflict");
+                    alert.showAndWait();
+                    return;
+                }
             }
 
             // Insert into database
