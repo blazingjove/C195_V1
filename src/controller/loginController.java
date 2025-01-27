@@ -68,12 +68,14 @@ public class loginController implements Initializable{
                 ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("UTC"));
                 appointments upcomingAppointment = appointmentQuery.getUpcomingAppointment(userId, currentTime);
 
+                System.out.println(currentTime);
+
                 if (upcomingAppointment != null) {
                     String alertMessage = String.format(
                             "You have an appointment within 15 minutes.\n\nAppointment ID: %d\nAppointment Type: %s\nTime: %s",
                             upcomingAppointment.getAppointmentID(),
                             upcomingAppointment.getAppointmentType(),
-                            upcomingAppointment.getStart().atZone(ZoneId.of("UTC")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"))
+                            upcomingAppointment.getStart().atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
                     );
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK);
                     alert.setTitle("Upcoming Appointment");
