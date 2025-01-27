@@ -303,6 +303,16 @@ public class mainViewController {
         // Display the count in the text field
         reportNumberInMonth.setText(String.valueOf(appointmentCount));
         System.out.println("Appointment count is " + appointmentCount);
+
+        //alerts user there are no appointments of selected type in selected month
+        if (appointmentCount == 0) {
+            Alert noAppointmentsAlert = new Alert(Alert.AlertType.INFORMATION);
+            noAppointmentsAlert.setTitle("No Appointments Found");
+            noAppointmentsAlert.setHeaderText(null);
+            noAppointmentsAlert.setContentText("There are no appointments of type: " +selectedType + "\n in the selected month: " + selectedMonth + ".");
+            noAppointmentsAlert.showAndWait();
+        }
+
     }
 
     /**this report returns all the appointments selected contact has in reportView*/
@@ -330,6 +340,8 @@ public class mainViewController {
             alert.showAndWait();
             return;
         }
+        
+        
 
         //opens the view and populates table with appoointments for selected contact
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/reportView.fxml"));

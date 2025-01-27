@@ -164,23 +164,35 @@ public class appointmentQuery{
         return uniqueTypes;
     }
 
-    /**parses the appointment database object for appointments with specific month and type
-     * @param selectedType the selected type selected in the reports tab
+    /**
+     * parses the appointment database object for appointments with specific month and type
+     * @param selectedType  the selected type selected in the reports tab
      * @param selectedMonth the selected month selected in the reports tab
-     * @return Int the number of appointments that meet both parameters*/
+     * @return Int the number of appointments that meet both parameters, returns 0 if none found
+     */
     public static int getAppointmentCountByMonthAndType(String selectedMonth, String selectedType) {
-        String sql = "SELECT COUNT(*) AS Count FROM appointments WHERE MONTHNAME(Start) = ? AND Type = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, selectedMonth);
-            ps.setString(2, selectedType);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("Count");
+        String sql = "SELECT Start, Type FROM appointments";
+        int count = 0;
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                String type = rs.getString("Type");
+
+                // Convert start to local time
+                start = ZonedDateTime.of(start, java.time.ZoneId.of("UTC"))
+                        .withZoneSameInstant(java.time.ZoneId.systemDefault())
+                        .toLocalDateTime();
+
+                if (start.getMonth().name().equalsIgnoreCase(selectedMonth) && type.equalsIgnoreCase(selectedType)) {
+                    count++;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0; // Return 0 if no matches are found or an error occurs
+        return count; // Return count of matching appointments
     }
 
     /**get appointments associated with the given contact ID

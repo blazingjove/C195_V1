@@ -71,7 +71,7 @@ public class addAppointmentController {
                 return;
             }
 
-            // Convert selected times and appointment date to UTC objects
+            // Convert selected times and appointment date to UTC objects in preparation for storage into the sql database
             LocalDateTime start = LocalDateTime.of(addAppointmentDate.getValue(),
                     java.time.LocalTime.of(
                             Integer.parseInt(selectedStartTime.split(":")[0]),
