@@ -94,7 +94,7 @@ public class loginController implements Initializable{
 
                 // Log successful login to login_activity.txt
                 ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
-                String logEntry = "User " +usernameField.getText()+ " gave invalid login at " + utcTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " UTC\n";
+                String logEntry = "User " +usernameField.getText()+ " failed to login at " + utcTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " UTC\n";
                 try (FileWriter writer = new FileWriter("login_activity.txt", true)) {
                     writer.write(logEntry);
                 } catch (IOException e) {
