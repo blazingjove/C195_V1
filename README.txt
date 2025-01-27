@@ -17,6 +17,5 @@ mysql connector: mysql-connector-java-8.0.41
 
 Additional report: located in the reports tab generates an alert of the next occurring appointment with all the appointment information in the alert
 
-How to run the program
-Program starts, connects to sql database and prompts user to login with a username and password that is checked
+The program starts, connects to sql database and prompts user to login with a username and password that is checked
 against the user information in the database. after login a tabbed window is Displayed with appointments, customers, reports, and settings.
