@@ -14,8 +14,9 @@ Runtime version: 21.0.5+8-b631.30 amd64 (JCEF 122.1.9)
 VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
 javafx: openjfx-21.0.6
 mysql connector: mysql-connector-java-8.0.41
-Additional report
 
-For the custom report, I chose to display the number of appointments per Country. I chose to have sql do all the work and created a query that contains inner joins which combines three tables and spits out two columns (Country and count). The query is complicated but made the java side was very simple and I was able to pull this information into a tableview to present the data.
+Additional report: located in the reports tab generates an alert of the next occurring appointment with all the appointment information in the alert
+
 How to run the program
-As the program starts, a login screen is presented. The user will be required to have a valid username and password that matches information in a mysql database. This program requires java 11 and has not been tested with any other jvm.
+Program starts, connects to sql database and prompts user to login with a username and password that is checked
+against the user information in the database. after login a tabbed window is Displayed with appointments, customers, reports, and settings.
