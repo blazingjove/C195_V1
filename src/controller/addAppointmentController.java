@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import main.JDBC;
 import model.contacts;
 import DAO.*;
+import model.customers;
 import model.users;
 
 import java.io.IOException;
@@ -33,11 +34,6 @@ public class addAppointmentController {
     @FXML private ComboBox<String> addAppointmentCustomerID;
     @FXML private Button appointmentExit;
 
-
-    //TODO need to set the time saved to be based of menus
-
-    //TODO populate the time selection 15 minute increments
-
     /**Captures all user inputs and saves the to the sql database
      * @throws RuntimeException error catching*/
     public void appointmentSaveAction() {
@@ -55,7 +51,7 @@ public class addAppointmentController {
             int customerID = customerQuery.getAllCustomers().stream()
                     .filter(customer -> customer.getCustomerName().equals(addAppointmentCustomerID.getSelectionModel().getSelectedItem()))
                     .findFirst()
-                    .map(customer -> customer.getCustomerID())
+                    .map(customers::getCustomerID)
                     .orElseThrow(() -> new RuntimeException("Customer not found in the database"));;
             int userID = userQuery.getAllUsers().stream()
                     .filter(user -> user.getUserName().equals(addAppointmentUserID.getSelectionModel().getSelectedItem()))
@@ -75,7 +71,7 @@ public class addAppointmentController {
                 return;
             }
 
-            // Convert selected times and appointment date to LocalDateTime objects
+            // Convert selected times and appointment date to UTC objects
             LocalDateTime start = LocalDateTime.of(addAppointmentDate.getValue(),
                     java.time.LocalTime.of(
                             Integer.parseInt(selectedStartTime.split(":")[0]),
@@ -139,18 +135,16 @@ public class addAppointmentController {
                 alert.showAndWait();
 
                 //close current view
-                appointmentSave.getScene().getWindow().hide();
+                //appointmentSave.getScene().getWindow().hide();
 
                 // Load and show the mainView.fxml
                 mainViewController.showMainView();
-
-
+                
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save the appointment.", ButtonType.OK);
                 alert.setTitle("Error");
                 alert.showAndWait();
             }
-
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid format in one or more fields.", ButtonType.OK);
             alert.setTitle("Input Error");

@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static controller.mainViewController.showMainView;
-
 public class editCustomerViewController {
     @FXML private TextField editCustomerID;
     @FXML private TextField editCustomerName;
@@ -45,7 +43,7 @@ public class editCustomerViewController {
             editCustomerExit.getScene().getWindow().hide();
 
             //close edit customer view and opens main view
-            showMainView();
+            mainViewController.showMainView();
         }
     }
 
@@ -94,15 +92,17 @@ public class editCustomerViewController {
         }
 
         // Close the edit customer view
-        editCustomerSave.getScene().getWindow().hide();
+        //editCustomerSave.getScene().getWindow().hide();
 
         // Close edit customer view and open the main view
-        showMainView();
+        mainViewController.showMainView();
     }
 
     public void initialize() throws SQLException {
         System.out.println("Edit Customer View initialized");
 
+        
+        
         // Populate ObservableLists for each country
         firstLevelDivisionQuery.getAllFirstLevelDivisions().forEach(division -> {
             if (division.getCountryID() == 1) {
@@ -147,8 +147,8 @@ public class editCustomerViewController {
     /**Uses method below to pull information from selected item into the edit customer view*/
     public void setCustomerData(customers selectedCustomer) throws SQLException {
         this.selectedCustomer = selectedCustomer;
-
         displaySelectedCustomerData();
+
     }
 
     private void displaySelectedCustomerData() throws SQLException {

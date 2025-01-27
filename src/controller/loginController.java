@@ -62,7 +62,7 @@ public class loginController implements Initializable{
                 }
 
                 // Hides login view and shows the main View
-                //mainViewController.showMainView();
+                mainViewController.showMainView();
 
                 //show alert if user that logged in successfully is associated with an appointment within 15 minutes of logging in
                 ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("UTC"));
@@ -85,9 +85,6 @@ public class loginController implements Initializable{
                     alert.setTitle("Upcoming Appointment");
                     alert.showAndWait();
                 }
-
-                // Hides login view and shows the main View
-                mainViewController.showMainView();
 
             }else {
 

@@ -142,7 +142,7 @@ public class editAppointmentController {
                 alert.showAndWait();
 
                 //closes the edit appointment scene after saving the information in the database
-                editAppointmentSave.getScene().getWindow().hide();
+                //editAppointmentSave.getScene().getWindow().hide();
 
                 // Load and show the mainView.fxml
                 mainViewController.showMainView();
