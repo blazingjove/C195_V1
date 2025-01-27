@@ -29,10 +29,10 @@ public class appointmentQuery{
             String appointmentDescription = rs.getString("Description");
             String appointmentLocation = rs.getString("Location");
             String appointmentType = rs.getString("Type");
-            LocalDateTime start = convertTimeDateLocal(rs.getTimestamp("Start").toLocalDateTime());
-            //LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-            LocalDateTime end = convertTimeDateLocal(rs.getTimestamp("End").toLocalDateTime());
-            //LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            //LocalDateTime start = convertTimeDateLocal(rs.getTimestamp("Start").toLocalDateTime());
+            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            //LocalDateTime end = convertTimeDateLocal(rs.getTimestamp("End").toLocalDateTime());
+            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
             int contactID = rs.getInt("Contact_ID");
@@ -120,6 +120,7 @@ public class appointmentQuery{
         return false;
     }
 
+    /**not used*/
     public static boolean createAppointment(int appointmentID, String title, String description, String location, String type, int customerID, int userID, int contactID) {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -236,7 +237,7 @@ public class appointmentQuery{
     }
 
     /**when logging in it returns an appointment that is nearest for the user
-     * @return appointments an appointments that is withing 15 start from the user login time*/
+     * @return appointments ,an appointments that is withing 15 start from the user login time*/
     public static appointments getUpcomingAppointment(int userId, ZonedDateTime currentTime) {
         String sql = "SELECT * FROM appointments WHERE User_ID = ? AND Start > ? AND Start <= ? ORDER BY Start ASC LIMIT 1";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

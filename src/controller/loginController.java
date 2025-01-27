@@ -49,11 +49,13 @@ public class loginController implements Initializable{
         try{
             int userId = userValidation.validateUser(usernameField.getText(), passwordField.getText());
 
+            System.out.println("Current System Time: " + ZonedDateTime.now());
+
             if (userId > 0) {
                 System.out.println("User logged in");
 
                 // Hides login view and shows the main View
-                mainViewController.showMainView();
+                //mainViewController.showMainView();
 
                 // Log successful login to login_activity.txt
                 ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
@@ -65,17 +67,18 @@ public class loginController implements Initializable{
                 }
 
                 //show alert if user that logged in successfully is associated with an appointment within 15 minutes of logging in
-                ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("UTC"));
+                ZonedDateTime currentTime = ZonedDateTime.now();
                 appointments upcomingAppointment = appointmentQuery.getUpcomingAppointment(userId, currentTime);
 
                 System.out.println(currentTime);
+                System.out.println(upcomingAppointment);
 
                 if (upcomingAppointment != null) {
                     String alertMessage = String.format(
                             "You have an appointment within 15 minutes.\n\nAppointment ID: %d\nAppointment Type: %s\nTime: %s",
                             upcomingAppointment.getAppointmentID(),
                             upcomingAppointment.getAppointmentType(),
-                            upcomingAppointment.getStart().atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                            upcomingAppointment.getStart().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
                     );
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, alertMessage, ButtonType.OK);
                     alert.setTitle("Upcoming Appointment");
@@ -85,6 +88,9 @@ public class loginController implements Initializable{
                     alert.setTitle("Upcoming Appointment");
                     alert.showAndWait();
                 }
+
+                // Hides login view and shows the main View
+                mainViewController.showMainView();
 
             }else {
 
