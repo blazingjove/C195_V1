@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 public class main extends Application {
 
     /** Initializes the mainView.fxml.
-     * @param stage sets the login view to define starting parameters */
+     * @param stage sets the login view to define starting parameters
+     * @throws IOException basic error handling*/
     @Override
     public void start(Stage stage) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("language/login", Locale.getDefault());

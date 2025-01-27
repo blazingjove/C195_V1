@@ -14,6 +14,7 @@ public class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /**opens connection with the database*/
     public static void openConnection()
     {
         try {
@@ -27,6 +28,7 @@ public class JDBC {
         }
     }
 
+    /**closes connection to the database*/
     public static void closeConnection() {
         try {
             connection.close();

@@ -14,12 +14,16 @@ public class firstLevelDivisionQuery{
     private String divisionName;
     public int countryID;
 
+    /**defines the first level division object*/
     public firstLevelDivisionQuery(int divisionID, String divisionName, int countryID) {
         this.divisionID = divisionID;
         this.divisionName = divisionName;
         this.countryID = countryID;
     }
-    
+
+    /**gets all first level division objects from the database
+     * @return firstLevelDivisionList list
+     * * @throws SQLException basic error handling*/
     public static ObservableList<firstLevelDivision> getAllFirstLevelDivisions() throws SQLException{
         ObservableList<firstLevelDivision> firstLevelDivisionList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT * from first_level_divisions";
@@ -38,6 +42,10 @@ public class firstLevelDivisionQuery{
         return firstLevelDivisionList;
     }
 
+    /**the country name associated with the division ID
+     * @param divisionID in
+     * @return countryName string
+     * @throws SQLException basic error handling*/
     public static String getCountryNameByDivisionID(int divisionID) throws SQLException {
         String countryName = null;
         String sqlQuery = "SELECT countries.Country FROM countries " +
@@ -53,6 +61,10 @@ public class firstLevelDivisionQuery{
         return countryName;
     }
 
+    /**gets the state/country name associated with the give division ID
+     * @param divisionID int
+     * @return divisionName string
+     * @throws SQLException basic error handling*/
     public static String getDivisionNameByDivisionID(int divisionID) throws SQLException {
         String divisionName = null;
         String sqlQuery = "SELECT Division FROM first_level_divisions WHERE Division_ID = ?";
@@ -66,16 +78,16 @@ public class firstLevelDivisionQuery{
         return divisionName;
     }
 
-    public int getDivisionID(String divisionName) throws SQLException {
-        String sqlQuery = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
-        ps.setString(1, divisionName);
-        ResultSet resultSet = ps.executeQuery();
-
-        if (resultSet.next()) {
-            return resultSet.getInt("Division_ID");
-        } else {
-            throw new SQLException("No Division found with the provided name: " + divisionName);
-        }
-    }
+//    public int getDivisionID(String divisionName) throws SQLException {
+//        String sqlQuery = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+//        PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
+//        ps.setString(1, divisionName);
+//        ResultSet resultSet = ps.executeQuery();
+//
+//        if (resultSet.next()) {
+//            return resultSet.getInt("Division_ID");
+//        } else {
+//            throw new SQLException("No Division found with the provided name: " + divisionName);
+//        }
+//    }
 }
