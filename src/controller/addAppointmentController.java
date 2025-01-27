@@ -105,6 +105,22 @@ public class addAppointmentController {
                 return;
             }
 
+            // Validate start and end times are within business hours (8:00 AM to 10:00 PM EST)
+            java.time.ZoneId localZoneId = java.time.ZoneId.systemDefault();
+            java.time.ZoneId estZoneId = java.time.ZoneId.of("America/New_York");
+            java.time.ZonedDateTime startEST = start.atZone(localZoneId).withZoneSameInstant(estZoneId);
+            java.time.ZonedDateTime endEST = end.atZone(localZoneId).withZoneSameInstant(estZoneId);
+
+            java.time.LocalTime businessStart = java.time.LocalTime.of(8, 0); // 8:00 AM EST
+            java.time.LocalTime businessEnd = java.time.LocalTime.of(22, 0); // 10:00 PM EST
+
+            if (startEST.toLocalTime().isBefore(businessStart) || endEST.toLocalTime().isAfter(businessEnd)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Start and end times must be within business hours (8:00 AM to 10:00 PM EST).", ButtonType.OK);
+                alert.setTitle("Time Validation Error");
+                alert.showAndWait();
+                return;
+            }
+
             // Validate that end time is after start time
             if (!end.isAfter(start)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "End time must be greater than start time.", ButtonType.OK);
@@ -120,6 +136,8 @@ public class addAppointmentController {
                 alert.showAndWait();
                 return;
             }
+            
+            
 
             // Get contact ID based on contact name
             int contactID = 0;
@@ -152,6 +170,8 @@ public class addAppointmentController {
                     return;
                 }
             }
+            
+            
 
             // Insert into database
             boolean success;
