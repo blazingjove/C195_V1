@@ -55,7 +55,7 @@ public class loginController implements Initializable{
                 System.out.println("User logged in");
 
                 // Hides login view and shows the main View
-                //mainViewController.showMainView();
+                mainViewController.showMainView();
 
                 // Log successful login to login_activity.txt
                 ZonedDateTime utcTime = ZonedDateTime.now(ZoneId.of("UTC"));
@@ -89,8 +89,6 @@ public class loginController implements Initializable{
                     alert.showAndWait();
                 }
 
-                // Hides login view and shows the main View
-                mainViewController.showMainView();
 
             }else {
 
@@ -150,13 +148,12 @@ public class loginController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             // Fetch user's system locale
+
             Locale userLocale = Locale.getDefault();
 
             //change zone ID here for troubleshooting
             //ZoneId newZoneId = ZoneId.of("Europe/Paris");
             ZoneId newZoneId = ZoneId.systemDefault();
-            
-            
 
             // Optional: Log default locale for debugging
             System.out.println("User Locale: " + userLocale.getDisplayLanguage());

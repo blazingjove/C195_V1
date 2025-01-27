@@ -13,7 +13,7 @@ import static main.JDBC.connection;
 
 public class appointmentQuery{
 
-    /**Observablelist for all appointments in database.
+    /**list for all appointments in database that are in database as "appointments" objects.
      * @throws SQLException error catching
      * @return appointmentsObservableList
      */
