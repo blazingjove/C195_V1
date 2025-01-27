@@ -310,6 +310,7 @@ public class mainViewController {
 
         String selectedContact = reportContact.getValue();
 
+        // if no contact is selected alert is shown
         if (selectedContact == null) {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Selection Error");
@@ -318,7 +319,6 @@ public class mainViewController {
             errorAlert.showAndWait();
             return;
         }
-
 
         // Check if the selected contact has appointments
         int contactID = contactQuery.getContactIDByName(selectedContact);
@@ -331,6 +331,7 @@ public class mainViewController {
             return;
         }
 
+        //opens the view and populates table with appoointments for selected contact
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/reportView.fxml"));
         Parent root = loader.load();
 
