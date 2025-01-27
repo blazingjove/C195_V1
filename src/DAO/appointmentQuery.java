@@ -29,10 +29,10 @@ public class appointmentQuery{
             String appointmentDescription = rs.getString("Description");
             String appointmentLocation = rs.getString("Location");
             String appointmentType = rs.getString("Type");
-            //LocalDateTime start = convertTimeDateLocal(rs.getTimestamp("Start").toLocalDateTime());
-            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-            //LocalDateTime end = convertTimeDateLocal(rs.getTimestamp("End").toLocalDateTime());
-            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+            LocalDateTime start = convertTimeDateLocal(rs.getTimestamp("Start").toLocalDateTime());
+            //LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = convertTimeDateLocal(rs.getTimestamp("End").toLocalDateTime());
+            //LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
             int customerID = rs.getInt("Customer_ID");
             int userID = rs.getInt("User_ID");
             int contactID = rs.getInt("Contact_ID");
@@ -41,6 +41,15 @@ public class appointmentQuery{
         }
 
         return appointmentsObservableList;
+    }
+
+    /**converts the time to local time from UTC
+     * @param start the time as UTC
+     * @return the time as local time*/
+    private static LocalDateTime convertTimeDateLocal(LocalDateTime start) {
+        return ZonedDateTime.of(start, java.time.ZoneId.of("UTC"))
+                .withZoneSameInstant(java.time.ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
     /**Method that deletes appointment based on appointment ID.

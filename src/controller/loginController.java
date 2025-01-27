@@ -149,6 +149,8 @@ public class loginController implements Initializable{
             //change zone ID here for troubleshooting
             //ZoneId newZoneId = ZoneId.of("Europe/Paris");
             ZoneId newZoneId = ZoneId.systemDefault();
+            
+            
 
             // Optional: Log default locale for debugging
             System.out.println("User Locale: " + userLocale.getDisplayLanguage());
