@@ -96,8 +96,6 @@ public class addAppointmentController {
                 alert.showAndWait();
                 return;
             }
-            
-            
 
             // Get contact ID based on contact name
             int contactID = 0;

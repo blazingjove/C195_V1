@@ -112,6 +112,9 @@ public class mainViewController {
             return;
             
         } else {
+
+            addAppointment.getScene().getWindow().hide();
+
             System.out.println("selected appointment is "+ selectedAppointment.getAppointmentID());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resource/view/editAppointmentView.fxml"));
             Parent root = loader.load();
@@ -123,6 +126,7 @@ public class mainViewController {
             stage.setTitle("Edit appointment");
             stage.setScene(new Scene(root));
             stage.show();
+
 
         }
 
@@ -191,6 +195,8 @@ public class mainViewController {
 
         if (customerTable.getSelectionModel().getSelectedItem() != null) {
             try{
+
+                editCustomer.getScene().getWindow().hide();
 
                 customers selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
                 System.out.println("selected customer is "+ selectedCustomer.getCustomerName());

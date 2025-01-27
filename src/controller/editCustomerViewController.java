@@ -5,7 +5,10 @@ import DAO.firstLevelDivisionQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import main.JDBC;
 import model.customers;
 
@@ -40,7 +43,7 @@ public class editCustomerViewController {
         alert.setTitle("Confirm Exit");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
-            editCustomerExit.getScene().getWindow().hide();
+            //editCustomerExit.getScene().getWindow().hide();
 
             //close edit customer view and opens main view
             mainViewController.showMainView();
@@ -85,7 +88,7 @@ public class editCustomerViewController {
                 System.out.println("Failed to update the customer in the database.");
             }
 
-            editCustomerSave.getScene().getWindow().hide();
+            //editCustomerSave.getScene().getWindow().hide();
 
         } catch (SQLException e) {
             System.err.println("Error occurred while updating the customer in the database: " + e.getMessage());
@@ -102,7 +105,7 @@ public class editCustomerViewController {
     }
 
     /**Initialize populates the ComboBoxes with the information required*/
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, IOException {
         System.out.println("Edit Customer View initialized");
 
         // Populate ObservableLists for each country
