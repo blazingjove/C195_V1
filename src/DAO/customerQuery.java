@@ -26,7 +26,7 @@ public class customerQuery {
             String customerPostalCode = ds.getString("Postal_Code");
             String customerPhone = ds.getString("Phone");
             int customerDivisionID = ds.getInt("Division_ID");
-            String customerDivisionName = "holder";
+            String customerDivisionName = firstLevelDivisionQuery.getDivisionNameByDivisionID(customerDivisionID);
 
             customers customer = new customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, customerDivisionID,customerDivisionName);
             customersObservableList.add(customer);

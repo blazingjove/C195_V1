@@ -10,7 +10,6 @@ public class appointments {
     private String appointmentLocation;
     private String appointmentType;
     private LocalDateTime start;
-    //private String start;
     private LocalDateTime end;
     public int customerID;
     public int userID;
