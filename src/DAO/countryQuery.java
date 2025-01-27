@@ -20,7 +20,7 @@ public class countryQuery extends country {
         ObservableList<country> countryList = FXCollections.observableArrayList();
         String sqlQuery = "SELECT Country_ID, Country FROM countries";
         try (PreparedStatement ps = JDBC.connection.prepareStatement(sqlQuery);
-             ResultSet resultSet = ps.executeQuery();) {
+             ResultSet resultSet = ps.executeQuery()) {
 
             while (resultSet.next()) {
                 int countryID = resultSet.getInt("Country_ID");

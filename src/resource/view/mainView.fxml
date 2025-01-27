@@ -84,7 +84,7 @@
          <ComboBox fx:id="reportContact" layoutX="414.0" layoutY="148.0" prefWidth="150.0" />
          <Button fx:id="reportContactButton" layoutX="426.0" layoutY="196.0" mnemonicParsing="false" onAction="#reportContactButtonAction" prefHeight="25.0" prefWidth="125.0" text="Contact Schedule" />
          <Separator layoutX="14.0" layoutY="228.0" prefHeight="0.0" prefWidth="981.0" />
-         <Label layoutX="129.0" layoutY="262.0" prefHeight="17.0" prefWidth="273.0" text="Shows the earlies occuring future appointment:">
+         <Label layoutX="57.0" layoutY="262.0" prefHeight="17.0" prefWidth="345.0" text="Shows the earlies occuring future appointment in database:">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
