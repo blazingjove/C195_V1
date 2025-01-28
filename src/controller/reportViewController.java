@@ -1,17 +1,13 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import model.contacts;
 import model.appointments; // Import appointments model
 import DAO.contactQuery;
 import DAO.appointmentQuery;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

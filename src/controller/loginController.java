@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import main.JDBC;
 import DAO.userValidation;
 import model.appointments;
-
 import java.time.ZoneId;
 import java.net.URL;
 import java.util.Locale;

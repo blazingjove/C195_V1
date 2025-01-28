@@ -1,6 +1,5 @@
 package DAO;
 
-import javafx.scene.control.TextField;
 import model.firstLevelDivision;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

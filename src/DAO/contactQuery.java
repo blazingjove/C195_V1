@@ -2,10 +2,7 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
-import model.appointments;
 import model.contacts;
-
 import main.JDBC;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

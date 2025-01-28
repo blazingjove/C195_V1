@@ -2,14 +2,12 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.JDBC;
 import model.appointments;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-
 import static main.JDBC.connection;
 
 

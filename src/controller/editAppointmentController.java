@@ -2,7 +2,6 @@ package controller;
 
 import DAO.contactQuery;
 import DAO.customerQuery;
-import DAO.firstLevelDivisionQuery;
 import DAO.userQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

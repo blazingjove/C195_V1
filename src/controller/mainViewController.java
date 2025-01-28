@@ -1,7 +1,6 @@
 package controller;
 
 import DAO.customerQuery;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +12,6 @@ import javafx.collections.ObservableList;
 import DAO.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.appointments;
 import model.customers;
