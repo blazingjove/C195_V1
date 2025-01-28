@@ -11,7 +11,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-/** main class that creates an application.*/
+/** main class that creates an application.
+ * @author marco a*/
 public class main extends Application {
 
     /** Initializes the mainView.fxml.
