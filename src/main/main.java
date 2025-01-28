@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 
 /** main class that creates an application.
- * @author marco a*/
+ * @author marco aadm*/
 public class main extends Application {
 
     /** Initializes the mainView.fxml.

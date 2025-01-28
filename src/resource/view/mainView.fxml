@@ -94,9 +94,4 @@
             <Button layoutX="951.0" layoutY="337.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
         </AnchorPane>
     </Tab>
-    <Tab closable="false" text="Settings">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <Button layoutX="937.0" layoutY="332.0" mnemonicParsing="false" onAction="#mainViewExitAction" text="Exit" />
-        </AnchorPane>
-    </Tab>
 </TabPane>
