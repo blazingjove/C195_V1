@@ -136,6 +136,9 @@ public class addCustomerViewController {
      * resolved by removing problematic clear() lines for ComboBox values.
      * <p><b>Note:</b> Further optimization could reduce the dependence on hardcoded country names.</p>
      *
+     * lambda expression for Listener is selected in country ComboBox to populate division ID combobox with appropriate
+     * first level divisions
+     *
      * @throws SQLException If fetching data from the database fails.
      */
     public void initialize() throws SQLException {
@@ -157,7 +160,7 @@ public class addCustomerViewController {
         //addCustomerCountry.getItems().clear();
         countryQuery.getAllCountries().forEach(country -> addCustomerCountry.getItems().add(country.getCountryName()));
 
-        // Add a listener to detect when a country is selected in addCustomerCountry
+        // lambda expression number #2 Add a listener to detect when a country is selected in addCustomerCountry
         addCustomerCountry.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 addCustomerFirstLevel.setDisable(false); // Enable ComboBox
