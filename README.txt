@@ -29,3 +29,7 @@ month is defined as the calendar month (in local time)
 Time in sql server is UTC.
 All Time displayed in program is local time.
 Time of company is in EST.
+
+
+Code passes assessment on first attempt
+
